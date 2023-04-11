@@ -58,17 +58,13 @@ const styles = StyleSheet.create({
   },
   header: {
     backgroundColor: 'pink',
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignitems: 'center',
+
   },
   body: {
     backgroundColor: 'black',
   },
   playerTurn: {
-    flexDirection: 'row',
-    justifyContent: 'left',
-    alignitems: 'center',
+
   },
   gridItem: {
     padding: 30,
