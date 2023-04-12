@@ -46,9 +46,8 @@ export default function GameScreen({ navigation }) {
         <Text style={styles.scores}>Poängen</Text>
         <Text style={styles.playerTurn}>BLABLBLABLA {players[activePlayer]}</Text>
       </View>
-      <View style={styles.body}>
 
-        <Text style={styles.bodyText}>Här ska brädet vara</Text>
+      <View style={styles.body}>
               <FlatList
           numColumns={numColumns}
           keyExtractor={(item) => item.id}
@@ -74,14 +73,16 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   header: {
-    backgroundColor: 'pink',
+    flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'flex-start',
+    zIndex: 2,
   },
   body: {
     backgroundColor: 'black',
     flex: 1,
+    position: 'absolute',
   },
   bodyText: {
     fontWeight: 'bold',
