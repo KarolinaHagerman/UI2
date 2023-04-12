@@ -13,11 +13,12 @@ export default function App() {
         <Stack.Screen 
           name="Home"
           component={HomeScreen}
-          options={{title: "Welcome"}}
+          options={{headerShown: false}}
         />
         <Stack.Screen 
           name="NewGame"
           component={NewGameScreen}
+          options={{headerShown: false}}
         />
         <Stack.Screen 
           name="Game"
