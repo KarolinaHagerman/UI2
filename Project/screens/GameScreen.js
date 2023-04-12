@@ -1,9 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Button, SafeAreaView, FlatList, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Button, SafeAreaView, FlatList, TouchableOpacity, Modal } from 'react-native';
+import GameMenu from '../components/GameMenu';
 
 export default function GameScreen({ navigation }) {
-  
+
   // Get the player with players[activePlayer]
   const players = ['X', 'O', 'Y', 'Z'];
   const [activePlayer, setActivePlayer] = useState(0);
@@ -13,7 +14,7 @@ export default function GameScreen({ navigation }) {
     { id: '1-1', isClicked: false }, { id: '1-2', isClicked: false }, { id: '1-3', isClicked: false }, { id: '1-4', isClicked: false }, { id: '1-5', isClicked: false },
     { id: '2-1', isClicked: false }, { id: '2-2', isClicked: false }, { id: '2-3', isClicked: false }, { id: '2-4', isClicked: false }, { id: '2-5', isClicked: false },
     { id: '3-1', isClicked: false }, { id: '3-2', isClicked: false }, { id: '3-3', isClicked: false }, { id: '3-4', isClicked: false }, { id: '3-5', isClicked: false },
-    { id: '4-1', isClicked: false }, { id: '4-2', isClicked: false }, { id: '4-3', isClicked: false }, { id: '4-4', isClicked: false }, { id: '4-5', isClicked: false }, 
+    { id: '4-1', isClicked: false }, { id: '4-2', isClicked: false }, { id: '4-3', isClicked: false }, { id: '4-4', isClicked: false }, { id: '4-5', isClicked: false },
     { id: '5-1', isClicked: false }, { id: '5-2', isClicked: false }, { id: '5-3', isClicked: false }, { id: '5-4', isClicked: false }, { id: '5-5', isClicked: false }
   ];
 
@@ -30,24 +31,25 @@ export default function GameScreen({ navigation }) {
       setActivePlayer(0);
     }
     else {
-      setActivePlayer(activePlayer+1);
+      setActivePlayer(activePlayer + 1);
     }
 
   }
 
   return (
+    
     <SafeAreaView style={styles.container}>
+      <StatusBar style="auto" />
       <View style={styles.header}>
-        <Button
-          title="Menu"
-        />
-        <Text style={styles.scores}>Här står poängen</Text>
-        <Text style={styles.playerTurn}>Player {players[activePlayer]}'s turn</Text>
+        <GameMenu navigation={navigation} />
+
+        <Text style={styles.scores}>Poängen</Text>
+        <Text style={styles.playerTurn}>BLABLBLABLA {players[activePlayer]}</Text>
       </View>
       <View style={styles.body}>
-        <Text>Här ska brädet vara</Text>
 
-        <FlatList
+        <Text style={styles.bodyText}>Här ska brädet vara</Text>
+              <FlatList
           numColumns={numColumns}
           keyExtractor={(item) => item.id}
           data={data}
@@ -56,32 +58,50 @@ export default function GameScreen({ navigation }) {
               <Text style={styles.gridItem}></Text>
             </TouchableOpacity>
           )}
-        />
+        /> 
 
       </View>
-      <Button title="Pop to root" onPress={() => navigation.popToTop()} />
-      <Button title="Pop" onPress={() => navigation.pop()} />
-      <StatusBar style="auto" />
+
     </SafeAreaView>
+
+
   );
 }
+
+
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
   header: {
     backgroundColor: 'pink',
-
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
   },
   body: {
     backgroundColor: 'black',
+    flex: 1,
+  },
+  bodyText: {
+    fontWeight: 'bold',
+    fontSize: 80,
+    color: 'white',
+    padding: 20,
+  },
+  scores: {
+    backgroundColor: 'purple',
+    fontSize: 20,
+    color: 'blue',
+    padding: 20,
   },
   playerTurn: {
-
+    backgroundColor: 'gold',
+    fontSize: 20,
+    color: 'red',
+    padding: 10,
   },
   gridItem: {
     padding: 30,
