@@ -4,6 +4,7 @@ import { Menu, MenuProvider, MenuOptions, MenuOption, MenuTrigger } from "react-
 import { Entypo } from '@expo/vector-icons';
 import { EvilIcons } from '@expo/vector-icons';
 
+// TODO: should this be a class instead? Can we even get to navigation in that case?
 export default function GameMenu({ navigation }) {
     const menuReference = useRef();
 
