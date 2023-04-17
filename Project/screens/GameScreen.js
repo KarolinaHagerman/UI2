@@ -9,6 +9,7 @@ export default function GameScreen({ navigation }) {
   // Get the player with players[activePlayer]
   const players = ['X', 'O', 'Y', 'Z'];
   const [activePlayer, setActivePlayer] = useState(0);
+  const [headerFlex, setHeaderFlex] = useState(0);
 
 /*   TODO: it's still very slow if I increase numColumns. 
   Have tried useCallback (here) and PureComponent (BoardItem.js). 
@@ -16,6 +17,17 @@ export default function GameScreen({ navigation }) {
    the app will only render the items that are currently visible on the screen, 
    which can improve the performance significantly. - ChatGPT */
   const numColumns = 15;
+
+// Lets the header flex over the entire board while the menu is shown - boardItems not clickable and menu can stretch down
+// TODO: still problem with the menu not stretching over the borders of the other flexitems (scores and playerTurn)
+  const showMenu = () => {
+    setHeaderFlex(1);
+  }
+
+// Sets the header flex back to normal - boardItems clickable again and menu can't stretch
+  const hideMenu = () => {
+    setHeaderFlex(0);
+  }
 
   // Returns data on the form (this example is a 5x5 board):
 /*   [
@@ -62,8 +74,13 @@ export default function GameScreen({ navigation }) {
     
     <SafeAreaView style={styles.container}>
       <StatusBar style="auto" />
-      <View style={styles.header}>
-        <GameMenu navigation={navigation} />
+      <View style={[styles.header, { flex: headerFlex }]}>
+        <GameMenu 
+        style={styles.gameMenu}
+        navigation={navigation} 
+        showMenu={showMenu}
+        hideMenu={hideMenu}
+        />
 
         <Text style={styles.scores}>Poängen</Text>
         <Text style={styles.playerTurn}>BLABLBLABLA {players[activePlayer]}</Text>
@@ -94,10 +111,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   header: {
+    flex: 0,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'flex-start',
     zIndex: 2,
+    position: 'relative'
   },
   body: {
     backgroundColor: 'black',
@@ -122,9 +141,6 @@ const styles = StyleSheet.create({
     color: 'red',
     padding: 10,
   },
-  gridItem: {
-    padding: 30,
-    backgroundColor: 'white',
-    margin: 1,
+  gameMenu: {
   }
 });

@@ -5,19 +5,20 @@ import { Entypo } from '@expo/vector-icons';
 import { EvilIcons } from '@expo/vector-icons';
 
 // TODO: should this be a class instead? Can we even get to navigation in that case?
-export default function GameMenu({ navigation }) {
+export default function GameMenu( props, { navigation }) {
     const menuReference = useRef();
 
     return (
-        <MenuProvider style={styles.container} ref={menuReference}>
+        <MenuProvider
+            style={styles.container}
+            ref={menuReference}
+        >
             <Menu>
-                <MenuTrigger style={styles.menuButton}>
+                <MenuTrigger style={styles.menuButton} onPress={props.showMenu}>
                     <Entypo name="menu" size={45} color="black" />
                 </MenuTrigger>
                 <MenuOptions style={styles.menuOptions}>
-                    <MenuOption
-                        style={styles.menuOption}
-                    >
+                    <MenuOption style={styles.menuOption} onSelect={props.hideMenu}>
                         <Text>Hide menu</Text>
                     </MenuOption>
                     <MenuOption
@@ -30,15 +31,15 @@ export default function GameMenu({ navigation }) {
                         style={styles.menuOption}
                         onSelect={() => alert(`Undo`)}
                     >
-                        <EvilIcons name="undo" size={24} color="black" />
                         <Text>Undo</Text>
+                        <EvilIcons name="undo" size={20} color="black" />
                     </MenuOption>
                     <MenuOption
                         style={styles.menuOption}
                         onSelect={() => alert(`Redo`)}
                     >
-                        <EvilIcons name="redo" size={24} color="black" />
                         <Text>Redo</Text>
+                        <EvilIcons name="redo" size={20} color="black" />
                     </MenuOption>
                 </MenuOptions>
             </Menu>
@@ -60,8 +61,9 @@ const styles = StyleSheet.create({
         fontSize: 16,
     },
     menuOptions: {
+        margin: 10,
     },
     menuOption: {
-        flexDirection: 'row'
+        flexDirection: 'row',
     }
 });
