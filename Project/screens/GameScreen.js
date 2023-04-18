@@ -11,46 +11,46 @@ export default function GameScreen({ navigation }) {
   const [activePlayer, setActivePlayer] = useState(0);
   const [headerFlex, setHeaderFlex] = useState(0);
 
-/*   TODO: it's still very slow if I increase numColumns. 
-  Have tried useCallback (here) and PureComponent (BoardItem.js). 
-  Other things to try is VirtualizedList instead of FlatList:
-   the app will only render the items that are currently visible on the screen, 
-   which can improve the performance significantly. - ChatGPT */
-  const numColumns = 15;
+  /*   TODO: it's still very slow if I increase numColumns. 
+    Have tried useCallback (here) and PureComponent (BoardItem.js). 
+    Other things to try is VirtualizedList instead of FlatList:
+     the app will only render the items that are currently visible on the screen, 
+     which can improve the performance significantly. - ChatGPT */
+  const numColumns = 20;
 
-// Lets the header flex over the entire board while the menu is shown - boardItems not clickable and menu can stretch down
-// TODO: still problem with the menu not stretching over the borders of the other flexitems (scores and playerTurn)
+  // Lets the header flex over the entire board while the menu is shown - boardItems not clickable and menu can stretch down
+  // TODO: still problem with the menu not stretching over the borders of the other flexitems (scores and playerTurn)
   const showMenu = () => {
     setHeaderFlex(1);
   }
 
-// Sets the header flex back to normal - boardItems clickable again and menu can't stretch
+  // Sets the header flex back to normal - boardItems clickable again and menu can't stretch
   const hideMenu = () => {
     setHeaderFlex(0);
   }
 
-  // Returns data on the form (this example is a 5x5 board):
-/*   [
-    { id: '1-1', isClicked: false }, { id: '1-2', isClicked: false }, { id: '1-3', isClicked: false }, { id: '1-4', isClicked: false }, { id: '1-5', isClicked: false },
-    { id: '2-1', isClicked: false }, { id: '2-2', isClicked: false }, { id: '2-3', isClicked: false }, { id: '2-4', isClicked: false }, { id: '2-5', isClicked: false },
-    { id: '3-1', isClicked: false }, { id: '3-2', isClicked: false }, { id: '3-3', isClicked: false }, { id: '3-4', isClicked: false }, { id: '3-5', isClicked: false },
-    { id: '4-1', isClicked: false }, { id: '4-2', isClicked: false }, { id: '4-3', isClicked: false }, { id: '4-4', isClicked: false }, { id: '4-5', isClicked: false },
-    { id: '5-1', isClicked: false }, { id: '5-2', isClicked: false }, { id: '5-3', isClicked: false }, { id: '5-4', isClicked: false }, { id: '5-5', isClicked: false }
+  // Returns data on the form (this example is a 3x3 board):
+  /*   [
+    [{ id: '0-0', isClicked: false }, { id: '0-1', isClicked: false }, { id: '0-2', isClicked: false }],
+    [{ id: '1-0', isClicked: false }, { id: '1-1', isClicked: false }, { id: '1-2', isClicked: false }],
+    [{ id: '2-0', isClicked: false }, { id: '2-1', isClicked: false }, { id: '2-2', isClicked: false }],
   ]; */
   const initializeBoardData = () => {
     let boardData = [];
-    for (let i=1; i <= numColumns; i++) {
-      for (let j=1; j<= numColumns; j++) {
+    for (let i = 0; i < numColumns; i++) {
+      let row = [];
+      for (let j = 0; j < numColumns; j++) {
         let boardObject = { id: i + '-' + j, isClicked: false }
-        boardData.push(boardObject);
+        row.push(boardObject);
       }
+      boardData.push(row);
     }
+    //TODO: denna log indikerar att initializeBoardData körs varje gång man klickar, så vill vi inte ha det!
+    //console.log(boardData);
     return boardData;
   }
 
   const data = initializeBoardData();
-  
-  
 
   // Decides what happens when you click on a grid item, useCallback to try and speed things up
   const clickHandler = useCallback((item) => {
@@ -71,15 +71,15 @@ export default function GameScreen({ navigation }) {
   }
 
   return (
-    
+
     <SafeAreaView style={styles.container}>
       <StatusBar style="auto" />
       <View style={[styles.header, { flex: headerFlex }]}>
-        <GameMenu 
-        style={styles.gameMenu}
-        navigation={navigation} 
-        showMenu={showMenu}
-        hideMenu={hideMenu}
+        <GameMenu
+          style={styles.gameMenu}
+          navigation={navigation}
+          showMenu={showMenu}
+          hideMenu={hideMenu}
         />
 
         <Text style={styles.scores}>Poängen</Text>
@@ -87,15 +87,20 @@ export default function GameScreen({ navigation }) {
       </View>
 
       <View style={styles.body}>
-              <FlatList
+
+        {/* FLATLIST DÄR DATAN ÄR EN MATRIS MED OBJEKT */}
+        {/* Here, we're using the flatMap() method to flatten the two-dimensional data 
+          array into a one-dimensional array, which can be used as the data prop for the FlatList. 
+          We're also using the index parameter of the keyExtractor function instead of the id property, 
+          since we're using an array of objects instead of an array of arrays. - ChatGPT*/}
+        <FlatList
           numColumns={numColumns}
           key={numColumns}
-          keyExtractor={(item) => item.id}
-          data={data}
-          renderItem={({ item }) => (
-            <BoardItem item={item} onPress={clickHandler} />
-          )}
-        /> 
+          keyExtractor={(item, index) => index.toString()}
+          data={data.flatMap((row) => row)}
+          renderItem={({ item }) => <BoardItem item={item} onPress={clickHandler} />}
+        />
+
 
       </View>
 
@@ -121,7 +126,7 @@ const styles = StyleSheet.create({
   body: {
     backgroundColor: 'black',
     flex: 1,
-    position: 'absolute',
+    //position: 'absolute',
   },
   bodyText: {
     fontWeight: 'bold',
