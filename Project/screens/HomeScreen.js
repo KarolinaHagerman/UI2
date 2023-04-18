@@ -1,17 +1,33 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Button, View } from 'react-native';
+import { StyleSheet, Button, View} from 'react-native';
+import {useState} from 'react';
+import eng from '../languages/eng.json';
+import sve from '../languages/sve.json';
 
 export default function HomeScreen({ navigation }) {
-  return (
+  const [language, setLanguage] = useState(eng);
+  return (   
     <View style={styles.container}>
       <Button 
-        title="New game (french)"
-        onPress={() => navigation.navigate("NewGame", { language: "french" })}
+        title= "Svenska"
+        onPress={() => {
+          setLanguage(sve);
+        }
+        }
       />
       <Button 
-        title="New game (english)"
-        onPress={() => navigation.navigate("NewGame", { language: "english" })}
+        title= "English"
+        onPress={() => {
+          setLanguage(eng);
+        }
+        }
       />
+
+      <Button 
+        title= {language.HomeScreen.newGameButton}
+        onPress={() => navigation.navigate("NewGame", {language: language})}
+      />
+
       <StatusBar style="auto" />
     </View>
   );

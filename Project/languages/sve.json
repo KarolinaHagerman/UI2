@@ -1,0 +1,17 @@
+
+{
+    "HomeScreen" : {
+        "newGameButton": "Ny Match"
+    } ,
+
+    "NewGameScreen" : {
+        "mainMenuButton": "Huvudmeny",
+        "startGameButton": "Starta Parti",
+        "numberOfPlayers": "Antal Spelare",
+        "numberOfPieces": "Antal Pjäser",
+        "timePerMove": "Tid per Drag",
+        "players": "spelare",
+        "pieces": "pjäser",
+        "seconds": "sekunder"
+    } 
+}
