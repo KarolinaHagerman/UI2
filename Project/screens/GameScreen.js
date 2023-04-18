@@ -16,7 +16,7 @@ export default function GameScreen({ navigation }) {
     Other things to try is VirtualizedList instead of FlatList:
      the app will only render the items that are currently visible on the screen, 
      which can improve the performance significantly. - ChatGPT */
-  const numColumns = 20;
+  const numColumns = 30;
 
   // Lets the header flex over the entire board while the menu is shown - boardItems not clickable and menu can stretch down
   // TODO: still problem with the menu not stretching over the borders of the other flexitems (scores and playerTurn)
@@ -31,16 +31,16 @@ export default function GameScreen({ navigation }) {
 
   // Returns data on the form (this example is a 3x3 board):
   /*   [
-    [{ id: '0-0', isClicked: false }, { id: '0-1', isClicked: false }, { id: '0-2', isClicked: false }],
-    [{ id: '1-0', isClicked: false }, { id: '1-1', isClicked: false }, { id: '1-2', isClicked: false }],
-    [{ id: '2-0', isClicked: false }, { id: '2-1', isClicked: false }, { id: '2-2', isClicked: false }],
+    [{ id: '0-0', row: 0, col: 0, isClicked: false }, { id: '0-1', row: 0, col: 1, isClicked: false }, { id: '0-2', row: 0, col: 2, isClicked: false }],
+    [{ id: '1-0', row: 1, col: 0, isClicked: false }, { id: '1-1', row: 1, col: 1, isClicked: false }, { id: '1-2', row: 1, col: 2, isClicked: false }],
+    [{ id: '2-0', row: 2, col: 0, isClicked: false }, { id: '2-1', row: 2, col: 1, isClicked: false }, { id: '2-2', row: 2, col: 2, isClicked: false }],
   ]; */
   const initializeBoardData = () => {
     let boardData = [];
     for (let i = 0; i < numColumns; i++) {
       let row = [];
       for (let j = 0; j < numColumns; j++) {
-        let boardObject = { id: i + '-' + j, isClicked: false }
+        let boardObject = { id: i + '-' + j, row: i, col: j, isClicked: false }
         row.push(boardObject);
       }
       boardData.push(row);
@@ -53,8 +53,10 @@ export default function GameScreen({ navigation }) {
   const data = initializeBoardData();
 
   // Decides what happens when you click on a grid item, useCallback to try and speed things up
-  const clickHandler = useCallback((item) => {
+  const clickHandler = useCallback((item, index) => {
     console.log('Player ', players[activePlayer], ' with index ', activePlayer, ' clicked on ', item.id);
+    console.log(index);
+    console.log(item);
     item.isClicked = !item.isClicked;
     nextPlayer();
   });
@@ -98,7 +100,7 @@ export default function GameScreen({ navigation }) {
           key={numColumns}
           keyExtractor={(item, index) => index.toString()}
           data={data.flatMap((row) => row)}
-          renderItem={({ item }) => <BoardItem item={item} onPress={clickHandler} />}
+          renderItem={({ item, index }) => <BoardItem item={item} index={index} onPress={() => clickHandler(item, index)} />}
         />
 
 
