@@ -1,0 +1,17 @@
+
+{
+    "HomeScreen" : {
+        "newGameButton": "New Game"
+    } ,
+    "NewGameScreen" : {
+        "mainMenuButton": "Main Menu",
+        "startGameButton": "Start Game",
+        "numberOfPlayers": "Number of Players",
+        "numberOfPieces": "Number of Pieces",
+        "timePerMove": "Time per Move",
+        "players": "players",
+        "pieces": "pieces",
+        "seconds": "seconds"
+    } 
+
+}
