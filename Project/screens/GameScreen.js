@@ -4,7 +4,10 @@ import { StyleSheet, Text, View, Button, SafeAreaView, FlatList, TouchableOpacit
 import GameMenu from '../components/GameMenu';
 import BoardItem from '../components/BoardItem';
 
-export default function GameScreen({ navigation }) {
+export default function GameScreen({ navigation, route }) {
+  console.log(route.params.pieces)
+  console.log(route.params.players)
+  console.log(route.params.time)
 
   // Get the player with players[activePlayer]
   const players = ['X', 'O', 'Y', 'Z'];

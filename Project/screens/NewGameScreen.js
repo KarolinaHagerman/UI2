@@ -2,10 +2,12 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import { StackActions } from '@react-navigation/native';
 import SelectDropdown from 'react-native-select-dropdown';
-
-
+import {useState} from 'react';
 
 export default function NewGameScreen({ navigation, route}) {
+  const [pieces, setPieces] = useState(3);
+  const [players, setPlayers] = useState(2);
+  const [time, setTime] = useState(5);
   const numberOfPlayers = [2,3,4,5,6,7,8,9,10];
   const piecesInRow = [3,4,5,6,7,8,9,10];
   const timePerMove = [5,10,15,30,60];
@@ -22,7 +24,7 @@ export default function NewGameScreen({ navigation, route}) {
           defaultButtonText = {route.params.language.NewGameScreen.numberOfPlayers}
           data = {numberOfPlayers}
           onSelect={(selectedItem, index) => {
-            console.log(selectedItem, index)
+            setPlayers(selectedItem)
           }}
           buttonTextAfterSelection={(selectedItem, index) => {
             // text represented after item is selected
@@ -39,6 +41,7 @@ export default function NewGameScreen({ navigation, route}) {
           defaultButtonText = {route.params.language.NewGameScreen.numberOfPieces}
           data = {piecesInRow}
           onSelect={(selectedItem, index) => {
+            setPieces(selectedItem)
             console.log(selectedItem, index)
           }}
           buttonTextAfterSelection={(selectedItem, index) => {
@@ -57,7 +60,7 @@ export default function NewGameScreen({ navigation, route}) {
           defaultButtonText = {route.params.language.NewGameScreen.timePerMove}
           data = {timePerMove}
           onSelect={(selectedItem, index) => {
-            console.log(selectedItem, index)
+            setTime(selectedItem)
           }}
           buttonTextAfterSelection={(selectedItem, index) => {
             // text represented after item is selected
@@ -77,7 +80,7 @@ export default function NewGameScreen({ navigation, route}) {
         title={route.params.language.NewGameScreen.startGameButton}
         onPress={() => {
           navigation.dispatch(
-            StackActions.replace("Game")
+            StackActions.replace("Game", {players: players, pieces: pieces, time: time})
           );
         }}
       />
