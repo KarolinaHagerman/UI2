@@ -1,8 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState, useCallback } from 'react';
-import { StyleSheet, Text, View, Button, SafeAreaView, FlatList, TouchableOpacity, Modal } from 'react-native';
+import { StyleSheet, Text, View, Button, SafeAreaView, FlatList, TouchableOpacity, Modal, Animated } from 'react-native';
 import GameMenu from '../components/GameMenu';
 import BoardItem from '../components/BoardItem';
+import { PanGestureHandler, PanGestureHandlerGestureEvent, GestureHandlerRootView } from 'react-native-gesture-handler';
+import { useSharedValue, useAnimatedGestureHandler, useAnimatedStyle, withSpring } from 'react-native-reanimated';
 
 export default function GameScreen({ navigation }) {
 
@@ -72,6 +74,51 @@ export default function GameScreen({ navigation }) {
 
   }
 
+  //----------------------------------------------------------------------------
+
+  const translateX = useSharedValue(0);
+  const translateY = useSharedValue(0);
+
+  const SIZE = 90;
+  const CIRCLE_RADIUS = SIZE * 2;
+
+  function usePanGestureHandler(translateX, translateY) {
+    const panGestureEvent = useAnimatedGestureHandler({
+      onStart: (event, context) => {
+        context.translateX = translateX.value;
+        context.translateY = translateY.value;
+      },
+      onActive: (event, context) => {
+        translateX.value = event.translationX + context.translateX;
+        translateY.value = event.translationY + context.translateY;
+      },
+      onEnd: () => {
+        const distance = Math.sqrt(translateX.value ** 2 + translateY.value ** 2);
+  
+        if (distance < CIRCLE_RADIUS + SIZE / 2) {
+          translateX.value = withSpring(0);
+          translateY.value = withSpring(0);
+        }
+      },
+    });
+
+    return panGestureEvent;
+  }
+ 
+
+  const rStyle = useAnimatedStyle(() => {
+    return {
+      transform: [
+        {
+          translateX: translateX.value,
+        },
+        {
+          translateY: translateY.value,
+        },
+      ],
+    };
+  });
+
   return (
 
     <SafeAreaView style={styles.container}>
@@ -89,6 +136,14 @@ export default function GameScreen({ navigation }) {
       </View>
 
       <View style={styles.body}>
+
+        <GestureHandlerRootView>
+          <PanGestureHandler onGestureEvent={usePanGestureHandler}>
+            <Animated.View style={[styles.square, rStyle]} />
+          </PanGestureHandler>
+        </GestureHandlerRootView>
+
+
 
         {/* FLATLIST DÄR DATAN ÄR EN MATRIS MED OBJEKT */}
         {/* Here, we're using the flatMap() method to flatten the two-dimensional data 
@@ -113,6 +168,12 @@ export default function GameScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
+  square: {
+    width: 100,
+    height: 100,
+    backgroundColor: 'blue',
+    borderRadius: 20,
+  },
   container: {
     flex: 1,
     backgroundColor: '#fff',
