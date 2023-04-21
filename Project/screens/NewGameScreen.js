@@ -9,6 +9,9 @@ export default function NewGameScreen({ navigation, route}) {
   const numberOfPlayers = [2,3,4,5,6,7,8,9,10];
   const piecesInRow = [3,4,5,6,7,8,9,10];
   const timePerMove = [5,10,15,30,60];
+  var players = 2;
+  var pieces = 3;
+  var time = 60;
   console.log(route.params.language.HomeScreen.newGameButton)
   return (
     <View style={styles.container}>
@@ -22,6 +25,7 @@ export default function NewGameScreen({ navigation, route}) {
           defaultButtonText = {route.params.language.NewGameScreen.numberOfPlayers}
           data = {numberOfPlayers}
           onSelect={(selectedItem, index) => {
+            players = selectedItem;
             console.log(selectedItem, index)
           }}
           buttonTextAfterSelection={(selectedItem, index) => {
@@ -39,6 +43,7 @@ export default function NewGameScreen({ navigation, route}) {
           defaultButtonText = {route.params.language.NewGameScreen.numberOfPieces}
           data = {piecesInRow}
           onSelect={(selectedItem, index) => {
+            pieces = selectedItem;
             console.log(selectedItem, index)
           }}
           buttonTextAfterSelection={(selectedItem, index) => {
@@ -57,6 +62,7 @@ export default function NewGameScreen({ navigation, route}) {
           defaultButtonText = {route.params.language.NewGameScreen.timePerMove}
           data = {timePerMove}
           onSelect={(selectedItem, index) => {
+            time = selectedItem;
             console.log(selectedItem, index)
           }}
           buttonTextAfterSelection={(selectedItem, index) => {
@@ -77,7 +83,7 @@ export default function NewGameScreen({ navigation, route}) {
         title={route.params.language.NewGameScreen.startGameButton}
         onPress={() => {
           navigation.dispatch(
-            StackActions.replace("Game")
+            StackActions.replace("Game", {language: route.params.language, piecesToWin: pieces, players: players, time: time})
           );
         }}
       />
