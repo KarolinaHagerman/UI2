@@ -7,10 +7,10 @@ export function checkNinRow(boardData, clickedSquare, player, n){
         let count = 0;
 
         //kolla diagonalen från övre vänster ner till höger
-        console.log('digonal 1**********************')
+        //console.log('digonal 1**********************')
         for (let i = 1, j = 1; i <= n*2-1, j <= n*2-1; i++, j++) {
             try{
-                console.log(boardData[clickedSquare.row + (i - n)][clickedSquare.col + (j - n)].player)
+                //console.log(boardData[clickedSquare.row + (i - n)][clickedSquare.col + (j - n)].player)
                 if (boardData[clickedSquare.row + (i - n)][clickedSquare.col + (j - n)].player == boardData[clickedSquare.row][clickedSquare.col].player){
                     count += 1;
                     if (count == n){
@@ -26,11 +26,11 @@ export function checkNinRow(boardData, clickedSquare, player, n){
         }
 
         //kolla diagonalen från övre höger ner till vänster
-        console.log('digonal 2**********************')
+        //console.log('digonal 2**********************')
         count = 0;
         for (let i = 1, j = 1; i <= n*2 - 1, j <= n*2 - 1; i++, j++) {
             try{
-                console.log(boardData[clickedSquare.row + (i - n)][clickedSquare.col + (n - j)].player)
+                //console.log(boardData[clickedSquare.row + (i - n)][clickedSquare.col + (n - j)].player)
                 if (boardData[clickedSquare.row + (i - n)][clickedSquare.col + (n - j)].player == boardData[clickedSquare.row][clickedSquare.col].player){
                     count += 1;
                     if (count == n){
@@ -47,11 +47,11 @@ export function checkNinRow(boardData, clickedSquare, player, n){
         }
 
         //kolla vertikalt uppifrån och ner
-        console.log('vertikal **********************')
+        //console.log('vertikal **********************')
         count = 0;
         for (let i = 1; i <= n*2 - 1; i++) {
             try{
-                console.log(boardData[clickedSquare.row + (i - n)][clickedSquare.col].player)
+                //console.log(boardData[clickedSquare.row + (i - n)][clickedSquare.col].player)
                 if (boardData[clickedSquare.row + (i - n)][clickedSquare.col].player == boardData[clickedSquare.row][clickedSquare.col].player){
                     count += 1;
                     if (count == n){
@@ -67,11 +67,11 @@ export function checkNinRow(boardData, clickedSquare, player, n){
         }
 
         //kolla horizontelt, vänster till höger
-        console.log('horizontal **********************')
+        //console.log('horizontal **********************')
         count = 0;
         for (let j = 1; j <= n*2 - 1; j++) {
             try{
-                console.log(boardData[clickedSquare.row][clickedSquare.col + (j - n)].player)
+                //console.log(boardData[clickedSquare.row][clickedSquare.col + (j - n)].player)
                 if (boardData[clickedSquare.row][clickedSquare.col + (j - n)].player == boardData[clickedSquare.row][clickedSquare.col].player){
                     count += 1;
                     if (count == n){
