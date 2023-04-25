@@ -12,6 +12,7 @@ export default function GameScreen({ navigation, route }) {
   const players = ['X', 'O', 'Y', 'Z'];
   const [activePlayer, setActivePlayer] = useState(0);
   const [headerFlex, setHeaderFlex] = useState(0);
+  const [isMenuVisible, changeMenuVisibility] = useState(false);
 
   /*   TODO: it's still very slow if I increase numColumns. 
     Have tried useCallback (here) and PureComponent (BoardItem.js). 
@@ -29,6 +30,21 @@ export default function GameScreen({ navigation, route }) {
   // Sets the header flex back to normal - boardItems clickable again and menu can't stretch
   const hideMenu = () => {
     setHeaderFlex(0);
+  }
+
+  // Sets the header flex back to normal - boardItems clickable again and menu can't stretch
+  const openCloseMenu = () => {
+    console.log('isMenuVisible', isMenuVisible, !isMenuVisible);
+
+    // Show menu if not shown already
+    if (isMenuVisible) {
+      setHeaderFlex(0);
+    }
+    else {
+      setHeaderFlex(1);
+    }
+    console.log('headerFlex', headerFlex);
+    changeMenuVisibility(!isMenuVisible);
   }
 
   // Returns data on the form (this example is a 3x3 board):
@@ -73,7 +89,7 @@ export default function GameScreen({ navigation, route }) {
     }
 
   }
-  
+
   return (
 
     <SafeAreaView style={styles.container}>
@@ -85,6 +101,8 @@ export default function GameScreen({ navigation, route }) {
           hideMenu={hideMenu}
           language={language}
           players={players}
+          openCloseMenu={openCloseMenu}
+          isVisible={isMenuVisible}
         />
 
         <Text style={styles.scores}>{language.GameScreen.scores}</Text>
@@ -137,12 +155,13 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'flex-start',
     zIndex: 2,
-    position: 'relative'
+    position: 'relative',
+    backgroundColor: 'orange',
   },
   body: {
     backgroundColor: 'black',
     flex: 1,
-    //position: 'absolute',
+    position: 'absolute',
   },
   bodyText: {
     fontWeight: 'bold',
@@ -162,8 +181,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'baseline',
-  },
-  gameMenu: {
   },
   player: {
     fontSize: 20,
