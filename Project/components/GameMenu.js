@@ -15,11 +15,11 @@ export default function GameMenu( props ) {
             ref={menuReference}
         >
             <Menu>
-                <MenuTrigger style={styles.menuButton} onPress={props.showMenu}>
+                <MenuTrigger style={styles.menuButton} onPress={showMenu}>
                     <Entypo name="menu" size={45} color="black" />
                 </MenuTrigger>
                 <MenuOptions style={styles.menuOptions}>
-                    <MenuOption style={styles.menuOption} onSelect={props.hideMenu}>
+                    <MenuOption style={styles.menuOption} onSelect={hideMenu}>
                         <Text>{language.GameMenu.hideMenu}</Text>
                     </MenuOption>
                     <MenuOption

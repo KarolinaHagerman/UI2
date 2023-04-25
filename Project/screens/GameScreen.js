@@ -58,14 +58,10 @@ export default function GameScreen({ navigation, route }) {
   const clickHandler = useCallback((item, index) => {
     console.log('Player ', players[activePlayer], ' with index ', activePlayer, ' clicked on ', item.id);
     item.isClicked = !item.isClicked;
-    occupyBoardItem(item);
     checkNinRow(data, item, players[activePlayer], piecesToWin);
     nextPlayer();
   });
 
-  const occupyBoardItem = (item) => {
-    console.log("inne");
-  }
 
   // Makes sure the activePlayer loops through the players array
   const nextPlayer = () => {
@@ -77,7 +73,7 @@ export default function GameScreen({ navigation, route }) {
     }
 
   }
-
+  
   return (
 
     <SafeAreaView style={styles.container}>
@@ -88,10 +84,15 @@ export default function GameScreen({ navigation, route }) {
           showMenu={showMenu}
           hideMenu={hideMenu}
           language={language}
+          players={players}
         />
 
         <Text style={styles.scores}>{language.GameScreen.scores}</Text>
-        <Text style={styles.playerTurn}>BLABLA {players[activePlayer]}</Text>
+        <View style={styles.playerTurn}>
+          {players.map((player, index) => (
+            <Text key={index} style={[styles.player, players[activePlayer] === player ? styles.activePlayer : null]} >{player}</Text>
+          ))}
+        </View>
       </View>
 
       <View style={styles.body}>
@@ -152,15 +153,25 @@ const styles = StyleSheet.create({
   scores: {
     backgroundColor: 'purple',
     fontSize: 20,
-    color: 'blue',
+    color: 'white',
     padding: 20,
   },
   playerTurn: {
     backgroundColor: 'gold',
-    fontSize: 20,
-    color: 'red',
     padding: 10,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'baseline',
   },
   gameMenu: {
-  }
+  },
+  player: {
+    fontSize: 20,
+    color: 'blue',
+  },
+  activePlayer: {
+    fontSize: 30,
+    fontWeight: 'bold',
+
+  },
 });
