@@ -6,6 +6,8 @@ import BoardItem from '../components/BoardItem';
 import { checkNinRow } from '../gameLogic';
 
 export default function GameScreen({ navigation, route}) {
+  const { language, piecesToWin, totPlayers, time } = route.params;
+
   // Get the player with players[activePlayer]
   const players = ['X', 'O', 'Y', 'Z'];
   const [activePlayer, setActivePlayer] = useState(0);
@@ -55,10 +57,8 @@ export default function GameScreen({ navigation, route}) {
   // Decides what happens when you click on a grid item, useCallback to try and speed things up
   const clickHandler = useCallback((item, index) => {
     console.log('Player ', players[activePlayer], ' with index ', activePlayer, ' clicked on ', item.id);
-    console.log(index);
-    console.log(item);
     item.isClicked = !item.isClicked;
-    checkNinRow(data, item, players[activePlayer], route.params.piecesToWin);
+    checkNinRow(data, item, players[activePlayer], piecesToWin);
     nextPlayer();
   });
 
@@ -79,14 +79,14 @@ export default function GameScreen({ navigation, route}) {
       <StatusBar style="auto" />
       <View style={[styles.header, { flex: headerFlex }]}>
         <GameMenu
-          style={styles.gameMenu}
           navigation={navigation}
           showMenu={showMenu}
           hideMenu={hideMenu}
+          language={language}
         />
 
-        <Text style={styles.scores}>Poängen</Text>
-        <Text style={styles.playerTurn}>BLABLBLABLA {players[activePlayer]}</Text>
+        <Text style={styles.scores}>{language.GameScreen.scores}</Text>
+        <Text style={styles.playerTurn}>BLABLA {players[activePlayer]}</Text>
       </View>
 
       <View style={styles.body}>
@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   header: {
-    flex: 0,
+    flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'flex-start',

@@ -5,7 +5,8 @@ import { Entypo } from '@expo/vector-icons';
 import { EvilIcons } from '@expo/vector-icons';
 
 // TODO: should this be a class instead? Can we even get to navigation in that case?
-export default function GameMenu( { navigation }, props ) {
+export default function GameMenu( props ) {
+    const { navigation, showMenu, hideMenu, language } = props;
     const menuReference = useRef();
 
     return (
@@ -19,26 +20,26 @@ export default function GameMenu( { navigation }, props ) {
                 </MenuTrigger>
                 <MenuOptions style={styles.menuOptions}>
                     <MenuOption style={styles.menuOption} onSelect={props.hideMenu}>
-                        <Text>Hide menu</Text>
+                        <Text>{language.GameMenu.hideMenu}</Text>
                     </MenuOption>
                     <MenuOption
                         style={styles.menuOption}
                         onSelect={() => navigation.popToTop()}
                     >
-                        <Text>Back to main menu</Text>
+                        <Text>{language.GameMenu.toMain}</Text>
                     </MenuOption>
                     <MenuOption
                         style={styles.menuOption}
                         onSelect={() => alert(`Undo`)}
                     >
-                        <Text>Undo</Text>
+                        <Text>{language.GameMenu.undo}</Text>
                         <EvilIcons name="undo" size={20} color="black" />
                     </MenuOption>
                     <MenuOption
                         style={styles.menuOption}
                         onSelect={() => alert(`Redo`)}
                     >
-                        <Text>Redo</Text>
+                        <Text>{language.GameMenu.redo}</Text>
                         <EvilIcons name="redo" size={20} color="black" />
                     </MenuOption>
                 </MenuOptions>
@@ -49,6 +50,7 @@ export default function GameMenu( { navigation }, props ) {
 
 const styles = StyleSheet.create({
     container: {
+        flex: 1,
         justifyContent: "flex-start",
         alignItems: "flex-start",
         padding: 4,

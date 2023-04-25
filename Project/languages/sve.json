@@ -13,5 +13,14 @@
         "players": "spelare",
         "pieces": "pjäser",
         "seconds": "sekunder"
-    } 
+    } ,
+    "GameScreen" : {
+        "scores": "poäng"
+    } ,
+    "GameMenu" : {
+        "hideMenu": "Göm meny",
+        "toMain": "Tillbaka till huvudmeny",
+        "undo": "Ångra",
+        "redo": "Gör om"
+    }
 }
