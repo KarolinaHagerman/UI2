@@ -5,7 +5,7 @@ import GameMenu from '../components/GameMenu';
 import BoardItem from '../components/BoardItem';
 import { checkNinRow } from '../gameLogic';
 
-export default function GameScreen({ navigation, route}) {
+export default function GameScreen({ navigation, route }) {
   const { language, piecesToWin, totPlayers, time } = route.params;
 
   // Get the player with players[activePlayer]
@@ -58,9 +58,14 @@ export default function GameScreen({ navigation, route}) {
   const clickHandler = useCallback((item, index) => {
     console.log('Player ', players[activePlayer], ' with index ', activePlayer, ' clicked on ', item.id);
     item.isClicked = !item.isClicked;
+    occupyBoardItem(item);
     checkNinRow(data, item, players[activePlayer], piecesToWin);
     nextPlayer();
   });
+
+  const occupyBoardItem = (item) => {
+    console.log("inne");
+  }
 
   // Makes sure the activePlayer loops through the players array
   const nextPlayer = () => {
@@ -101,7 +106,14 @@ export default function GameScreen({ navigation, route}) {
           key={numColumns}
           keyExtractor={(item, index) => index.toString()}
           data={data.flatMap((row) => row)}
-          renderItem={({ item, index }) => <BoardItem item={item} index={index} onPress={() => clickHandler(item, index)} />}
+          renderItem={({ item, index }) =>
+            <BoardItem
+              item={item}
+              index={index}
+              playerClicked={players[activePlayer]}
+              onPress={() => clickHandler(item, index)}
+
+            />}
         />
 
 
