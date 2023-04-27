@@ -5,7 +5,9 @@ import { Entypo } from '@expo/vector-icons';
 import { EvilIcons } from '@expo/vector-icons';
 
 // TODO: should this be a class instead? Can we even get to navigation in that case?
-export default function GameMenu( { navigation }, props ) {
+export default function GameMenu(props) {
+    const SYMBOL_SIZE = 20;
+    const { navigation, showMenu, hideMenu, language, openCloseMenu, isVisible } = props;
     const menuReference = useRef();
 
     return (
@@ -13,33 +15,33 @@ export default function GameMenu( { navigation }, props ) {
             style={styles.container}
             ref={menuReference}
         >
-            <Menu>
-                <MenuTrigger style={styles.menuButton} onPress={props.showMenu}>
+            <Menu style={styles.menu}>
+                <MenuTrigger style={styles.menuButton} onPress={openCloseMenu}>
                     <Entypo name="menu" size={45} color="black" />
                 </MenuTrigger>
                 <MenuOptions style={styles.menuOptions}>
-                    <MenuOption style={styles.menuOption} onSelect={props.hideMenu}>
-                        <Text>Hide menu</Text>
+                    <MenuOption style={styles.menuOption} onSelect={openCloseMenu}>
+                        <Text>{language.GameMenu.hideMenu}</Text>
                     </MenuOption>
                     <MenuOption
                         style={styles.menuOption}
                         onSelect={() => navigation.popToTop()}
                     >
-                        <Text>Back to main menu</Text>
+                        <Text>{language.GameMenu.toMain}</Text>
                     </MenuOption>
                     <MenuOption
                         style={styles.menuOption}
                         onSelect={() => alert(`Undo`)}
                     >
-                        <Text>Undo</Text>
-                        <EvilIcons name="undo" size={20} color="black" />
+                        <Text>{language.GameMenu.undo}</Text>
+                        <EvilIcons name="undo" size={SYMBOL_SIZE} color="black" />
                     </MenuOption>
                     <MenuOption
                         style={styles.menuOption}
                         onSelect={() => alert(`Redo`)}
                     >
-                        <Text>Redo</Text>
-                        <EvilIcons name="redo" size={20} color="black" />
+                        <Text>{language.GameMenu.redo}</Text>
+                        <EvilIcons name="redo" size={SYMBOL_SIZE} color="black" />
                     </MenuOption>
                 </MenuOptions>
             </Menu>
@@ -52,6 +54,8 @@ const styles = StyleSheet.create({
         justifyContent: "flex-start",
         alignItems: "flex-start",
         padding: 4,
+        backgroundColor: 'red',
+        flex: 1
     },
     menuButton: {
         backgroundColor: 'white',
@@ -61,7 +65,8 @@ const styles = StyleSheet.create({
         fontSize: 16,
     },
     menuOptions: {
-        margin: 10,
+        padding: 10,
+        backgroundColor: 'lightblue',
     },
     menuOption: {
         flexDirection: 'row',

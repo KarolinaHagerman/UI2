@@ -21,7 +21,7 @@ export function checkNinRow(boardData, clickedSquare, player, n){
                     count = 0
                 }
             } catch(err){
-                console.log(err)
+                //console.log(err)
             }
         }
 
@@ -42,7 +42,7 @@ export function checkNinRow(boardData, clickedSquare, player, n){
                 }
             } catch(err){
 
-                console.log(err)
+                //console.log(err)
             }
         }
 
@@ -62,7 +62,7 @@ export function checkNinRow(boardData, clickedSquare, player, n){
                     count = 0
                 }
             } catch(err){
-                console.log(err)
+                //console.log(err)
             }
         }
 
@@ -82,7 +82,7 @@ export function checkNinRow(boardData, clickedSquare, player, n){
                     count = 0
                 }
             } catch(err){
-                console.log(err)
+                //console.log(err)
             }
         }
     }

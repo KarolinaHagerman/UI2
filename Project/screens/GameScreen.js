@@ -5,11 +5,14 @@ import GameMenu from '../components/GameMenu';
 import BoardItem from '../components/BoardItem';
 import { checkNinRow } from '../gameLogic';
 
-export default function GameScreen({ navigation, route}) {
+export default function GameScreen({ navigation, route }) {
+  const { language, piecesToWin, totPlayers, time } = route.params;
+
   // Get the player with players[activePlayer]
   const players = ['X', 'O', 'Y', 'Z'];
   const [activePlayer, setActivePlayer] = useState(0);
   const [headerFlex, setHeaderFlex] = useState(0);
+  const [isMenuVisible, changeMenuVisibility] = useState(false);
 
   /*   TODO: it's still very slow if I increase numColumns. 
     Have tried useCallback (here) and PureComponent (BoardItem.js). 
@@ -27,6 +30,21 @@ export default function GameScreen({ navigation, route}) {
   // Sets the header flex back to normal - boardItems clickable again and menu can't stretch
   const hideMenu = () => {
     setHeaderFlex(0);
+  }
+
+  // Sets the header flex back to normal - boardItems clickable again and menu can't stretch
+  const openCloseMenu = () => {
+    console.log('isMenuVisible', isMenuVisible, !isMenuVisible);
+
+    // Show menu if not shown already
+    if (isMenuVisible) {
+      setHeaderFlex(0);
+    }
+    else {
+      setHeaderFlex(1);
+    }
+    console.log('headerFlex', headerFlex);
+    changeMenuVisibility(!isMenuVisible);
   }
 
   // Returns data on the form (this example is a 3x3 board):
@@ -55,12 +73,11 @@ export default function GameScreen({ navigation, route}) {
   // Decides what happens when you click on a grid item, useCallback to try and speed things up
   const clickHandler = useCallback((item, index) => {
     console.log('Player ', players[activePlayer], ' with index ', activePlayer, ' clicked on ', item.id);
-    console.log(index);
-    console.log(item);
     item.isClicked = !item.isClicked;
-    checkNinRow(data, item, players[activePlayer], route.params.piecesToWin);
+    checkNinRow(data, item, players[activePlayer], piecesToWin);
     nextPlayer();
   });
+
 
   // Makes sure the activePlayer loops through the players array
   const nextPlayer = () => {
@@ -79,14 +96,21 @@ export default function GameScreen({ navigation, route}) {
       <StatusBar style="auto" />
       <View style={[styles.header, { flex: headerFlex }]}>
         <GameMenu
-          style={styles.gameMenu}
           navigation={navigation}
           showMenu={showMenu}
           hideMenu={hideMenu}
+          language={language}
+          players={players}
+          openCloseMenu={openCloseMenu}
+          isVisible={isMenuVisible}
         />
 
-        <Text style={styles.scores}>Poängen</Text>
-        <Text style={styles.playerTurn}>BLABLBLABLA {players[activePlayer]}</Text>
+        <Text style={styles.scores}>{language.GameScreen.scores}</Text>
+        <View style={styles.playerTurn}>
+          {players.map((player, index) => (
+            <Text key={index} style={[styles.player, players[activePlayer] === player ? styles.activePlayer : null]} >{player}</Text>
+          ))}
+        </View>
       </View>
 
       <View style={styles.body}>
@@ -101,7 +125,14 @@ export default function GameScreen({ navigation, route}) {
           key={numColumns}
           keyExtractor={(item, index) => index.toString()}
           data={data.flatMap((row) => row)}
-          renderItem={({ item, index }) => <BoardItem item={item} index={index} onPress={() => clickHandler(item, index)} />}
+          renderItem={({ item, index }) =>
+            <BoardItem
+              item={item}
+              index={index}
+              playerClicked={players[activePlayer]}
+              onPress={() => clickHandler(item, index)}
+
+            />}
         />
 
 
@@ -119,17 +150,18 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   header: {
-    flex: 0,
+    flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'flex-start',
     zIndex: 2,
-    position: 'relative'
+    position: 'relative',
+    backgroundColor: 'orange',
   },
   body: {
     backgroundColor: 'black',
     flex: 1,
-    //position: 'absolute',
+    position: 'absolute',
   },
   bodyText: {
     fontWeight: 'bold',
@@ -140,15 +172,23 @@ const styles = StyleSheet.create({
   scores: {
     backgroundColor: 'purple',
     fontSize: 20,
-    color: 'blue',
+    color: 'white',
     padding: 20,
   },
   playerTurn: {
     backgroundColor: 'gold',
-    fontSize: 20,
-    color: 'red',
     padding: 10,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'baseline',
   },
-  gameMenu: {
-  }
+  player: {
+    fontSize: 20,
+    color: 'blue',
+  },
+  activePlayer: {
+    fontSize: 30,
+    fontWeight: 'bold',
+
+  },
 });

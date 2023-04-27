@@ -12,6 +12,15 @@
         "players": "players",
         "pieces": "pieces",
         "seconds": "seconds"
-    } 
+    } ,
+    "GameScreen" : {
+        "scores": "scores"
+    } ,
+    "GameMenu" : {
+        "hideMenu": "Hide Menu",
+        "toMain": "Back to main menu",
+        "undo": "Undo",
+        "redo": "Redo"
+    }
 
 }
