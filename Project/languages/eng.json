@@ -1,9 +1,8 @@
-
 {
-    "HomeScreen" : {
+    "HomeScreen": {
         "newGameButton": "New Game"
-    } ,
-    "NewGameScreen" : {
+    },
+    "NewGameScreen": {
         "mainMenuButton": "Main Menu",
         "startGameButton": "Start Game",
         "numberOfPlayers": "Number of Players",
@@ -11,16 +10,17 @@
         "timePerMove": "Time per Move",
         "players": "players",
         "pieces": "pieces",
-        "seconds": "seconds"
-    } ,
-    "GameScreen" : {
+        "seconds": "seconds",
+        "boardSize": "Board Size",
+        "squares": "Squares"
+    },
+    "GameScreen": {
         "scores": "scores"
-    } ,
-    "GameMenu" : {
+    },
+    "GameMenu": {
         "hideMenu": "Hide Menu",
         "toMain": "Back to main menu",
         "undo": "Undo",
         "redo": "Redo"
     }
-
 }
