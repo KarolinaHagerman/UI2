@@ -12,6 +12,8 @@
         "timePerMove": "Tid per Drag",
         "players": "spelare",
         "pieces": "pjäser",
-        "seconds": "sekunder"
+        "seconds": "sekunder",
+        "boardSize": "Brädstorlek",
+        "squares": "Rutor"
     } 
 }

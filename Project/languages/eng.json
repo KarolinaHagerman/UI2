@@ -11,7 +11,9 @@
         "timePerMove": "Time per Move",
         "players": "players",
         "pieces": "pieces",
-        "seconds": "seconds"
+        "seconds": "seconds",
+        "boardSize": "Board Size",
+        "squares": "Squares"
     } 
 
 }

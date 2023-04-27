@@ -3,11 +3,12 @@ import React, { useState, useCallback } from 'react';
 import { StyleSheet, Text, View, Button, SafeAreaView, FlatList, TouchableOpacity, Modal } from 'react-native';
 import GameMenu from '../components/GameMenu';
 import BoardItem from '../components/BoardItem';
-import { checkNinRow } from '../gameLogic';
+import { checkNinRow, undo, redo } from '../js/gameLogic';
 
 export default function GameScreen({ navigation, route}) {
   // Get the player with players[activePlayer]
-  const players = ['X', 'O', 'Y', 'Z'];
+  const players = ['X', 'O'];
+  //const players = ['X', 'O', 'Y', 'Z'];
   const [activePlayer, setActivePlayer] = useState(0);
   const [headerFlex, setHeaderFlex] = useState(0);
 
@@ -16,7 +17,7 @@ export default function GameScreen({ navigation, route}) {
     Other things to try is VirtualizedList instead of FlatList:
      the app will only render the items that are currently visible on the screen, 
      which can improve the performance significantly. - ChatGPT */
-  const numColumns = 30;
+ // const numColumns = 30;
 
   // Lets the header flex over the entire board while the menu is shown - boardItems not clickable and menu can stretch down
   // TODO: still problem with the menu not stretching over the borders of the other flexitems (scores and playerTurn)
@@ -29,36 +30,12 @@ export default function GameScreen({ navigation, route}) {
     setHeaderFlex(0);
   }
 
-  // Returns data on the form (this example is a 3x3 board):
-  /*   [
-    [{ id: '0-0', row: 0, col: 0, isClicked: false, player: null  }, { id: '0-1', row: 0, col: 1, isClicked: false, player: null  }, { id: '0-2', row: 0, col: 2, isClicked: false, player: null  }],
-    [{ id: '1-0', row: 1, col: 0, isClicked: false, player: null  }, { id: '1-1', row: 1, col: 1, isClicked: false, player: null  }, { id: '1-2', row: 1, col: 2, isClicked: false, player: null }],
-    [{ id: '2-0', row: 2, col: 0, isClicked: false, player: null  }, { id: '2-1', row: 2, col: 1, isClicked: false, player: null  }, { id: '2-2', row: 2, col: 2, isClicked: false, player: null }],
-  ]; */
-  const initializeBoardData = () => {
-    let boardData = [];
-    for (let i = 0; i < numColumns; i++) {
-      let row = [];
-      for (let j = 0; j < numColumns; j++) {
-        let boardObject = { id: i + '-' + j, row: i, col: j, isClicked: false, player: null }
-        row.push(boardObject);
-      }
-      boardData.push(row);
-    }
-    //TODO: denna log indikerar att initializeBoardData körs varje gång man klickar, så vill vi inte ha det!
-    //console.log(boardData);
-    return boardData;
-  }
-
-  const data = initializeBoardData();
 
   // Decides what happens when you click on a grid item, useCallback to try and speed things up
   const clickHandler = useCallback((item, index) => {
     console.log('Player ', players[activePlayer], ' with index ', activePlayer, ' clicked on ', item.id);
-    console.log(index);
-    console.log(item);
     item.isClicked = !item.isClicked;
-    checkNinRow(data, item, players[activePlayer], route.params.piecesToWin);
+    checkNinRow(route.params.data, item, players[activePlayer], route.params.piecesToWin);
     nextPlayer();
   });
 
@@ -97,12 +74,25 @@ export default function GameScreen({ navigation, route}) {
           We're also using the index parameter of the keyExtractor function instead of the id property, 
           since we're using an array of objects instead of an array of arrays. - ChatGPT*/}
         <FlatList
-          numColumns={numColumns}
-          key={numColumns}
+          numColumns={route.params.numColumns}
+          key={route.params.numColumns}
           keyExtractor={(item, index) => index.toString()}
-          data={data.flatMap((row) => row)}
+          data={route.params.data.flatMap((row) => row)}
           renderItem={({ item, index }) => <BoardItem item={item} index={index} onPress={() => clickHandler(item, index)} />}
         />
+              <Button 
+        title={'undo'}
+        onPress={() => {
+        undo();
+        }}
+      />
+
+<Button 
+        title={'redo'}
+        onPress={() => {
+        redo();
+        }}
+      />
 
 
       </View>
