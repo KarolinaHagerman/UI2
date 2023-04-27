@@ -3,7 +3,7 @@ import React, { useState, useCallback } from 'react';
 import { StyleSheet, Text, View, Button, SafeAreaView, FlatList, TouchableOpacity, Modal } from 'react-native';
 import GameMenu from '../components/GameMenu';
 import BoardItem from '../components/BoardItem';
-import { checkNinRow, undo, redo } from '../js/gameLogic';
+import { checkNinRow, undo, redo } from 'C:/Users/hager/OneDrive/Dokument/UI Programming II/Project/js/gameLogic';
 
 export default function GameScreen({ navigation, route }) {
   const { language, piecesToWin, totPlayers, time, data, numColumns } = route.params;
@@ -108,15 +108,15 @@ export default function GameScreen({ navigation, route }) {
             <BoardItem
               item={item}
               index={index}
-              playerClicked={players[activePlayer]}
+              boardData={data}
               onPress={() => clickHandler(item, index)}
-
             />}
         />
         <Button
           title={'undo'}
           onPress={() => {
             undo();
+            console.log("raden i gamescreen", data[2])
           }}
         />
 

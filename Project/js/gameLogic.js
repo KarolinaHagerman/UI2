@@ -10,7 +10,7 @@ export function undo(){
         boardData[lastMove.row][lastMove.col].player = null;
         boardData[lastMove.row][lastMove.col].isClicked = false;
         unmadeMoves.push(lastMove);
-        console.log(boardData[2])
+        console.log("raden i gameLogic ", boardData[2])
     }
 }
 
