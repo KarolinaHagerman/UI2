@@ -6,10 +6,10 @@ import BoardItem from '../components/BoardItem';
 import { checkNinRow, undo, redo } from '../js/gameLogic';
 
 export default function GameScreen({ navigation, route }) {
-  const { language, piecesToWin, totPlayers, time, data, numColumns } = route.params;
-
+  const { language, piecesToWin, players, time, data, numColumns } = route.params;
+  console.log('totplayers gamescreeeeeeen:', players)
   // Get the player with players[activePlayer]
-  const players = ['X', 'O'];
+  var playerss = ['X', 'O'];
   //const players = ['X', 'O', 'Y', 'Z'];
   const [activePlayer, setActivePlayer] = useState(0);
   const [headerFlex, setHeaderFlex] = useState(0);

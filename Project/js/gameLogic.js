@@ -24,7 +24,6 @@ export function redo(){
     }
 }
 
-
 export function initializeBoardData(numColumns){
     //const numColumns = 30;
     for (let i = 0; i < numColumns; i++) {

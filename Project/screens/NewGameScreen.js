@@ -8,15 +8,16 @@ import { initializeBoardData } from '../js/gameLogic';
 
 export default function NewGameScreen({ navigation, route}) {
   const { language } = route.params;
+  const playerChars = ['A', 'B', 'C', 'D', 'X', 'Y', 'Z', 'Å', 'Ä', 'Ö']
   const numberOfPlayers = [2,3,4,5,6,7,8,9,10];
   const piecesInRow = [3,4,5,6,7,8,9,10];
   const timePerMove = [5,10,15,30,60];
   const boardSize = [3,5,15,30];
   var size = 3
-  var players = 2;
+  var players = playerChars.slice(0,2);
   var pieces = 3;
   var time = 60;
-  console.log(language.HomeScreen.newGameButton)
+  console.log('totplayers newgamescreen initial: ' , players)
   return (
     <View style={styles.container}>
       
@@ -29,8 +30,8 @@ export default function NewGameScreen({ navigation, route}) {
           defaultButtonText = {language.NewGameScreen.numberOfPlayers}
           data = {numberOfPlayers}
           onSelect={(selectedItem, index) => {
-            players = selectedItem;
-            console.log(selectedItem, index)
+            players = playerChars.slice(0,selectedItem);
+            console.log('totplayers newgamescreen: ' , players)
           }}
           buttonTextAfterSelection={(selectedItem, index) => {
             // text represented after item is selected
