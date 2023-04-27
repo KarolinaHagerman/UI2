@@ -3,14 +3,14 @@ import React, { useState, useCallback } from 'react';
 import { StyleSheet, Text, View, Button, SafeAreaView, FlatList, TouchableOpacity, Modal } from 'react-native';
 import GameMenu from '../components/GameMenu';
 import BoardItem from '../components/BoardItem';
-import { checkNinRow, undo, redo } from 'C:/Users/hager/OneDrive/Dokument/UI Programming II/Project/js/gameLogic';
+import { checkNinRow, undoBoard, redoBoard, madeMoves, unmadeMoves } from 'C:/Users/hager/OneDrive/Dokument/UI Programming II/Project/js/gameLogic';
 
 export default function GameScreen({ navigation, route }) {
   const { language, piecesToWin, totPlayers, time, data, numColumns } = route.params;
 
   // Get the player with players[activePlayer]
-  const players = ['X', 'O'];
-  //const players = ['X', 'O', 'Y', 'Z'];
+  //const players = ['X', 'O'];
+  const players = ['X', 'O', 'Y', 'Z'];
   const [activePlayer, setActivePlayer] = useState(0);
   const [headerFlex, setHeaderFlex] = useState(0);
   const [isMenuVisible, changeMenuVisibility] = useState(false);
@@ -51,9 +51,11 @@ export default function GameScreen({ navigation, route }) {
   // Decides what happens when you click on a grid item, useCallback to try and speed things up
   const clickHandler = useCallback((item, index) => {
     console.log('Player ', players[activePlayer], ' with index ', activePlayer, ' clicked on ', item.id);
-    item.isClicked = !item.isClicked;
-    checkNinRow(data, item, players[activePlayer], piecesToWin);
-    nextPlayer();
+    if (!item.isClicked) {
+      item.isClicked = true;
+      checkNinRow(data, item, players[activePlayer], piecesToWin);
+      nextPlayer();
+    }
   });
 
 
@@ -65,8 +67,27 @@ export default function GameScreen({ navigation, route }) {
     else {
       setActivePlayer(activePlayer + 1);
     }
-
   }
+
+  // Goes back one step in player loop
+  const undoPlayer = () => {
+    if (madeMoves.length > 0) {
+      if (activePlayer <= 0) {
+        setActivePlayer(players.length - 1);
+      }
+      else {
+        setActivePlayer(activePlayer - 1);
+      }
+    }
+  }
+
+  // Calls on next player only if undo's are done
+  const redoPlayer = () => {
+    if(unmadeMoves.length > 0) {
+      nextPlayer();
+    }
+  }
+
 
   return (
 
@@ -115,15 +136,16 @@ export default function GameScreen({ navigation, route }) {
         <Button
           title={'undo'}
           onPress={() => {
-            undo();
-            console.log("raden i gamescreen", data[2])
+            undoBoard();
+            undoPlayer();
           }}
         />
 
         <Button
           title={'redo'}
           onPress={() => {
-            redo();
+            redoBoard();
+            redoPlayer();
           }}
         />
 

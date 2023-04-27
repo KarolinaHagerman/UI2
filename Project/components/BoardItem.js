@@ -12,7 +12,7 @@ export default class BoardItem extends PureComponent {
   };
 
   render() {
-    console.log(this.props.boardData[2]);
+    //console.log(this.props.boardData[2]);
 
     return (
       <TouchableOpacity onPress={this.onPress}>
