@@ -6,11 +6,8 @@ import BoardItem from '../components/BoardItem';
 import { checkNinRow, undoBoard, redoBoard, madeMoves, unmadeMoves } from 'C:/Users/hager/OneDrive/Dokument/UI Programming II/Project/js/gameLogic';
 
 export default function GameScreen({ navigation, route }) {
-  const { language, piecesToWin, totPlayers, time, data, numColumns } = route.params;
-
-  // Get the player with players[activePlayer]
-  //const players = ['X', 'O'];
-  const players = ['X', 'O', 'Y', 'Z'];
+  const { language, piecesToWin, players, time, data, numColumns } = route.params;
+  console.log('totplayers gamescreeeeeeen:', players)
   const [activePlayer, setActivePlayer] = useState(0);
   const [headerFlex, setHeaderFlex] = useState(0);
   const [isMenuVisible, changeMenuVisibility] = useState(false);

@@ -1,8 +1,8 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Button, View} from 'react-native';
 import {useState} from 'react';
-import eng from 'C:/Users/hager/OneDrive/Dokument/UI Programming II/Project/languages/eng.json';
-import sve from 'C:/Users/hager/OneDrive/Dokument/UI Programming II/Project/languages/sve.json';
+import eng from '../languages/eng.json';
+import sve from '../languages/sve.json';
 
 
 //import eng from '../languages/eng.json';
