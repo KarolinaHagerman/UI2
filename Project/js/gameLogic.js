@@ -1,20 +1,20 @@
 var boardData = [];
-var madeMoves = [];
-var unmadeMoves = [];
+export var madeMoves = [];
+export var unmadeMoves = [];
 var lastMove = null;
 var redoMove = null;
 
-export function undo(){
+export function undoBoard(){
     if(madeMoves.length > 0){
         lastMove = {...madeMoves.pop()};
         boardData[lastMove.row][lastMove.col].player = null;
         boardData[lastMove.row][lastMove.col].isClicked = false;
         unmadeMoves.push(lastMove);
-        console.log(boardData[2])
+        console.log("raden i gameLogic ", boardData[2])
     }
 }
 
-export function redo(){
+export function redoBoard(){
     if(unmadeMoves.length > 0){
         redoMove = {...unmadeMoves.pop()};
         boardData[redoMove.row][redoMove.col].player = redoMove.player;
