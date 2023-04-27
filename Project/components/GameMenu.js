@@ -3,7 +3,7 @@ import { StyleSheet, View, Text } from "react-native";
 import { Menu, MenuProvider, MenuOptions, MenuOption, MenuTrigger } from "react-native-popup-menu";
 import { Entypo } from '@expo/vector-icons';
 import { EvilIcons } from '@expo/vector-icons';
-import { undo, redo } from 'C:/Users/hager/OneDrive/Dokument/UI Programming II/Project/js/gameLogic';
+import { undoBoard, redoBoard } from 'C:/Users/hager/OneDrive/Dokument/UI Programming II/Project/js/gameLogic';
 
 // TODO: should this be a class instead? Can we even get to navigation in that case?
 export default function GameMenu(props) {
