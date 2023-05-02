@@ -12,7 +12,8 @@
         "pieces": "pieces",
         "seconds": "seconds",
         "boardSize": "Board Size",
-        "squares": "Squares"
+        "squares": "Squares",
+        "tutorialMode": "Tutorial Mode"
     },
     "GameScreen": {
         "scores": "scores"

@@ -14,7 +14,8 @@
         "pieces": "pjäser",
         "seconds": "sekunder",
         "boardSize": "Brädstorlek",
-        "squares": "Rutor"
+        "squares": "Rutor",
+        "tutorialMode": "Tutorial Mode"
     } ,
     "GameScreen" : {
         "scores": "poäng"

@@ -10,7 +10,6 @@ export function undoBoard(){
         boardData[lastMove.row][lastMove.col].player = null;
         boardData[lastMove.row][lastMove.col].isClicked = false;
         unmadeMoves.push(lastMove);
-        console.log("raden i gameLogic ", boardData[2])
     }
 }
 
@@ -36,6 +35,7 @@ export function initializeBoardData(numColumns){
     }
     return boardData
 }
+
 
 //After each click on the board, checks if there is a winner
 export function checkNinRow(boardData, clickedSquare, player, n){

@@ -1,5 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, View, Text, Button, Switch} from 'react-native';
+import React, { useState} from 'react';
 import { StackActions } from '@react-navigation/native';
 import SelectDropdown from 'react-native-select-dropdown';
 import { initializeBoardData } from '../js/gameLogic';
@@ -17,13 +18,24 @@ export default function NewGameScreen({ navigation, route}) {
   var players = playerChars.slice(0,2);
   var pieces = 3;
   var time = 60;
+  const [isEnabled, setIsEnabled] = useState(false);
+  const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+
   console.log('totplayers newgamescreen initial: ' , players)
   return (
     <View style={styles.container}>
-      
+
+      <StatusBar style="auto" />
       <Button 
         title= {language.NewGameScreen.mainMenuButton}
         onPress={() => navigation.navigate('Home')}
+      />
+      <Text>{language.NewGameScreen.tutorialMode}</Text>
+      <Switch
+        trackColor={{false: '#767577', true: '#81b0ff'}}
+        thumbColor={isEnabled ? '#f5dd4b' : '#f4f3f4'}
+        onValueChange={toggleSwitch}
+        value={isEnabled}
       />
       <StatusBar style="auto" />
         <SelectDropdown 
@@ -109,11 +121,12 @@ export default function NewGameScreen({ navigation, route}) {
         onPress={() => {
           var boardData = initializeBoardData(size)
           navigation.dispatch(
-            StackActions.replace("Game", {language: language, piecesToWin: pieces, players: players, time: time, data: boardData, numColumns: size})
+            StackActions.replace("Game", {language: language, piecesToWin: pieces, players: players, time: time, data: boardData, numColumns: size, tutorialMode: isEnabled})
           );
         }}
       />
-      <StatusBar style="auto" />
+
+
     </View>
   );
 }

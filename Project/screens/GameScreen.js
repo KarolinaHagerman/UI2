@@ -1,23 +1,32 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { useState, useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { StyleSheet, Text, View, Button, SafeAreaView, FlatList, TouchableOpacity, Modal } from 'react-native';
 import GameMenu from '../components/GameMenu';
 import BoardItem from '../components/BoardItem';
-import { checkNinRow, undoBoard, redoBoard, madeMoves, unmadeMoves } from 'C:/Users/hager/OneDrive/Dokument/UI Programming II/Project/js/gameLogic';
+import { checkNinRow, undoBoard, redoBoard, madeMoves, unmadeMoves} from '../js/gameLogic';
 
 export default function GameScreen({ navigation, route }) {
-  const { language, piecesToWin, players, time, data, numColumns } = route.params;
-  console.log('totplayers gamescreeeeeeen:', players)
+  const { language, piecesToWin, players, time, data, numColumns, tutorialMode } = route.params;
+  console.log('tutorialMode: ', tutorialMode)
   const [activePlayer, setActivePlayer] = useState(0);
   const [headerFlex, setHeaderFlex] = useState(0);
   const [isMenuVisible, changeMenuVisibility] = useState(false);
+  const [timeLeft, setTimeLeft] = useState(time);
 
-  /*   TODO: it's still very slow if I increase numColumns. 
-    Have tried useCallback (here) and PureComponent (BoardItem.js). 
-    Other things to try is VirtualizedList instead of FlatList:
-     the app will only render the items that are currently visible on the screen, 
-     which can improve the performance significantly. - ChatGPT */
-  // const numColumns = 30;
+  //timer 
+  let timer = null;
+  useEffect(() => {
+    timer = setTimeout(() => { 
+      setTimeLeft(timeLeft - 1);
+      console.log('******************',timeLeft,'***********************************')
+      if (timeLeft == 0){
+        nextPlayer();
+        setTimeLeft(time);
+      }
+    }, 1000) ;
+
+    return () => clearInterval(timer);
+  }, [timeLeft]);
 
   // Lets the header flex over the entire board while the menu is shown - boardItems not clickable and menu can stretch down
   // TODO: still problem with the menu not stretching over the borders of the other flexitems (scores and playerTurn)
@@ -52,6 +61,7 @@ export default function GameScreen({ navigation, route }) {
       item.isClicked = true;
       checkNinRow(data, item, players[activePlayer], piecesToWin);
       nextPlayer();
+      setTimeLeft(time);
     }
   });
 
@@ -71,9 +81,11 @@ export default function GameScreen({ navigation, route }) {
     if (madeMoves.length > 0) {
       if (activePlayer <= 0) {
         setActivePlayer(players.length - 1);
+        setTimeLeft(time);
       }
       else {
         setActivePlayer(activePlayer - 1);
+        setTimeLeft(time);
       }
     }
   }
@@ -82,6 +94,7 @@ export default function GameScreen({ navigation, route }) {
   const redoPlayer = () => {
     if(unmadeMoves.length > 0) {
       nextPlayer();
+      setTimeLeft(time);
     }
   }
 
@@ -101,7 +114,7 @@ export default function GameScreen({ navigation, route }) {
           isVisible={isMenuVisible}
         />
 
-        <Text style={styles.scores}>{language.GameScreen.scores}</Text>
+        <Text style={styles.scores}>{timeLeft}</Text>
         <View style={styles.playerTurn}>
           {players.map((player, index) => (
             <Text key={index} style={[styles.player, players[activePlayer] === player ? styles.activePlayer : null]} >{player}</Text>
