@@ -3,11 +3,11 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { StyleSheet, Text, View, Button, SafeAreaView, FlatList, TouchableOpacity, Modal } from 'react-native';
 import GameMenu from '../components/GameMenu';
 import BoardItem from '../components/BoardItem';
+import WinnerModal from '../components/WinnerModal';
 import { checkNinRow, undoBoard, redoBoard, madeMoves, unmadeMoves} from '../js/gameLogic';
 
 export default function GameScreen({ navigation, route }) {
   const { language, piecesToWin, players, time, data, numColumns, tutorialMode } = route.params;
-  console.log('tutorialMode: ', tutorialMode)
   const [activePlayer, setActivePlayer] = useState(0);
   const [headerFlex, setHeaderFlex] = useState(0);
   const [isMenuVisible, changeMenuVisibility] = useState(false);
@@ -18,7 +18,6 @@ export default function GameScreen({ navigation, route }) {
   useEffect(() => {
     timer = setTimeout(() => { 
       setTimeLeft(timeLeft - 1);
-      console.log('******************',timeLeft,'***********************************')
       if (timeLeft == 0){
         nextPlayer();
         setTimeLeft(time);
@@ -123,6 +122,8 @@ export default function GameScreen({ navigation, route }) {
       </View>
 
       <View style={styles.body}>
+
+      <WinnerModal />
 
         {/* FLATLIST DÄR DATAN ÄR EN MATRIS MED OBJEKT */}
         {/* Here, we're using the flatMap() method to flatten the two-dimensional data 

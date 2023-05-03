@@ -32,14 +32,14 @@ export default function GameMenu(props) {
                     </MenuOption>
                     <MenuOption
                         style={styles.menuOption}
-                        onSelect={() => undo()}
+                        onSelect={() => undoBoard()}
                     >
                         <Text>{language.GameMenu.undo}</Text>
                         <EvilIcons name="undo" size={SYMBOL_SIZE} color="black" />
                     </MenuOption>
                     <MenuOption
                         style={styles.menuOption}
-                        onSelect={() => redo()}
+                        onSelect={() => redoBoard()}
                     >
                         <Text>{language.GameMenu.redo}</Text>
                         <EvilIcons name="redo" size={SYMBOL_SIZE} color="black" />
