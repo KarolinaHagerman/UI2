@@ -1,10 +1,13 @@
 import React, { PureComponent, useState } from 'react';
-import { TouchableOpacity, Text, View, StyleSheet } from 'react-native';
+import { TouchableOpacity, Text, View, StyleSheet, Dimensions } from 'react-native';
 
+//screenWidth = Dimensions.get("window").width;
+//numColumns = this.props.numColumns;
+let tileSize = 100;
 // PureComponent automatically implements a "shouldComponentUpdate" method that performs a 
 // shallow comparison of the props and state of the component to determine if it needs to re-render. - ChatGPT
 export default class BoardItem extends PureComponent {
-
+  
 
   onPress = () => {
     this.props.onPress(this.props.item);
@@ -23,12 +26,13 @@ export default class BoardItem extends PureComponent {
     );
   }
 
-  
 }
 
 const styles = StyleSheet.create({
     boardItem: {
-      padding: 30,
+      alignItems: "center",
+      height: tileSize,
+      width: tileSize,
       backgroundColor: 'white',
       margin: 1,
     }

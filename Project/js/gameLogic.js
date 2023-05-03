@@ -52,7 +52,8 @@ export function checkNinRow(boardData, clickedSquare, player, n){
                 if (boardData[clickedSquare.row + (i - n)][clickedSquare.col + (j - n)].player == boardData[clickedSquare.row][clickedSquare.col].player){
                     count += 1;
                     if (count == n){
-                        console.log('winner: ', player)
+                        console.log('winner: ' + player);
+                        window.alert('winner: ' + player);
                     }
                 } else {
                     count = 0
@@ -67,7 +68,8 @@ export function checkNinRow(boardData, clickedSquare, player, n){
                 if (boardData[clickedSquare.row + (i - n)][clickedSquare.col + (n - j)].player == boardData[clickedSquare.row][clickedSquare.col].player){
                     count += 1;
                     if (count == n){
-                        console.log('winner: ', player)
+                        console.log('winner: ', player);
+                        window.alert('winner: ', player);
                     }
                 } else {
                     count = 0
@@ -82,7 +84,9 @@ export function checkNinRow(boardData, clickedSquare, player, n){
                 if (boardData[clickedSquare.row + (i - n)][clickedSquare.col].player == boardData[clickedSquare.row][clickedSquare.col].player){
                     count += 1;
                     if (count == n){
-                        console.log('winner: ', player)
+                        console.log('winner: ', player);
+                        window.alert('winner: ', player);
+                 
                     }
                 } else {
                     count = 0
@@ -97,7 +101,8 @@ export function checkNinRow(boardData, clickedSquare, player, n){
                 if (boardData[clickedSquare.row][clickedSquare.col + (j - n)].player == boardData[clickedSquare.row][clickedSquare.col].player){
                     count += 1;
                     if (count == n){
-                        console.log('winner: ', player)
+                        console.log('winner: ', player);
+                        window.alert('winner: ', player);
                     }
                 } else {
                     count = 0

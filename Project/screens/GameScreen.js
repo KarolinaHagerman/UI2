@@ -1,13 +1,14 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState, useEffect, useCallback } from 'react';
-import { StyleSheet, Text, View, Button, SafeAreaView, FlatList, TouchableOpacity, Modal } from 'react-native';
+import { StyleSheet, Text, View, Button, SafeAreaView, FlatList, TouchableOpacity, Modal} from 'react-native';
 import GameMenu from '../components/GameMenu';
 import BoardItem from '../components/BoardItem';
 import { checkNinRow, undoBoard, redoBoard, madeMoves, unmadeMoves} from '../js/gameLogic';
+import MovableView from 'react-native-movable-view';
+//import ReactNativeZoomableView from '@openspacelabs/react-native-zoomable-view/src/ReactNativeZoomableView';
 
 export default function GameScreen({ navigation, route }) {
   const { language, piecesToWin, players, time, data, numColumns, tutorialMode } = route.params;
-  console.log('tutorialMode: ', tutorialMode)
   const [activePlayer, setActivePlayer] = useState(0);
   const [headerFlex, setHeaderFlex] = useState(0);
   const [isMenuVisible, changeMenuVisibility] = useState(false);
@@ -18,7 +19,6 @@ export default function GameScreen({ navigation, route }) {
   useEffect(() => {
     timer = setTimeout(() => { 
       setTimeLeft(timeLeft - 1);
-      console.log('******************',timeLeft,'***********************************')
       if (timeLeft == 0){
         nextPlayer();
         setTimeLeft(time);
@@ -122,45 +122,46 @@ export default function GameScreen({ navigation, route }) {
         </View>
       </View>
 
-      <View style={styles.body}>
+        <MovableView style={styles.body}>
 
-        {/* FLATLIST DÄR DATAN ÄR EN MATRIS MED OBJEKT */}
-        {/* Here, we're using the flatMap() method to flatten the two-dimensional data 
-          array into a one-dimensional array, which can be used as the data prop for the FlatList. 
-          We're also using the index parameter of the keyExtractor function instead of the id property, 
-          since we're using an array of objects instead of an array of arrays. - ChatGPT*/}
-        <FlatList
-          numColumns={numColumns}
-          key={numColumns}
-          keyExtractor={(item, index) => index.toString()}
+          {/* FLATLIST DÄR DATAN ÄR EN MATRIS MED OBJEKT */}
+          {/* Here, we're using the flatMap() method to flatten the two-dimensional data 
+            array into a one-dimensional array, which can be used as the data prop for the FlatList. 
+            We're also using the index parameter of the keyExtractor function instead of the id property, 
+            since we're using an array of objects instead of an array of arrays. - ChatGPT*/}
+          <FlatList
+            numColumns={numColumns}
+            key={numColumns}
+            keyExtractor={(item, index) => index.toString()}
 
-          data={data.flatMap((row) => row)}
-          renderItem={({ item, index }) =>
-            <BoardItem
-              item={item}
-              index={index}
-              boardData={data}
-              onPress={() => clickHandler(item, index)}
-            />}
-        />
-        <Button
-          title={'undo'}
-          onPress={() => {
-            undoBoard();
-            undoPlayer();
-          }}
-        />
+            data={data.flatMap((row) => row)}
+            renderItem={({ item, index, numColumns }) =>
+              <BoardItem
+                item={item}
+                index={index}
+                boardData={data}
+                onPress={() => clickHandler(item, index, numColumns)}
+              />}
+          />
+          <Button
+            title={'undo'}
+            onPress={() => {
+              undoBoard();
+              undoPlayer();
+            }}
+          />
 
-        <Button
-          title={'redo'}
-          onPress={() => {
-            redoBoard();
-            redoPlayer();
-          }}
-        />
+          <Button
+            title={'redo'}
+            onPress={() => {
+              redoBoard();
+              redoPlayer();
+            }}
+          />
 
 
-      </View>
+        </MovableView>
+      
 
     </SafeAreaView>
 
