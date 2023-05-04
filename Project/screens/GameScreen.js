@@ -33,7 +33,7 @@ export default function GameScreen({ navigation, route }) {
   const showMenu = () => {
     setHeaderFlex(1);
   }
-
+  
   // Sets the header flex back to normal - boardItems clickable again and menu can't stretch
   const hideMenu = () => {
     setHeaderFlex(0);
