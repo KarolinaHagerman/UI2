@@ -166,11 +166,10 @@ const styles = StyleSheet.create({
     color: '#3E6680',
   },
   button: {
-    borderColor: '#262723',
     backgroundColor: '#C8C1AD',
-    borderWidth: 2,
+    borderColor: '#262723',
+    borderWidth: 1,
     borderRadius: 7,
-    color: 'black',
     padding: 20,
     shadowColor: 'black',
     shadowOffset: { width: -2, height: 4 },

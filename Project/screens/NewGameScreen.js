@@ -59,7 +59,7 @@ export default function NewGameScreen({ navigation, route }) {
     <View style={styles.container}>
       <View style={styles.header}>
         <TouchableOpacity onPress={() => navigation.navigate('Home', { soundIsOn: soundOn })}>
-          <Ionicons name="chevron-back" size={24} color="black" />
+          <Ionicons name="chevron-back" size={ICON_SIZE} color="black" />
         </TouchableOpacity>
 
         <TouchableOpacity
@@ -76,8 +76,10 @@ export default function NewGameScreen({ navigation, route }) {
       </View>
       <View style={styles.body}>
         <SelectDropdown
-          style={styles.dropDown}
+          buttonStyle={styles.dropDown}
+          buttonTextStyle={styles.dropDownText}
           defaultButtonText={language.NewGameScreen.numberOfPlayers + ': ' + players.length}
+          renderDropdownIcon={() => { return <Ionicons name="chevron-back" size={24} style={styles.dropDownIcon} />; }}
           data={numberOfPlayers}
           onSelect={(selectedItem, index) => { changePlayers(playerChars.slice(0, selectedItem)); }}
           buttonTextAfterSelection={(selectedItem, index) => {
@@ -92,7 +94,10 @@ export default function NewGameScreen({ navigation, route }) {
             return item
           }} />
         <SelectDropdown
+          buttonStyle={styles.dropDown}
+          buttonTextStyle={styles.dropDownText}
           defaultButtonText={language.NewGameScreen.numberOfPieces + ': ' + pieces}
+          renderDropdownIcon={() => { return <Ionicons name="chevron-back" size={24} style={styles.dropDownIcon} />; }}
           data={piecesInRow}
           onSelect={(selectedItem, index) => { changePieces(selectedItem); }}
           buttonTextAfterSelection={(selectedItem, index) => {
@@ -108,14 +113,17 @@ export default function NewGameScreen({ navigation, route }) {
           }} />
 
         <SelectDropdown
-          defaultButtonText={language.NewGameScreen.timePerMove + ': ' + time}
+          buttonStyle={styles.dropDown}
+          buttonTextStyle={styles.dropDownText}
+          defaultButtonText={language.NewGameScreen.timePerMove + ': ' + time + ' ' + language.NewGameScreen.seconds}
+          renderDropdownIcon={() => { return <Ionicons name="chevron-back" size={24} style={styles.dropDownIcon} />; }}
           data={timePerMove}
           onSelect={(selectedItem, index) => { changeTime(selectedItem); }}
           buttonTextAfterSelection={(selectedItem, index) => {
             // text represented after item is selected
             // if data array is an array of objects then return selectedItem.property to render after item is selected
             //let text = selectedItem + ' ' + language.NewGameScreen.seconds
-            return language.NewGameScreen.timePerMove + ': ' + time;
+            return language.NewGameScreen.timePerMove + ': ' + time + ' ' + language.NewGameScreen.seconds;
           }}
           rowTextForSelection={(item, index) => {
             // text represented for each item in dropdown
@@ -125,7 +133,10 @@ export default function NewGameScreen({ navigation, route }) {
           }} />
 
         <SelectDropdown
+          buttonStyle={styles.dropDown}
+          buttonTextStyle={styles.dropDownText}
           defaultButtonText={language.NewGameScreen.boardSize + ': ' + boardSize + 'x' + boardSize}
+          renderDropdownIcon={() => { return <Ionicons name="chevron-back" size={24} style={styles.dropDownIcon} />; }}
           data={boardSizes}
           onSelect={(selectedItem, index) => { changeBoardSize(selectedItem); }}
           buttonTextAfterSelection={(selectedItem, index) => {
@@ -142,7 +153,10 @@ export default function NewGameScreen({ navigation, route }) {
           }} />
 
         <SelectDropdown
+          buttonStyle={styles.dropDown}
+          buttonTextStyle={styles.dropDownText}
           defaultButtonText={language.NewGameScreen.tutorialMode + ': ' + tutModeOn}
+          renderDropdownIcon={() => { return <Ionicons name="chevron-back" size={24} style={styles.dropDownIcon} />; }}
           data={tutModeOptions}
           onSelect={(selectedItem, index) => { changeTutMode(selectedItem); }}
           buttonTextAfterSelection={(selectedItem, index) => {
@@ -158,14 +172,15 @@ export default function NewGameScreen({ navigation, route }) {
           }} />
 
         <TouchableOpacity
+          style={styles.startBtn}
           onPress={() => {
-            var boardData = initializeBoardData(size)
+            var boardData = initializeBoardData(boardSize)
             navigation.dispatch(
               StackActions.replace("Game", { language: language, piecesToWin: pieces, players: players, time: time, data: boardData, numColumns: boardSize, tutorialMode: tutModeOn })
             );
           }}
         >
-          <Text>{language.NewGameScreen.startGameButton}</Text>
+          <Text style={styles.startBtnText}>{language.NewGameScreen.startGameButton}</Text>
         </TouchableOpacity>
 
       </View>
@@ -177,7 +192,7 @@ export default function NewGameScreen({ navigation, route }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#F8FFFF',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -191,9 +206,37 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   body: {
+    marginTop: '20%',
+    marginBottom: '60%',
     flex: 1,
+    justifyContent: 'space-evenly'
   },
   dropDown: {
-
+    backgroundColor: '#C8C1AD',
+    borderColor: '#262723',
+    borderWidth: 1,
+    borderRadius: 3,
+    alignSelf: 'center',
+  },
+  dropDownText: {
+    color: '#262723',
+    fontFamily: 'oxfordStreet'
+  },
+  dropDownIcon: {
+    transform: [{ rotate: '270deg' }],
+    color: 'black'
+  },
+  startBtn: {
+    backgroundColor: '#9E355E',
+    padding: '5%',
+    alignSelf: 'center',
+    borderColor: '#262723',
+    borderWidth: 1,
+    borderRadius: 3,
+  },
+  startBtnText: {
+    fontSize: 40,
+    fontFamily: 'oxfordStreet',
+    color: 'white'
   }
 });
