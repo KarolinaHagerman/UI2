@@ -4,26 +4,12 @@ import { useState } from 'react';
 import eng from '../languages/eng.json';
 import sve from '../languages/sve.json';
 import { Ionicons } from '@expo/vector-icons';
-import { useFonts } from 'expo-font';
-import AppLoading from 'expo-app-loading';
-
 
 const ICON_SIZE = 40;
 
 export default function HomeScreen({ navigation }) {
   const [language, setLanguage] = useState(eng);
   const [soundOn, setSound] = useState(false)
-
-  // Fonts, download from https://www.dafont.com/ and add to fonts folder
-  let [fontsLoaded] = useFonts({
-    'impact': require('../fonts/impact.ttf'),
-    'swallowKick': require('../fonts/SwallowKick.ttf')
-  });
-
-  if(!fontsLoaded) {
-    return <AppLoading />;
-  }
-
 
   return (
     <View style={styles.container}>
@@ -136,9 +122,9 @@ const styles = StyleSheet.create({
     borderColor: 'black',
     backgroundColor: 'white',
     borderWidth: 2,
-    borderRadius: 15,
+    borderRadius: 10,
     color: 'black',
-    padding: 10,
+    padding: 20,
     shadowColor: 'black',
     shadowOffset: { width: -2, height: 4 },
     shadowOpacity: 0.2,
@@ -146,6 +132,6 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     fontSize: 40,
-    fontFamily: 'swallowKick',
+    fontFamily: 'oxfordStreet',
   }
 });
