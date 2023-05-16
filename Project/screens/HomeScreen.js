@@ -1,15 +1,42 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Button, View, Image, TouchableOpacity, Text } from 'react-native';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import eng from '../languages/eng.json';
 import sve from '../languages/sve.json';
 import { Ionicons } from '@expo/vector-icons';
+import { useFonts } from 'expo-font';
+import * as SplashScreen from 'expo-splash-screen';
 
 const ICON_SIZE = 40;
 
 export default function HomeScreen({ navigation }) {
   const [language, setLanguage] = useState(eng);
   const [soundOn, setSound] = useState(false)
+
+  // Fonts, download from https://www.dafont.com/ and add to fonts folder
+  const [fontsLoaded] = useFonts({
+    'impact': require('../fonts/impact.ttf'),
+    'oxfordStreet': require('../fonts/OxfordStreet.ttf'),
+    'bold': require('../fonts/THEBOLDFONT.ttf'),
+  });
+
+  // https://www.youtube.com/watch?v=viIkcDYSBrI
+  // This hook is used to tell React to do prepare after rendering
+  useEffect(() => {
+    async function prepare() {
+      // Keeps the splash screen visible until we call hideAsync
+      await SplashScreen.preventAutoHideAsync();
+    }
+    prepare();
+  }, []);
+
+  if (!fontsLoaded) {
+    return undefined;
+  }
+  else {
+    //Hides the native splash screen immediately - Expo Documentation
+    SplashScreen.hideAsync();
+  }
 
   return (
     <View style={styles.container}>
@@ -50,9 +77,9 @@ export default function HomeScreen({ navigation }) {
           onPress={() => setSound(!soundOn)}
         >
           {soundOn ? (
-            <Ionicons name="volume-high-outline" size={ICON_SIZE} color="black" />
+            <Ionicons name="volume-high-outline" size={ICON_SIZE} color="#262723" />
           ) : (
-            <Ionicons name="volume-mute-outline" size={ICON_SIZE} color="black" />
+            <Ionicons name="volume-mute-outline" size={ICON_SIZE} color="#262723" />
           )}
         </TouchableOpacity>
 
@@ -61,6 +88,12 @@ export default function HomeScreen({ navigation }) {
       <View style={styles.body}>
 
         {/*       <Image style={styles.image} source={require('../assets/BILD')}/> */}
+
+        <Text style={styles.xoz}>
+          <Text style={styles.x}>X</Text>
+          <Text style={styles.o}>O</Text>
+          <Text style={styles.z}>Z</Text>
+        </Text>
 
         <TouchableOpacity
           style={styles.button}
@@ -79,7 +112,7 @@ export default function HomeScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#F8FFFF',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -94,7 +127,7 @@ const styles = StyleSheet.create({
     marginTop: '10%',
   },
   body: {
-    marginTop: '60%',
+    marginTop: '40%',
     flex: 1,
   },
   flags: {
@@ -109,7 +142,7 @@ const styles = StyleSheet.create({
     marginRight: '3%',
   },
   chosenFlag: {
-    borderColor: 'red',
+    borderColor: '#F2A341',
     borderWidth: 2,
   },
   soundIcon: {
@@ -118,11 +151,26 @@ const styles = StyleSheet.create({
   image: {
     //HÄR LÄGGER VI TILL FÖR BILDEN
   },
+  xoz: {
+    fontSize: 120,
+    fontFamily: 'bold',
+    padding: 10,
+  },
+  x: {
+    color: '#69272A',
+  },
+  o: {
+    fontSize: 180,
+    color: '#374730',
+  },
+  z: {
+    color: '#3E6680',
+  },
   button: {
-    borderColor: 'black',
-    backgroundColor: 'white',
+    borderColor: '#262723',
+    backgroundColor: '#C8C1AD',
     borderWidth: 2,
-    borderRadius: 10,
+    borderRadius: 7,
     color: 'black',
     padding: 20,
     shadowColor: 'black',
@@ -133,5 +181,7 @@ const styles = StyleSheet.create({
   buttonText: {
     fontSize: 40,
     fontFamily: 'oxfordStreet',
+    alignSelf: 'center',
+    color: '#262723'
   }
 });
