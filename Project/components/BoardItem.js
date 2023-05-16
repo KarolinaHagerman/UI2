@@ -1,6 +1,6 @@
 import React, { PureComponent, useState } from 'react';
 import { TouchableOpacity, Text, View, StyleSheet, Dimensions } from 'react-native';
-import { vh } from 'react-native-viewport-units';
+//import { vh } from 'react-native-viewport-units';
 //screenWidth = Dimensions.get("window").width;
 //numColumns = this.props.numColumns;
 // PureComponent automatically implements a "shouldComponentUpdate" method that performs a 
@@ -34,6 +34,6 @@ const styles = StyleSheet.create({
       alignItems: 'center',
 
       backgroundColor: 'white',
-      margin: 1 * vh,
+      margin: 1,
     }
   });
