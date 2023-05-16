@@ -16,7 +16,7 @@ export default class BoardItem extends PureComponent {
   render() {
     //console.log(this.props.boardData[2]);
     const tileSize = this.props.tileSize;
-    console.log('tile size: ', this.props.tileSize)
+    //console.log('tile size: ', this.props.tileSize)
     return (
       <TouchableOpacity onPress={this.onPress}>
         <View style={[styles.boardItem, {height: tileSize, width: tileSize} ]}>
