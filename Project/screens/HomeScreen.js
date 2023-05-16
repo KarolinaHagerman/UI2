@@ -97,7 +97,7 @@ export default function HomeScreen({ navigation }) {
 
         <TouchableOpacity
           style={styles.button}
-          onPress={() => navigation.navigate("NewGame", { language: language, soundOn: soundOn })}
+          onPress={() => navigation.navigate("NewGame", { language: language, soundIsOn: soundOn })}
         >
           <Text style={styles.buttonText}>{language.HomeScreen.newGameButton}</Text>
         </TouchableOpacity>
@@ -118,7 +118,6 @@ const styles = StyleSheet.create({
   },
   header: {
     flexDirection: 'row',
-
     alignSelf: 'stretch',
     justifyContent: 'space-between',
     padding: '2%',
