@@ -8,7 +8,7 @@ import { initializeBoardData } from '../js/gameLogic';
 
 
 export default function NewGameScreen({ navigation, route}) {
-  const { language } = route.params;
+  const { language, soundOn } = route.params;
   const playerChars = ['A', 'B', 'C', 'D', 'X', 'Y', 'Z', 'Å', 'Ä', 'Ö']
   const numberOfPlayers = [2,3,4,5,6,7,8,9,10];
   const piecesInRow = [3,4,5,6,7,8,9,10];
