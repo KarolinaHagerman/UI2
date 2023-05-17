@@ -9,7 +9,7 @@
         "numberOfPlayers": "Spelare",
         "numberOfPieces": "Pjäser",
         "timePerMove": "Tid",
-        "Handledning": "Tutorial mode",
+        "tutorialMode": "Handledning",
         "players": "spelare",
         "pieces": "pjäser",
         "seconds": "sekunder",

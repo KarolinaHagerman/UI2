@@ -1,3 +1,14 @@
+/**
+ * File: NewGameScreen.js
+ *
+ * This file contains the javaScript needed for the new game screen of the app.
+ *
+ * Version ???
+ * Author: Karolina Hagerman, Erik Blomsterberg
+ */
+
+// Imports
+//
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, View, Text, Button, Switch, TouchableOpacity } from 'react-native';
 import React, { useState, useEffect } from 'react';
@@ -10,11 +21,16 @@ import * as SplashScreen from 'expo-splash-screen';
 
 const ICON_SIZE = 40;
 
+// START OF EXPORTED NEW GAME SCREEN
+//
 export default function NewGameScreen({ navigation, route }) {
+  // Language passed from hame screen and again the state for changing the sound
+  //
   const language = route.params.language;
   const [soundOn, setSound] = useState(route.params.soundIsOn)
 
   //All displayed options
+  //
   const playerChars = ['A', 'B', 'C', 'D', 'X', 'Y', 'Z', 'Å', 'Ä', 'Ö']
   const numberOfPlayers = [2, 3, 4, 5, 6, 7, 8, 9, 10];
   const piecesInRow = [3, 4, 5, 6, 7, 8, 9, 10];
@@ -22,22 +38,25 @@ export default function NewGameScreen({ navigation, route }) {
   const boardSizes = [3, 5, 15, 30];
   const tutModeOptions = ['On', 'Off'];
 
-  //States for all options
+  //States for all options which will then be passed on to game screen
+  //
   const [players, changePlayers] = useState(playerChars.slice(0, 2));
   const [pieces, changePieces] = useState(3);
   const [time, changeTime] = useState(60);
   const [boardSize, changeBoardSize] = useState(3);
   const [tutModeOn, changeTutMode] = useState('Off');
 
-  // Fonts, download from https://www.dafont.com/ and add to fonts folder
+  // Fonts, can be downloaded from e.g. https://www.dafont.com/ and added to fonts folder
+  //
   const [fontsLoaded] = useFonts({
     'impact': require('../fonts/impact.ttf'),
     'oxfordStreet': require('../fonts/OxfordStreet.ttf'),
     'bold': require('../fonts/THEBOLDFONT.ttf'),
   });
 
-  // https://www.youtube.com/watch?v=viIkcDYSBrI
+  // The following useEffect was explained in https://www.youtube.com/watch?v=viIkcDYSBrI and is used to load the fonts.
   // This hook is used to tell React to do prepare after rendering
+  //
   useEffect(() => {
     async function prepare() {
       // Keeps the splash screen visible until we call hideAsync
@@ -53,15 +72,22 @@ export default function NewGameScreen({ navigation, route }) {
     //Hides the native splash screen immediately - Expo Documentation
     SplashScreen.hideAsync();
   }
+  // Ending of the named code
 
-
+  // All elements presented to the user
+  // 
   return (
     <View style={styles.container}>
+
+      {/* HEADER */}
       <View style={styles.header}>
+
+        {/* The go back button, navigates back to home screen */}
         <TouchableOpacity onPress={() => navigation.navigate('Home', { soundIsOn: soundOn })}>
           <Ionicons name="chevron-back" size={ICON_SIZE} color="black" />
         </TouchableOpacity>
 
+        {/* The clickable sound icon, different icons depending on soundOn state */}
         <TouchableOpacity
           style={[styles.headerItem, styles.soundIcon]}
           onPress={() => setSound(!soundOn)}
@@ -74,7 +100,12 @@ export default function NewGameScreen({ navigation, route }) {
         </TouchableOpacity>
 
       </View>
+      {/* END OF HEADER */}
+
+      {/* BODY */}
       <View style={styles.body}>
+
+        {/* The dropdowns */}
         <SelectDropdown
           buttonStyle={styles.dropDown}
           buttonTextStyle={styles.dropDownText}
@@ -93,6 +124,7 @@ export default function NewGameScreen({ navigation, route }) {
             // if data array is an array of objects then return item.property to represent item in dropdown
             return item
           }} />
+
         <SelectDropdown
           buttonStyle={styles.dropDown}
           buttonTextStyle={styles.dropDownText}
@@ -170,7 +202,9 @@ export default function NewGameScreen({ navigation, route }) {
             // if data array is an array of objects then return item.property to represent item in dropdown
             return item
           }} />
+        {/* End of dropdowns */}
 
+        {/* Start game button, navigates to game screen */}
         <TouchableOpacity
           style={styles.startBtn}
           onPress={() => {
@@ -184,11 +218,16 @@ export default function NewGameScreen({ navigation, route }) {
         </TouchableOpacity>
 
       </View>
+      {/* END OF BODY */}
+
+      {/* Default style of status bar */}
       <StatusBar style="auto" />
     </View>
   );
 }
 
+
+// Styles for new game screen
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -197,19 +236,21 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   header: {
-    padding: '2%',
-    marginLeft: '5%',
-    marginRight: '5%',
-    marginTop: '10%',
     flexDirection: 'row',
     alignSelf: 'stretch',
     justifyContent: 'space-between',
+    padding: '2%',
+    marginLeft: '5%',
+    marginRight: '5%',
+    marginTop: 50,
   },
   body: {
-    marginTop: '20%',
-    marginBottom: '60%',
+    alignSelf: 'stretch',
+    margin: 20,
+    marginBottom: 150,
+    paddingTop: 40,
     flex: 1,
-    justifyContent: 'space-evenly'
+    justifyContent: 'space-evenly',
   },
   dropDown: {
     backgroundColor: '#C8C1AD',
@@ -217,10 +258,13 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 3,
     alignSelf: 'center',
+    width: '70%',
   },
   dropDownText: {
     color: '#262723',
-    fontFamily: 'oxfordStreet'
+    fontFamily: 'oxfordStreet',
+    paddingHorizontal: 2,
+    alignSelf: 'center',
   },
   dropDownIcon: {
     transform: [{ rotate: '270deg' }],
@@ -228,15 +272,21 @@ const styles = StyleSheet.create({
   },
   startBtn: {
     backgroundColor: '#9E355E',
-    padding: '5%',
+    padding: 20,
     alignSelf: 'center',
     borderColor: '#262723',
     borderWidth: 1,
     borderRadius: 3,
+    marginTop: 10,
   },
   startBtnText: {
-    fontSize: 40,
+    fontSize: 35,
     fontFamily: 'oxfordStreet',
-    color: 'white'
+    color: 'white',
+    alignSelf: 'center',
   }
 });
+
+//************
+// END of file NewGameScreen.js
+//************

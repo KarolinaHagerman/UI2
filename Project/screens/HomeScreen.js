@@ -1,3 +1,14 @@
+/**
+ * File: HomeScreen.js
+ *
+ * This file contains the javaScript needed for the home screen of the app.
+ *
+ * Version ???
+ * Author: Karolina Hagerman, Erik Blomsterberg
+ */
+
+// Imports
+//
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Button, View, Image, TouchableOpacity, Text } from 'react-native';
 import { useState, useEffect } from 'react';
@@ -9,22 +20,29 @@ import * as SplashScreen from 'expo-splash-screen';
 
 const ICON_SIZE = 40;
 
+// START OF EXPORTED HOME SCREEN
+//
 export default function HomeScreen({ navigation }) {
+  // States for changing the language and the sound
+  //
   const [language, setLanguage] = useState(eng);
   const [soundOn, setSound] = useState(false)
 
-  // Fonts, download from https://www.dafont.com/ and add to fonts folder
+  // Fonts, can be downloaded from e.g. https://www.dafont.com/ and added to fonts folder
+  //
   const [fontsLoaded] = useFonts({
     'impact': require('../fonts/impact.ttf'),
     'oxfordStreet': require('../fonts/OxfordStreet.ttf'),
     'bold': require('../fonts/THEBOLDFONT.ttf'),
   });
 
-  // https://www.youtube.com/watch?v=viIkcDYSBrI
-  // This hook is used to tell React to do prepare after rendering
+  // The following code was explained in https://www.youtube.com/watch?v=viIkcDYSBrI and is used to load the fonts.
+  // This hook is used to tell React to do prepare after rendering.
+  //
   useEffect(() => {
     async function prepare() {
       // Keeps the splash screen visible until we call hideAsync
+      //
       await SplashScreen.preventAutoHideAsync();
     }
     prepare();
@@ -34,13 +52,21 @@ export default function HomeScreen({ navigation }) {
     return undefined;
   }
   else {
-    //Hides the native splash screen immediately - Expo Documentation
+    //Hides the native splash screen immediately - explained in Expo Documentation
+    //
     SplashScreen.hideAsync();
   }
+  // Ending of the named code
 
+  // All elements presented to the user
+  // 
   return (
     <View style={styles.container}>
+
+      {/* HEADER */}
       <View style={styles.header}>
+
+        {/* The clickable language flags */}
         <View style={styles.flags}>
           <TouchableOpacity
             style={styles.headerItem}
@@ -55,6 +81,7 @@ export default function HomeScreen({ navigation }) {
             >
             </Image>
           </TouchableOpacity>
+
           <TouchableOpacity
             style={styles.headerItem}
             onPress={() => {
@@ -68,10 +95,9 @@ export default function HomeScreen({ navigation }) {
             >
             </Image>
           </TouchableOpacity>
-
         </View>
 
-
+        {/* The clickable sound icon, different icons depending on soundOn state */}
         <TouchableOpacity
           style={[styles.headerItem, styles.soundIcon]}
           onPress={() => setSound(!soundOn)}
@@ -82,19 +108,20 @@ export default function HomeScreen({ navigation }) {
             <Ionicons name="volume-mute-outline" size={ICON_SIZE} color="#262723" />
           )}
         </TouchableOpacity>
-
       </View>
+      {/* END OF HEADER */}
 
+      {/* BODY */}
       <View style={styles.body}>
 
-        {/*       <Image style={styles.image} source={require('../assets/BILD')}/> */}
-
+        {/* The XOZ text displayed in different colors */}
         <Text style={styles.xoz}>
           <Text style={styles.x}>X</Text>
           <Text style={styles.o}>O</Text>
           <Text style={styles.z}>Z</Text>
         </Text>
 
+        {/* New game button, navigates to new game screen */}
         <TouchableOpacity
           style={styles.button}
           onPress={() => navigation.navigate("NewGame", { language: language, soundIsOn: soundOn })}
@@ -102,19 +129,23 @@ export default function HomeScreen({ navigation }) {
           <Text style={styles.buttonText}>{language.HomeScreen.newGameButton}</Text>
         </TouchableOpacity>
       </View>
+      {/* END OF BODY */}
 
-
+      {/* Default style of status bar */}
       <StatusBar style="auto" />
     </View>
   );
 }
 
+
+// Styles for home screen
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: '#F8FFFF',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
+    flexDirection: 'column',
+    flex: 1,
   },
   header: {
     flexDirection: 'row',
@@ -123,11 +154,11 @@ const styles = StyleSheet.create({
     padding: '2%',
     marginLeft: '5%',
     marginRight: '5%',
-    marginTop: '10%',
+    marginTop: 50,
   },
   body: {
-    marginTop: '40%',
-    flex: 1,
+    paddingTop: '10%',
+    margin: '10%',
   },
   flags: {
     flexDirection: 'row',
@@ -151,21 +182,23 @@ const styles = StyleSheet.create({
     //HÄR LÄGGER VI TILL FÖR BILDEN
   },
   xoz: {
-    fontSize: 120,
+    margin: 5,
+    fontSize: 100,
     fontFamily: 'bold',
-    padding: 10,
+    padding: 20,
   },
   x: {
     color: '#69272A',
   },
   o: {
-    fontSize: 180,
+    fontSize: 150,
     color: '#374730',
   },
   z: {
     color: '#3E6680',
   },
   button: {
+    margin: 20,
     backgroundColor: '#C8C1AD',
     borderColor: '#262723',
     borderWidth: 1,
@@ -183,3 +216,7 @@ const styles = StyleSheet.create({
     color: '#262723'
   }
 });
+
+//************
+// END of file HomeScreen.js
+//************
