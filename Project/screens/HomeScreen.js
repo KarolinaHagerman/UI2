@@ -11,55 +11,30 @@
 //
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Button, View, Image, TouchableOpacity, Text } from 'react-native';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import eng from '../languages/eng.json';
 import sve from '../languages/sve.json';
 import { Ionicons } from '@expo/vector-icons';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
-import { Audio } from 'expo-av';
-import AppContext from '../components/AppContext';
+import { SoundContext } from '../components/SoundContext';
 
 const ICON_SIZE = 40;
 
-// START OF EXPORTED HOME SCREEN
-//
 export default function HomeScreen({ navigation }) {
-
-  // States for changing the language and the sound
+  // States for changing the language 
   //
   const [language, setLanguage] = useState(eng);
-  const [soundOn, setSound] = useState(false);
 
-  const [backgroundMusic, setBackgroundMusic] = useState(null);
-
-
-  // Call the playBackgroundMusic() function whenever we want to play music
-  // This code is from ChatGPT
+  // Getting the needed information from the sound context
   //
-  const playBackgroundMusic = async () => {
-    if (soundOn && !backgroundMusic) {
-      const soundObject = new Audio.Sound();
-      try {
-        await soundObject.loadAsync(require('../sounds/background.mp3'));
-        await soundObject.setOnPlaybackStatusUpdate(async (status) => {
-          if (status.isLoaded && status.didJustFinish) {
-            await soundObject.unloadAsync();
-            setBackgroundMusic(null);
-          }
-        });
-        await soundObject.playAsync();
-        setBackgroundMusic(soundObject);
-      } catch (error) {
-        console.log('Failed to play the sound', error);
-      }
-    } else if (!soundOn && backgroundMusic) {
-      await backgroundMusic.stopAsync();
-      await backgroundMusic.unloadAsync();
-      setBackgroundMusic(null);
-    }
-  };
+  const { soundOn, toggleSound, playBackgroundMusic, backgroundMusic } = useContext(SoundContext);
 
+  // This hook is responsible for playing and cleaning up the background music based on the soundOn state. It will execute a function whenever soundOn changes. 
+  // The function first calls playBackgroundMusic, which is explained in SoundContext.js. 
+  // Then it returns a cleanup function that stops/unloads if backgroundMusic is already defined. 
+  // It was created with the help of ChatGPT.
+  //
   useEffect(() => {
     playBackgroundMusic();
     return () => {
@@ -143,10 +118,7 @@ export default function HomeScreen({ navigation }) {
 
         <TouchableOpacity
           style={[styles.headerItem, styles.soundIcon]}
-          onPress={() => {
-            setSound(!soundOn);
-            playBackgroundMusic();
-          }}
+          onPress={() => { toggleSound(); }}
         >
           {soundOn ? (
             <Ionicons name="volume-high-outline" size={ICON_SIZE} color="#262723" />
@@ -170,7 +142,7 @@ export default function HomeScreen({ navigation }) {
         {/* New game button, navigates to new game screen */}
         <TouchableOpacity
           style={styles.button}
-          onPress={() => navigation.navigate("NewGame", { language: language, soundIsOn: soundOn, backgroundMusic: backgroundMusic })}
+          onPress={() => navigation.navigate("NewGame", { language: language })}
         >
           <Text style={styles.buttonText}>{language.HomeScreen.newGameButton}</Text>
         </TouchableOpacity>
@@ -180,7 +152,7 @@ export default function HomeScreen({ navigation }) {
       {/* Default style of status bar */}
       <StatusBar style="auto" />
     </View>
-  );
+  )
 }
 
 
