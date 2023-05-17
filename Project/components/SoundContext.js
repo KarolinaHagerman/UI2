@@ -23,36 +23,44 @@ export const SoundProvider = ({ children }) => {
   // This function was created with the help of ChatGPT. It's responsible for playing and stopping the background music based on the soundOn state.
   //  
   const playBackgroundMusic = async () => {
-    if (soundOn) {
-      if (backgroundMusic) {
-        // If there's already a background music playing, unload it first
-        await backgroundMusic.stopAsync();
-        await backgroundMusic.unloadAsync();
-        setBackgroundMusic(null);
-      }
 
-      // Create a new sound object and load the background music
+    // If sound is on and if the background music isn't already playing we create a new soundObject with the background music. 
+    //
+    if (soundOn && !backgroundMusic) {
       const soundObject = new Audio.Sound();
       try {
+
+        // The mp3 is loaded and prepared for playback
+        //
         await soundObject.loadAsync(require('../sounds/background.mp3'));
+
+        // Sets an update callback function for the playback status
+        //
         await soundObject.setOnPlaybackStatusUpdate(async (status) => {
+
+          // If sounds is loaded and has already finished we unload the audio from the sound object and the background music i set to null.
+          //
           if (status.isLoaded && status.didJustFinish) {
             await soundObject.unloadAsync();
             setBackgroundMusic(null);
           }
         });
+
+        // Start playing and setBackgroundMusic to the soundObject
+        // 
         await soundObject.playAsync();
         setBackgroundMusic(soundObject);
       } catch (error) {
         console.log('Failed to play the sound', error);
       }
+
+      // If sound is off or if the background music is already playing we stop the music, unload the audio file and set the backgroundMusic to null
     } else if (!soundOn && backgroundMusic) {
-      // If sound is turned off and there's background music playing, stop and unload it
       await backgroundMusic.stopAsync();
       await backgroundMusic.unloadAsync();
       setBackgroundMusic(null);
     }
-  }
+  };
 
   // This function toggles the soundOn state
   //
