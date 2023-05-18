@@ -43,6 +43,10 @@ export const SoundProvider = ({ children }) => {
           if (status.isLoaded && status.didJustFinish) {
             await soundObject.unloadAsync();
             setBackgroundMusic(null);
+
+            // This row restart the song after finished - no errors so far, but keep this line in mind since it's recursive!
+            //
+            playBackgroundMusic();
           }
         });
 

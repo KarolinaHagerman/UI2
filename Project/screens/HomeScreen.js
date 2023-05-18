@@ -18,10 +18,11 @@ import { Ionicons } from '@expo/vector-icons';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import { SoundContext } from '../components/SoundContext';
-
-const ICON_SIZE = 40;
+import { responsiveHeight, responsiveWidth, responsiveFontSize, useResponsiveHeight } from "react-native-responsive-dimensions";
 
 export default function HomeScreen({ navigation }) {
+  const ICON_SIZE = useResponsiveHeight(5);
+
   // States for changing the language 
   //
   const [language, setLanguage] = useState(eng);
@@ -133,11 +134,13 @@ export default function HomeScreen({ navigation }) {
       <View style={styles.body}>
 
         {/* The XOZ text displayed in different colors */}
-        <Text style={styles.xoz}>
-          <Text style={styles.x}>X</Text>
-          <Text style={styles.o}>O</Text>
-          <Text style={styles.z}>Z</Text>
-        </Text>
+        <View style={styles.xozView}>
+          <Text style={styles.xoz}>
+            <Text style={styles.x}>X</Text>
+            <Text style={styles.o}>O</Text>
+            <Text style={styles.z}>Z</Text>
+          </Text>
+        </View>
 
         {/* New game button, navigates to new game screen */}
         <TouchableOpacity
@@ -170,13 +173,15 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch',
     justifyContent: 'space-between',
     padding: '2%',
-    marginLeft: '5%',
-    marginRight: '5%',
-    marginTop: 50,
+    marginHorizontal: responsiveWidth(2),
+    marginTop: responsiveHeight(5),
+    width: responsiveWidth(96),
   },
   body: {
-    paddingTop: '10%',
-    margin: '10%',
+    paddingVertical: responsiveHeight(10),
+    paddingHorizontal: responsiveWidth(10),
+    width: responsiveWidth(96),
+    height: responsiveHeight(80),
   },
   flags: {
     flexDirection: 'row',
@@ -185,12 +190,12 @@ const styles = StyleSheet.create({
     //INKLUDERAR FLAGGOR OCH LJUDSYMBOL, 
   },
   flag: {
-    width: 60,
-    height: ICON_SIZE,
-    marginRight: '3%',
+    height: responsiveHeight(5),
+    aspectRatio: 3/2,
+    marginRight: '5%',
   },
   chosenFlag: {
-    borderColor: '#F2A341',
+    borderColor: '#DBD123',
     borderWidth: 2,
   },
   soundIcon: {
@@ -199,39 +204,44 @@ const styles = StyleSheet.create({
   image: {
     //HÄR LÄGGER VI TILL FÖR BILDEN
   },
+  xozView: {
+    width: responsiveWidth(90),
+    alignSelf: 'center',
+  },
   xoz: {
-    margin: 5,
-    fontSize: 100,
+    fontSize: responsiveFontSize(10),
     fontFamily: 'bold',
-    padding: 20,
+    justifyContent: 'space-around',
+    alignSelf: 'center',
   },
   x: {
-    color: '#69272A',
+    color: '#C2933F',
   },
   o: {
-    fontSize: 150,
-    color: '#374730',
+    fontSize: responsiveFontSize(18),
+    color: '#294725',
   },
   z: {
-    color: '#3E6680',
+    color: '#276180',
   },
   button: {
-    margin: 20,
-    backgroundColor: '#C8C1AD',
+    backgroundColor: '#9E355E',
     borderColor: '#262723',
     borderWidth: 1,
     borderRadius: 7,
-    padding: 20,
+    padding: '5%',
+    paddingTop: '7%',
     shadowColor: 'black',
     shadowOffset: { width: -2, height: 4 },
     shadowOpacity: 0.2,
     shadowRadius: 3,
+    alignSelf: 'center',
   },
   buttonText: {
-    fontSize: 40,
+    fontSize: responsiveFontSize(7),
     fontFamily: 'oxfordStreet',
     alignSelf: 'center',
-    color: '#262723'
+    color: '#F8FFFF',
   }
 });
 
