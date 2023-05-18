@@ -5,7 +5,7 @@ import GameMenu from '../components/GameMenu';
 import BoardItem from '../components/BoardItem';
 import { checkNinRow, undoBoard, redoBoard, madeMoves, unmadeMoves} from '../js/gameLogic';
 import MovableView from 'react-native-movable-view';
-import ReactNativeZoomableView from '@openspacelabs/react-native-zoomable-view/src/ReactNativeZoomableView';
+//import ReactNativeZoomableView from '@openspacelabs/react-native-zoomable-view/src/ReactNativeZoomableView';
 import { MenuProvider } from "react-native-popup-menu";
 
 export default function GameScreen({ navigation, route }) {
