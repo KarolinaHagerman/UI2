@@ -31,7 +31,6 @@ export default function WinnerModal(props) {
 }
 
 const styles = StyleSheet.create({
-
     modalContent: {
         margin: '13%',
         padding: '5%',

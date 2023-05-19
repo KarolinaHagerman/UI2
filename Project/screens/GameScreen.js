@@ -2,11 +2,6 @@
 import React, {useState} from 'react';
 import { StyleSheet, SafeAreaView} from 'react-native';
 import { StatusBar } from 'expo-status-bar';
-import GameMenu from '../components/GameMenu';
-import BoardItem from '../components/BoardItem';
-import { checkNinRow, undoBoard, redoBoard, madeMoves, unmadeMoves} from '../js/gameLogic';
-import MovableView from 'react-native-movable-view';
-import ReactNativeZoomableView from '@openspacelabs/react-native-zoomable-view/src/ReactNativeZoomableView';
 import { MenuProvider } from "react-native-popup-menu";
 import Header from '../components/Header';
 import Board from '../components/Board';
@@ -23,10 +18,8 @@ export default function GameScreen({ navigation, route }) {
   const {language, piecesToWin, players, time, data, numColumns, tutorialMode, colors } = route.params;
   const [activePlayer, setActivePlayer] = useState(0);
   const [resetTime, setResetTime] = useState(false);
-  console.log('render game screen')
 
   return (
-
     <SafeAreaView style={styles.container}>
         <MenuProvider>
           <Header navigation = {navigation} language = {language} players = {players} activePlayer = {activePlayer} time = {time} setActivePlayer={setActivePlayer} resetTime = {resetTime} setResetTime = {setResetTime} colors = {colors}/>

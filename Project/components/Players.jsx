@@ -6,8 +6,6 @@ Players: shows all players and whos turn it is to play,
 whos turn it is is shown by making the players
 */
 export default function Players({players, activePlayer, colors}) {
-    console.log('render Players')
-    
   return ( 
     <View style={styles.playerTurn}>
     {players.map((player, index) => (
