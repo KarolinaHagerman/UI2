@@ -19,10 +19,11 @@ import { Ionicons } from '@expo/vector-icons';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import { SoundContext } from '../components/SoundContext';
-
-const ICON_SIZE = 40;
+import { responsiveHeight, responsiveWidth, responsiveFontSize, useResponsiveHeight } from "react-native-responsive-dimensions";
 
 export default function NewGameScreen({ navigation, route }) {
+  const ICON_SIZE = useResponsiveHeight(5);
+
   // Language passed from hame screen
   //
   const language = route.params.language;
@@ -235,27 +236,26 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#F8FFFF',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
   },
   header: {
     flexDirection: 'row',
     alignSelf: 'stretch',
     justifyContent: 'space-between',
     padding: '2%',
-    marginLeft: '5%',
-    marginRight: '5%',
-    marginTop: 50,
+    marginHorizontal: responsiveWidth(2),
+    marginTop: responsiveHeight(5),
+    width: responsiveWidth(96),
   },
   body: {
-    alignSelf: 'stretch',
-    margin: 20,
-    marginBottom: 150,
-    paddingTop: 40,
-    flex: 1,
+    paddingVertical: responsiveHeight(10),
+    paddingHorizontal: responsiveWidth(10),
+    width: responsiveWidth(96),
+    height: responsiveHeight(80),
     justifyContent: 'space-evenly',
   },
   dropDown: {
-    backgroundColor: '#C8C1AD',
+    backgroundColor: '#EDE4E1',
     borderColor: '#262723',
     borderWidth: 1,
     borderRadius: 3,
@@ -264,9 +264,11 @@ const styles = StyleSheet.create({
   },
   dropDownText: {
     color: '#262723',
-    fontFamily: 'oxfordStreet',
-    paddingHorizontal: 2,
+    fontFamily: 'Helvetica',
+    paddingHorizontal: '1%',
     alignSelf: 'center',
+    fontSize: responsiveFontSize(2),
+    textAlign: 'left'
   },
   dropDownIcon: {
     transform: [{ rotate: '270deg' }],
@@ -274,17 +276,21 @@ const styles = StyleSheet.create({
   },
   startBtn: {
     backgroundColor: '#9E355E',
-    padding: 20,
-    alignSelf: 'center',
     borderColor: '#262723',
     borderWidth: 1,
-    borderRadius: 3,
-    marginTop: 10,
+    borderRadius: 7,
+    padding: '5%',
+    paddingTop: '7%',
+    shadowColor: 'black',
+    shadowOffset: { width: -2, height: 4 },
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
+    alignSelf: 'center',
   },
   startBtnText: {
-    fontSize: 35,
+    fontSize: responsiveFontSize(7),
     fontFamily: 'oxfordStreet',
-    color: 'white',
+    color: '#F8FFFF',
     alignSelf: 'center',
   }
 });
