@@ -9,12 +9,14 @@ import { initializeBoardData } from '../js/gameLogic';
 
 export default function NewGameScreen({ navigation, route}) {
   const { language } = route.params;
-  const playerChars = ['A', 'B', 'C', 'D', 'X', 'Y', 'Z', 'Å', 'Ä', 'Ö']
-  const numberOfPlayers = [2,3,4,5,6,7,8,9,10];
+  const playerChars = [ 'X', 'Y', 'Z', 'O', 'E'];
+  const playerColors = ['orange', 'green', 'purple', 'blue', 'red'];
+  const numberOfPlayers = [2,3,4,5];
   const piecesInRow = [3,4,5,6,7,8,9,10];
   const timePerMove = [5,10,15,30,60];
   const boardSize = [3,5,15,30];
-  var size = 3
+  var size = 3;
+  var colors = playerColors.slice(0,2);
   var players = playerChars.slice(0,2);
   var pieces = 3;
   var time = 60;
@@ -43,6 +45,7 @@ export default function NewGameScreen({ navigation, route}) {
           data = {numberOfPlayers}
           onSelect={(selectedItem, index) => {
             players = playerChars.slice(0,selectedItem);
+            colors = playerColors.slice(0,selectedItem);
             console.log('totplayers newgamescreen: ' , players)
           }}
           buttonTextAfterSelection={(selectedItem, index) => {
@@ -119,9 +122,9 @@ export default function NewGameScreen({ navigation, route}) {
       <Button 
         title={language.NewGameScreen.startGameButton}
         onPress={() => {
-          var boardData = initializeBoardData(size)
-          navigation.dispatch(
-            StackActions.replace("Game", {language: language, piecesToWin: pieces, players: players, time: time, data: boardData, numColumns: size, tutorialMode: isEnabled})
+          const boardData = initializeBoardData(size)
+          navigation.navigate(
+            "Game", {language: language, piecesToWin: pieces, players: players, time: time, data: boardData, numColumns: size, tutorialMode: isEnabled, colors: colors}
           );
         }}
       />
