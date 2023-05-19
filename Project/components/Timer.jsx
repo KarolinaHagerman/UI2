@@ -13,12 +13,27 @@ export default function Timer({time, setActivePlayer, activePlayer, players, res
 const [timeLeft, setTimeLeft] = useState(time);
 
 let timer = null;
+
+// This effect is recursive, because it happens when timeLeft changes and inside the function timeLeft changes
+//
 useEffect(() => {
+
+    // Creates a timer that runs a function every 1000 milliseconds
+    //
     timer = setTimeout(() => { 
+
+    // Timer counts down
+    //
     setTimeLeft(timeLeft - 1);
+
+    // If the timer is 0, go to new player and reset time left with chosen time
+    //
     if (timeLeft == 0){
         nextPlayer(setActivePlayer, activePlayer, players);
         setTimeLeft(time);
+
+        // If resetTime is true, e.g. after undo/redo or placing a marker, reset the time left and change back resetTime to false
+        //
     } else if (resetTime){
         setTimeLeft(time);
         setResetTime(false);
@@ -26,11 +41,12 @@ useEffect(() => {
     
     }, 1000) ;
 
+    // Without this row new timers will be created, so clearInterval clears the timer
+    //
     return () => clearInterval(timer);
 }, [timeLeft]);
 
   return (
-    
     <Text style={[styles.time, timeLeft <= 3 ? styles.shortTime : styles.time]}>{timeLeft}</Text>
   );
 }

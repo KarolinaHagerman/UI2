@@ -11,19 +11,17 @@ a drop down menu located in the header and placed at the top left of the screen
 */
 export default function GameMenu(props) {
     
-    const { navigation, showMenu, hideMenu, language, openCloseMenu, players, setActivePlayer, activePlayer, isVisible, setResetTime } = props;
+    const { navigation, language, players, setActivePlayer, activePlayer, setResetTime } = props;
+
     const SYMBOL_SIZE = 20;
 
     return (
 
             <Menu>
-                <MenuTrigger style={styles.menuButton} onPress={openCloseMenu}>
+                <MenuTrigger style={styles.menuButton}>
                     <Entypo name="menu" size={45} color="black" />
                 </MenuTrigger>
                 <MenuOptions style={styles.menuOptions}>
-                    <MenuOption style={styles.menuOption} onSelect={openCloseMenu}>
-                        <Text>{language.GameMenu.hideMenu}</Text>
-                    </MenuOption>
                     <MenuOption
                         style={styles.menuOption}
                         onSelect={() => navigation.popToTop()}

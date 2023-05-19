@@ -17,49 +17,15 @@ Composed of:
 */
 
 export default function Header({navigation, language, players, activePlayer, time, setActivePlayer, resetTime, setResetTime, colors}) {
-    console.log('render header, activePlayer: ', activePlayer)
-    const [headerFlex, setHeaderFlex] = useState(0);
-    const [isMenuVisible, changeMenuVisibility] = useState(false);
- 
-
-  const showMenu = () => {
-    setHeaderFlex(1);
-  }
-
-  // Sets the header flex back to normal - boardItems clickable again and menu can't stretch
-  const hideMenu = () => {
-    setHeaderFlex(0);
-  }
-
-  // Sets the header flex back to normal - boardItems clickable again and menu can't stretch
-  const openCloseMenu = () => {
-    console.log('isMenuVisible', isMenuVisible, !isMenuVisible);
-
-    // Show menu if not shown already
-    if (isMenuVisible) {
-      setHeaderFlex(0);
-    }
-    else {
-      setHeaderFlex(1);
-    }
-    console.log('headerFlex', headerFlex);
-    changeMenuVisibility(!isMenuVisible);
-  }
   return ( 
     <View style={styles.menuContainer}>
         <GameMenu
         navigation={navigation}
-        showMenu={showMenu}
-        hideMenu={hideMenu}
         language={language}
         players={players}
         setActivePlayer = {setActivePlayer}
         activePlayer = {activePlayer}
-        openCloseMenu={openCloseMenu}
-        isVisible={isMenuVisible}
         setResetTime = {setResetTime}
-        
-        
         />
 
         <Timer time = {time} nextPlayer = {nextPlayer} setActivePlayer = {setActivePlayer} activePlayer = {activePlayer} players = {players} resetTime = {resetTime} setResetTime = {setResetTime}/>
