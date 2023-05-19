@@ -79,6 +79,15 @@ export function redo(setActivePlayer, activePlayer, players, setResetTime) {
 
 // 
 export function initializeBoardData(numColumns) {
+
+    //Nollställ
+    boardData = [];
+    madeMoves = [];
+    unmadeMoves = [];
+    lastMove = null;
+    redoMove = null;
+    isWinnerModalOpen = false;
+
     //const numColumns = 30;
     for (let i = 0; i < numColumns; i++) {
         let row = [];
@@ -88,6 +97,7 @@ export function initializeBoardData(numColumns) {
         }
         boardData.push(row);
     }
+    console.log(boardData)
     return boardData
 }
 
