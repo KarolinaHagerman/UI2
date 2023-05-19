@@ -1,14 +1,17 @@
-import React, { useState, useRef } from "react";
-import { StyleSheet, View, Text } from "react-native";
+import React from "react";
+import { StyleSheet, Text } from "react-native";
 import { Menu, MenuOptions, MenuOption, MenuTrigger } from "react-native-popup-menu";
 import { Entypo } from '@expo/vector-icons';
 import { EvilIcons } from '@expo/vector-icons';
-import { undoBoard, redoBoard } from '../js/gameLogic';
+import { undo, redo } from '../js/gameLogic';
 
-// TODO: should this be a class instead? Can we even get to navigation in that case?
+/*
+GameMenu:
+a drop down menu located in the header and placed at the top left of the screen
+*/
 export default function GameMenu(props) {
     
-    const { navigation, showMenu, hideMenu, language, openCloseMenu, isVisible } = props;
+    const { navigation, showMenu, hideMenu, language, openCloseMenu, players, setActivePlayer, activePlayer, isVisible, setResetTime } = props;
     const SYMBOL_SIZE = 20;
 
     return (
@@ -29,14 +32,14 @@ export default function GameMenu(props) {
                     </MenuOption>
                     <MenuOption
                         style={styles.menuOption}
-                        onSelect={() => undoBoard()}
+                        onSelect={() => undo(setActivePlayer, activePlayer, players, setResetTime)}
                     >
                         <Text>{language.GameMenu.undo}</Text>
                         <EvilIcons name="undo" size={SYMBOL_SIZE} color="black" />
                     </MenuOption>
                     <MenuOption
                         style={styles.menuOption}
-                        onSelect={() => redoBoard()}
+                        onSelect={() => redo(setActivePlayer, activePlayer, players, setResetTime)}
                     >
                         <Text>{language.GameMenu.redo}</Text>
                         <EvilIcons name="redo" size={SYMBOL_SIZE} color="black" />

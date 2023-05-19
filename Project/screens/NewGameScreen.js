@@ -34,8 +34,9 @@ export default function NewGameScreen({ navigation, route }) {
 
   //All displayed options
   //
-  const playerChars = ['A', 'B', 'C', 'D', 'X', 'Y', 'Z', 'Å', 'Ä', 'Ö']
-  const numberOfPlayers = [2, 3, 4, 5, 6, 7, 8, 9, 10];
+  const playerChars = ['X', 'Y', 'Z', 'O', 'E'];
+  const playerColors = ['orange', 'green', 'purple', 'blue', 'red'];
+  const numberOfPlayers = [2, 3, 4, 5];
   const piecesInRow = [3, 4, 5, 6, 7, 8, 9, 10];
   const timePerMove = [5, 10, 15, 30, 60];
   const boardSizes = [3, 5, 15, 30];
@@ -44,6 +45,7 @@ export default function NewGameScreen({ navigation, route }) {
   //States for all options which will then be passed on to game screen
   //
   const [players, changePlayers] = useState(playerChars.slice(0, 2));
+  const [colors, changeColors] = useState(playerColors.slice(0, 2));
   const [pieces, changePieces] = useState(3);
   const [time, changeTime] = useState(60);
   const [boardSize, changeBoardSize] = useState(3);
@@ -115,7 +117,10 @@ export default function NewGameScreen({ navigation, route }) {
           defaultButtonText={language.NewGameScreen.numberOfPlayers + ': ' + players.length}
           renderDropdownIcon={() => { return <Ionicons name="chevron-back" size={24} style={styles.dropDownIcon} />; }}
           data={numberOfPlayers}
-          onSelect={(selectedItem, index) => { changePlayers(playerChars.slice(0, selectedItem)); }}
+          onSelect={(selectedItem, index) => {
+            changePlayers(playerChars.slice(0, selectedItem));
+            changeColors(playerColors.slice(0, selectedItem));
+          }}
           buttonTextAfterSelection={(selectedItem, index) => {
             // text represented after item is selected
             // if data array is an array of objects then return selectedItem.property to render after item is selected
@@ -213,13 +218,12 @@ export default function NewGameScreen({ navigation, route }) {
           onPress={() => {
             var boardData = initializeBoardData(boardSize)
             navigation.dispatch(
-              StackActions.replace("Game", { language: language, piecesToWin: pieces, players: players, time: time, data: boardData, numColumns: boardSize, tutorialMode: tutModeOn })
+              StackActions.replace("Game", { language: language, piecesToWin: pieces, players: players, time: time, data: boardData, numColumns: boardSize, tutorialMode: tutModeOn, colors: colors })
             );
           }}
         >
           <Text style={styles.startBtnText}>{language.NewGameScreen.startGameButton}</Text>
         </TouchableOpacity>
-
       </View>
       {/* END OF BODY */}
 
@@ -228,6 +232,7 @@ export default function NewGameScreen({ navigation, route }) {
     </View>
   );
 }
+
 
 
 // Styles for new game screen
