@@ -1,6 +1,14 @@
 
 import React, {useState} from 'react';
 import { StyleSheet, SafeAreaView} from 'react-native';
+import { StatusBar } from 'expo-status-bar';
+import React, { useState, useEffect, useCallback } from 'react';
+import { StyleSheet, Text, View, Button, SafeAreaView, FlatList, TouchableOpacity, Modal, Dimensions} from 'react-native';
+import GameMenu from '../components/GameMenu';
+import BoardItem from '../components/BoardItem';
+import { checkNinRow, undoBoard, redoBoard, madeMoves, unmadeMoves} from '../js/gameLogic';
+import MovableView from 'react-native-movable-view';
+//import ReactNativeZoomableView from '@openspacelabs/react-native-zoomable-view/src/ReactNativeZoomableView';
 import { MenuProvider } from "react-native-popup-menu";
 import Header from '../components/Header';
 import Board from '../components/Board';

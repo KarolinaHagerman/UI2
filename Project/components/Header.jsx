@@ -1,11 +1,11 @@
 
 import React, { useState} from 'react';
 import { StyleSheet, View} from 'react-native';
-import GameMenu from '../components/GameMenu';
+import GameMenu from './GameMenu';
 import {nextPlayer} from '../js/gameLogic';
 
-import Timer from '../components/timer'
-import Players from '../components/Players'
+import Timer from './Timer'
+import Players from './Players'
 
 /*
 Header:

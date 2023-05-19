@@ -3,17 +3,16 @@
         "newGameButton": "New Game"
     },
     "NewGameScreen": {
-        "mainMenuButton": "Main Menu",
         "startGameButton": "Start Game",
-        "numberOfPlayers": "Number of Players",
-        "numberOfPieces": "Number of Pieces",
-        "timePerMove": "Time per Move",
+        "numberOfPlayers": "Players",
+        "numberOfPieces": "Pieces",
+        "timePerMove": "Time",
+        "tutorialMode": "Tutorial mode",
         "players": "players",
         "pieces": "pieces",
         "seconds": "seconds",
         "boardSize": "Board Size",
-        "squares": "Squares",
-        "tutorialMode": "Tutorial Mode"
+        "squares": "Squares"  
     },
     "GameScreen": {
         "scores": "scores"
