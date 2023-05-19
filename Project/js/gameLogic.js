@@ -46,6 +46,7 @@ export function initializeBoardData(numColumns){
         }
         boardData.push(row);
     }
+    console.log(boardData);
     return boardData
 }
 

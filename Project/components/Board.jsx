@@ -22,7 +22,7 @@ export default function Board(input){
                 <FlatList
                
                 numColumns={numColumns}
-                keyExtractor={item => item.id}
+
                
                 data={data.flatMap((row) => row)}
                 renderItem={({item}) =>
