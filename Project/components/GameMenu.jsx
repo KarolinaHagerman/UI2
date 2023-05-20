@@ -9,10 +9,7 @@ import { undo, redo } from '../js/gameLogic';
 GameMenu:
 a drop down menu located in the header and placed at the top left of the screen
 */
-export default function GameMenu(props) {
-    
-    const { navigation, language, players, setActivePlayer, activePlayer, setResetTime } = props;
-
+export default function GameMenu({ navigation, language, players, setActivePlayer, activePlayer, setResetTime }) {
     const SYMBOL_SIZE = 20;
 
     return (

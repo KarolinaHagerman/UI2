@@ -3,7 +3,7 @@
  *
  * This file contains the javaScript needed for the home screen of the app.
  *
- * Version ???
+ * Version 0.5
  * Author: Karolina Hagerman, Erik Blomsterberg
  */
 

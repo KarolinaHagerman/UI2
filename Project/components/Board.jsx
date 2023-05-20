@@ -5,9 +5,7 @@ import BoardItem from '../components/BoardItem';
 import MovableView from 'react-native-movable-view';
 import ReactNativeZoomableView from '@openspacelabs/react-native-zoomable-view/src/ReactNativeZoomableView';
 
-export default function Board(input) {
-
-    const { numColumns, data, players, activePlayer, piecesToWin, setActivePlayer, setResetTime, colors } = input.props;
+export default function Board({ numColumns, data, players, activePlayer, piecesToWin, setActivePlayer, setResetTime, colors }) {
     const tileSize = (Dimensions.get('window').width * 0.8) / (numColumns);
 
     return (

@@ -1,11 +1,12 @@
 
-import React, {useState} from 'react';
-import { StyleSheet, SafeAreaView} from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, SafeAreaView } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { MenuProvider } from "react-native-popup-menu";
 import Header from '../components/Header';
 import Board from '../components/Board';
 import WinnerModal from '../components/WinnerModal';
+import TutorialView from '../components/TutorialView';
 
 /*
 GameScreen: 
@@ -15,17 +16,53 @@ Composed of:
 2) Board: contains the game board, location: the whole screen except for header
 */
 export default function GameScreen({ navigation, route }) {
-  const {language, piecesToWin, players, time, data, numColumns, tutorialMode, colors } = route.params;
+  const { language, piecesToWin, players, time, data, numColumns, tutorialMode, colors } = route.params;
   const [activePlayer, setActivePlayer] = useState(0);
   const [resetTime, setResetTime] = useState(false);
 
+  // Translate tutorialMode
+  //
+  let tutMode = false;
+  if (tutorialMode == 'On') {
+    tutMode = true;
+  }
+
+  console.log(tutorialMode)
+
   return (
     <SafeAreaView style={styles.container}>
-        <MenuProvider>
-          <Header navigation = {navigation} language = {language} players = {players} activePlayer = {activePlayer} time = {time} setActivePlayer={setActivePlayer} resetTime = {resetTime} setResetTime = {setResetTime} colors = {colors}/>
-          <Board props = {{numColumns: numColumns, data: data, players: players, activePlayer: activePlayer, piecesToWin: piecesToWin, setActivePlayer: setActivePlayer, setResetTime: setResetTime, colors: colors}}/>
-          <WinnerModal/>
-        </MenuProvider>
+      <MenuProvider>
+        <Header
+          navigation={navigation}
+          language={language}
+          players={players}
+          activePlayer={activePlayer}
+          time={time}
+          setActivePlayer={setActivePlayer}
+          resetTime={resetTime}
+          setResetTime={setResetTime}
+          colors={colors}
+        />
+        {true &&
+          <TutorialView
+            language={language}
+            activePlayer={activePlayer}
+            players={players}
+            colors={colors}
+          />
+        }
+        <Board
+          numColumns={numColumns}
+          data={data}
+          players={players}
+          activePlayer={activePlayer}
+          piecesToWin={piecesToWin}
+          setActivePlayer={setActivePlayer}
+          setResetTime={setResetTime}
+          colors={colors}
+        />
+        <WinnerModal />
+      </MenuProvider>
     </SafeAreaView>
   );
 }

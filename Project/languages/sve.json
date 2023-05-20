@@ -24,5 +24,9 @@
         "toMain": "Tillbaka till huvudmeny",
         "undo": "Ångra",
         "redo": "Gör om"
-    } 
+    } ,
+    "TutorialView" : {
+        "turn1": "Nu är det spelare ",
+        "turn2": "s tur. Klicka på en av rutorna för att placera pjäsen."
+    }
 }

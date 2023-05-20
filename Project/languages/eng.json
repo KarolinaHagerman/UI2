@@ -22,5 +22,9 @@
         "toMain": "Back to main menu",
         "undo": "Undo",
         "redo": "Redo"
+    },
+    "TutorialView" : {
+        "turn1": "Now it's player ",
+        "turn2": "'s turn. Click on one of the squares to place you piece."
     }
 }
