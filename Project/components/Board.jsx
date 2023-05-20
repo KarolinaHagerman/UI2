@@ -1,16 +1,16 @@
 
 import React, { useCallback } from 'react';
-import { StyleSheet, FlatList, Dimensions, TouchableWithoutFeedback } from 'react-native';
+import { StyleSheet, FlatList, Dimensions, TouchableWithoutFeedback, View } from 'react-native';
 import BoardItem from '../components/BoardItem';
 import MovableView from 'react-native-movable-view';
 import ReactNativeZoomableView from '@openspacelabs/react-native-zoomable-view/src/ReactNativeZoomableView';
+import { responsiveHeight } from 'react-native-responsive-dimensions';
 
 export default function Board({ numColumns, data, players, activePlayer, piecesToWin, setActivePlayer, setResetTime, colors }) {
     const tileSize = (Dimensions.get('window').width * 0.8) / (numColumns);
 
     return (
-        <ReactNativeZoomableView style={{ backgroundColor: 'black' }}>
-            <MovableView style={[styles.board, { height: (tileSize + 2) * numColumns, width: (tileSize + 2) * numColumns }]}>
+            <View style={[styles.container, { height: (tileSize + 2*tileSize/25) * numColumns, width: (tileSize + 2*tileSize/25) * numColumns }]}>
 
                 {/* FLATLIST DÄR DATAN ÄR EN MATRIS MED OBJEKT */}
                 {/* Here, we're using the flatMap() method to flatten the two-dimensional data 
@@ -34,13 +34,13 @@ export default function Board({ numColumns, data, players, activePlayer, piecesT
                         />
                     }
                 />
-            </MovableView>
-        </ReactNativeZoomableView>
+            </View>
     );
 }
 
 const styles = StyleSheet.create({
-    board: {
-        backgroundColor: 'black',
+    container: {
+        backgroundColor: '#262723',
     },
+
 })

@@ -8,6 +8,8 @@
         "numberOfPieces": "Pieces",
         "timePerMove": "Time",
         "tutorialMode": "Tutorial mode",
+        "on": "On",
+        "off": "Off",
         "players": "players",
         "pieces": "pieces",
         "seconds": "seconds",
@@ -23,8 +25,12 @@
         "undo": "Undo",
         "redo": "Redo"
     },
-    "TutorialView" : {
-        "turn1": "Now it's player ",
-        "turn2": "'s turn. Click on one of the squares to place you piece."
+    "Tutorial" : {
+        "turn1": "Now it's ",
+        "turn2": "player ",
+        "turn3": "'s turn. Click on an empty square to place you piece.",
+        "timer": "Time left: ",
+        "zoom": "Use two fingers to zoom in and out.",
+        "move": "Drag with your finger to move the board view."
     }
 }

@@ -16,7 +16,7 @@ Composed of:
 3) Players: shows all the players and which players turn it is to make a move, location: top right of the screen
 */
 
-export default function Header({ navigation, language, players, activePlayer, time, setActivePlayer, resetTime, setResetTime, colors }) {
+export default function Header({ navigation, language, players, activePlayer, time, setActivePlayer, resetTime, setResetTime, colors, tutMode, setTutMode, restartTut }) {
   return (
     <View style={styles.menuContainer}>
       <GameMenu
@@ -26,6 +26,9 @@ export default function Header({ navigation, language, players, activePlayer, ti
         setActivePlayer={setActivePlayer}
         activePlayer={activePlayer}
         setResetTime={setResetTime}
+        tutMode={tutMode}
+        setTutMode={setTutMode}
+        restartTut={restartTut}
       />
 
       <Timer
@@ -36,7 +39,8 @@ export default function Header({ navigation, language, players, activePlayer, ti
         players={players}
         resetTime={resetTime}
         setResetTime={setResetTime}
-
+        tutMode={tutMode}
+        language={language}
       />
 
       <Players
@@ -54,7 +58,7 @@ export default function Header({ navigation, language, players, activePlayer, ti
 const styles = StyleSheet.create({
   menuContainer: {
     flexDirection: "row",
-    backgroundColor: 'rgba(255 ,255,255,1)',
+    backgroundColor: 'rgba(255 ,255,255,0.9)',
     borderBottomWidth: 2,
     borderBottomColor: '#000',
     paddingRight: 5,
