@@ -1,3 +1,13 @@
+/** 
+* File: Piece.jsx
+
+* This file contains the JSX needed to create pieces that are placed on the squares in the gameboard
+
+* Version 0.5
+* Author: Karolina Hagerman, Erik Blomsterberg
+
+*/
+
 import { useState, useEffect } from 'react';
 import { Text, StyleSheet, Animated } from 'react-native';
 
@@ -28,15 +38,19 @@ export default function Piece(props) {
 
   return (
     <Animated.View style={{ transform: [{ scale: scaleAnim }] }}>
+      {/** Animated.View is what animated and Text is the player that clicked on the square */}
       <Text style={[styles.text, { color: props.color, fontSize: props.tileSize / 1.5, }]}>{props.player}</Text>
     </Animated.View>
 
   );
 }
 
+/**styles for the letter/piece */
 const styles = StyleSheet.create({
   text: {
-
     fontWeight: 'bold',
   }
 })
+
+
+  /* END of file Piece.jsx */

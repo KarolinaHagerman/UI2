@@ -1,7 +1,23 @@
+/*
+File: GameScreen.js
+
+This file contains the JSX needed to create 
+1) a header; containing a menu, timer and players
+2) a game board
+
+Version 0.5
+Author: Karolina Hagerman, Erik Blomsterberg
+
+Requires the following files:
+
+Header.jsx
+Board.jsx
+WinnerModal.jsx
+
+*/
 
 import React, { useState } from 'react';
 import { StyleSheet, SafeAreaView, View } from 'react-native';
-import { StatusBar } from 'expo-status-bar';
 import { MenuProvider } from "react-native-popup-menu";
 import Header from '../components/Header';
 import Board from '../components/Board';
@@ -11,13 +27,7 @@ import ReactNativeZoomableView from '@openspacelabs/react-native-zoomable-view/s
 import ZoomMoveTut from '../components/ZoomMoveTut';
 import TutorialText from '../components/TutorialText';
 
-/*
-GameScreen: 
-This is the screen that shows when starting a game
-Composed of:
-1) Header: contains a menu, timer and players, location: top of the screen
-2) Board: contains the game board, location: the whole screen except for header
-*/
+
 export default function GameScreen({ navigation, route }) {
   const { language, piecesToWin, players, time, data, numColumns, tutorialMode, colors } = route.params;
   const [activePlayer, setActivePlayer] = useState(0);
@@ -28,7 +38,7 @@ export default function GameScreen({ navigation, route }) {
 
   // Translate tutorialMode
   //
-  function getTutMode(tutModeText){
+  function getTutMode(tutModeText) {
     let tutMode = false;
     if (tutModeText == 'On') {
       tutMode = true;
@@ -36,7 +46,7 @@ export default function GameScreen({ navigation, route }) {
     return tutMode;
   }
 
-  function restartTut(){
+  function restartTut() {
     setHasTutMoved(false);
     setHasTutZoomed(false);
   }
@@ -88,7 +98,11 @@ export default function GameScreen({ navigation, route }) {
           initialZoom={1}
         >
           <MovableView
-            onDragEnd={() => setHasTutMoved(true)}
+            onDragEnd={() => {
+              if (hasTutZoomed) {
+                setHasTutMoved(true);
+              }
+            }}
           >
             <Board
               numColumns={numColumns}
@@ -116,3 +130,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#262723',
   },
 });
+
+
+/* END of file GameScreen.js */

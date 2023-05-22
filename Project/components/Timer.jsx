@@ -1,17 +1,27 @@
+/**
+* File: Timer.jsx
+
+* This file contains the JSX needed to create a timer 
+* that counts down and resets the time that each player has to make a move
+
+* Version 0.5
+* Author: Karolina Hagerman, Erik Blomsterberg
+
+* Requires the following files:
+
+* GameLogic.js
+*/
+
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text } from 'react-native';
 import { nextPlayer } from '../js/gameLogic';
 
-/*
-Timer:
-a timer located in the center of the header. Counts down the time to make a move,
-resets when a player makes a move or if time runs out. 
-The timer switches whos turn it is to make a move when a player runs out of time.
-*/
 export default function Timer({ time, setActivePlayer, activePlayer, players, resetTime, setResetTime, tutMode, language }) {
-
+  //Initializes timeLeft, timeleft is initialized as the same value that was selected in NewGameScreen
+  //
   const [timeLeft, setTimeLeft] = useState(time);
-
+  //initializes timer let
+  //
   let timer = null;
 
   // This effect is recursive, because it happens when timeLeft changes and inside the function timeLeft changes
@@ -48,12 +58,15 @@ export default function Timer({ time, setActivePlayer, activePlayer, players, re
 
   return (
     <Text style={[styles.time, timeLeft <= 3 ? styles.shortTime : styles.time]}>
+    
+      {/**shows the time left for a player to make a move*/}
       {tutMode && <Text>{language.Tutorial.timer}</Text>}
       {timeLeft}
     </Text>
   );
 }
 
+/**styles for the timer/seconds left */
 const styles = StyleSheet.create({
   time: {
     fontSize: 30,
@@ -66,3 +79,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
 });
+
+/* END of file Timer.jsx */
+
