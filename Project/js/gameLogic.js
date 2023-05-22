@@ -1,3 +1,13 @@
+/**
+ * File: gameLogic.js
+ *
+ * This file contains the javaScript needed for the game to function
+ *
+ * Version 0.5
+ * Authors: karolina Hagerman, Erik Blomsterberg
+ */
+
+
 var boardData = [];
 export var madeMoves = [];
 export var unmadeMoves = [];
@@ -102,7 +112,8 @@ export function initializeBoardData(numColumns) {
 }
 
 
-//After each click on the board, checks if there is a winner
+//This function checks if there is a winner after each click on the board
+//
 export function checkNinRow(boardData, clickedSquare, player, n) {
 
     // Check if the boardItem is empty
@@ -111,63 +122,104 @@ export function checkNinRow(boardData, clickedSquare, player, n) {
         boardData[clickedSquare.row][clickedSquare.col].player = player;
         madeMoves.push({ ...clickedSquare });
 
-        //kolla diagonalen från övre vänster ner till höger
+        //count keeps track of the number of same pieces in a row
+        //
         let count = 0;
+
+        //check diagonaly from n-1 squares to the top left of the clicked square to n-1 squares down right of the clicked square
+        //
         for (let i = 1, j = 1; i <= n * 2 - 1, j <= n * 2 - 1; i++, j++) {
             try {
+                //if square is occupied by the same player as the player that made a move, the count is increase by one
+                // 
                 if (boardData[clickedSquare.row + (i - n)][clickedSquare.col + (j - n)].player == boardData[clickedSquare.row][clickedSquare.col].player) {
                     count += 1;
+
+                    //if count is the same as the number of pieces needed to win, the winner is anounced
+                    //
                     if (count == n) {
                         proclaimWinner(player);
                     }
+                //if square is not occupied by the same player as the player that made a move, the count is reset to 0
+                // 
                 } else {
                     count = 0
                 }
             } catch (err) { }
         }
 
-        //kolla diagonalen från övre höger ner till vänster
+        //check diagonaly from n-1 squares to the top right of the clicked square to n-1 squares bottom left of the clicked square
+        //
         count = 0;
         for (let i = 1, j = 1; i <= n * 2 - 1, j <= n * 2 - 1; i++, j++) {
             try {
+                //if square is occupied by the same player as the player that made a move, the count is increase by one
+                //
                 if (boardData[clickedSquare.row + (i - n)][clickedSquare.col + (n - j)].player == boardData[clickedSquare.row][clickedSquare.col].player) {
                     count += 1;
+
+                    //if count is the same as the number of pieces needed to win, the winner is anounced
+                    //
                     if (count == n) {
                         proclaimWinner(player);
                     }
+
+                //if square is not occupied by the same player as the player that made a move, the count is reset to 0
+                //
                 } else {
                     count = 0
                 }
             } catch (err) { }
         }
 
-        //kolla vertikalt uppifrån och ner
+        //check vertically from n-1 squares up of the clicked square to n-1 squares down of the clicked square
+        //
         count = 0;
         for (let i = 1; i <= n * 2 - 1; i++) {
             try {
+
+                //if square is occupied by the same player as the player that made a move, the count is increase by one
+                // 
                 if (boardData[clickedSquare.row + (i - n)][clickedSquare.col].player == boardData[clickedSquare.row][clickedSquare.col].player) {
                     count += 1;
+
+                    //if count is the same as the number of pieces needed to win, the winner is anounced
+                    //
                     if (count == n) {
                         proclaimWinner(player);
                     }
+                
+                //if square is not occupied by the same player as the player that made a move, the count is reset to 0
+                //
                 } else {
                     count = 0
                 }
             } catch (err) { }
         }
 
-        //kolla horizontelt, vänster till höger
+        
+        //check horisontally from n-1 squares to the right of the clicked square to n-1 squares to the left of the clicked square
+        //
         count = 0;
         for (let j = 1; j <= n * 2 - 1; j++) {
 
             // Try-catch to handle boardItems with index out of bound
             //
             try {
+
+                //if square is occupied by the same player as the player that made a move, the count is increase by one
+                // 
                 if (boardData[clickedSquare.row][clickedSquare.col + (j - n)].player == boardData[clickedSquare.row][clickedSquare.col].player) {
                     count += 1;
+
+                    //if count is the same as the number of pieces needed to win, the winner is anounced
+                    //
                     if (count == n) {
                         proclaimWinner(player);
                     }
+
+                //if square is not occupied by the same player as the player that made a move, the count is reset to 0
+                //
                 } else {
                     count = 0
                 }

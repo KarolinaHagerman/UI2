@@ -10,7 +10,7 @@
 // Imports
 //
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Button, View, Image, TouchableOpacity, Text } from 'react-native';
+import { StyleSheet, Button, View, Image, TouchableOpacity, Text, Animated} from 'react-native';
 import { useState, useEffect, useContext } from 'react';
 import eng from '../languages/eng.json';
 import sve from '../languages/sve.json';
@@ -19,9 +19,20 @@ import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import { SoundContext } from '../components/SoundContext';
 import { responsiveHeight, responsiveWidth, responsiveFontSize, useResponsiveHeight } from "react-native-responsive-dimensions";
+import Logo from '../components/Logo';
 
 export default function HomeScreen({ navigation }) {
   const ICON_SIZE = useResponsiveHeight(5);
+
+  //initial value for header and button fading animation
+  //
+  const [fadeAnim] = useState(new Animated.Value(0));
+
+  // fading animation for header and button
+  //
+  useEffect(() => {
+          Animated.timing(fadeAnim,{tovalue: 1, duration: 3000, useNativeDriver: true, delay: 3200}).start()
+  }, [])
 
   // States for changing the language 
   //
@@ -52,6 +63,7 @@ export default function HomeScreen({ navigation }) {
     'impact': require('../fonts/impact.ttf'),
     'oxfordStreet': require('../fonts/OxfordStreet.ttf'),
     'bold': require('../fonts/THEBOLDFONT.ttf'),
+    'prillyMonly': require('../fonts/PrillyMonly.ttf')
   });
 
   // The following code was explained in https://www.youtube.com/watch?v=viIkcDYSBrI and is used to load the fonts.
@@ -82,7 +94,7 @@ export default function HomeScreen({ navigation }) {
     <View style={styles.container}>
 
       {/* HEADER */}
-      <View style={styles.header}>
+      <Animated.View style={[styles.header, {opacity: fadeAnim}]}>
 
         {/* The clickable language flags */}
         <View style={styles.flags}>
@@ -127,28 +139,24 @@ export default function HomeScreen({ navigation }) {
             <Ionicons name="volume-mute-outline" size={ICON_SIZE} color="#262723" />
           )}
         </TouchableOpacity>
-      </View>
+      </Animated.View>
       {/* END OF HEADER */}
 
       {/* BODY */}
       <View style={styles.body}>
 
         {/* The XOZ text displayed in different colors */}
-        <View style={styles.xozView}>
-          <Text style={styles.xoz}>
-            <Text style={styles.x}>X</Text>
-            <Text style={styles.o}>O</Text>
-            <Text style={styles.z}>Z</Text>
-          </Text>
-        </View>
+        <Logo/>
 
         {/* New game button, navigates to new game screen */}
+        <Animated.View style =  {{opacity: fadeAnim}}>
         <TouchableOpacity
           style={styles.button}
           onPress={() => navigation.navigate("NewGame", { language: language })}
         >
           <Text style={styles.buttonText}>{language.HomeScreen.newGameButton}</Text>
         </TouchableOpacity>
+        </Animated.View>
       </View>
       {/* END OF BODY */}
 
@@ -178,7 +186,7 @@ const styles = StyleSheet.create({
     width: responsiveWidth(96),
   },
   body: {
-    paddingVertical: responsiveHeight(10),
+    paddingVertical: responsiveHeight(14),
     paddingHorizontal: responsiveWidth(10),
     width: responsiveWidth(96),
     height: responsiveHeight(80),

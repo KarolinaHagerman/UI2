@@ -1,19 +1,30 @@
+/*
+File: GameScreen.js
+
+This file contains the JSX needed to create 
+1) a header; containing a menu, timer and players
+2) a game board
+
+Version 0.5
+Author: Karolina Hagerman, Erik Blomsterberg
+
+Requires the following files:
+
+Header.jsx
+Board.jsx
+WinnerModal.jsx
+
+*/
 
 import React, {useState} from 'react';
-import { StyleSheet, SafeAreaView} from 'react-native';
+import { StyleSheet, SafeAreaView, Dimensions} from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { MenuProvider } from "react-native-popup-menu";
 import Header from '../components/Header';
 import Board from '../components/Board';
 import WinnerModal from '../components/WinnerModal';
 
-/*
-GameScreen: 
-This is the screen that shows when starting a game
-Composed of:
-1) Header: contains a menu, timer and players, location: top of the screen
-2) Board: contains the game board, location: the whole screen except for header
-*/
+
 export default function GameScreen({ navigation, route }) {
   const {language, piecesToWin, players, time, data, numColumns, tutorialMode, colors } = route.params;
   const [activePlayer, setActivePlayer] = useState(0);
@@ -36,3 +47,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'black',
   },
 });
+
+
+  /* END of file GameScreen.js */

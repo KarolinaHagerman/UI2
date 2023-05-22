@@ -1,24 +1,36 @@
+/** 
+* File: Header.jsx
+
+* This file contains the JSX needed to create a Header containing
+* 1) a menu
+* 2) a timer that counts down the active players time to make a move
+* 3) the players and which players turn it is to make a move
+
+* Version 0.5
+* Author: Karolina Hagerman, Erik Blomsterberg
+
+* Requires the following files:
+
+* GameMenu.jsx
+* Timer.jsx
+* Players.jsx
+
+*/
+
 
 import React, { useState} from 'react';
 import { StyleSheet, View} from 'react-native';
 import GameMenu from './GameMenu';
 import {nextPlayer} from '../js/gameLogic';
-
 import Timer from './Timer'
 import Players from './Players'
-
-/*
-Header:
-This is the component shown at the top of GameScreen
-Composed of:
-1) GameMenu: a drop down menu, location: tope left of the screen
-2) Timer: a timer that counts down the active players time to make a move, location: top center of the screen
-3) Players: shows all the players and which players turn it is to make a move, location: top right of the screen
-*/
+import { StatusBar } from 'expo-status-bar';
 
 export default function Header({navigation, language, players, activePlayer, time, setActivePlayer, resetTime, setResetTime, colors}) {
   return ( 
-    <View style={styles.menuContainer}>
+    
+    <View style={styles.header}>
+      {/**Dropdown menu with hamburger icon at the top left of the screen */}
         <GameMenu
         navigation={navigation}
         language={language}
@@ -27,18 +39,20 @@ export default function Header({navigation, language, players, activePlayer, tim
         activePlayer = {activePlayer}
         setResetTime = {setResetTime}
         />
-
+      {/**Timer at the center top of the screen */}
         <Timer time = {time} nextPlayer = {nextPlayer} setActivePlayer = {setActivePlayer} activePlayer = {activePlayer} players = {players} resetTime = {resetTime} setResetTime = {setResetTime}/>
-        
+      {/**shows players and which players turn at the top right of the screen*/}  
         <Players players = {players} activePlayer = {activePlayer} colors = {colors}/>
     </View>
+    
 
 
   );
 }
 
+/**styles for the header */
 const styles = StyleSheet.create({
-    menuContainer: {
+    header: {
         flexDirection: "row",
         backgroundColor: 'rgba(255 ,255,255,1)',
         borderBottomWidth: 2,
@@ -47,3 +61,5 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between'
       },
   });
+
+  /* END of file Header.jsx */

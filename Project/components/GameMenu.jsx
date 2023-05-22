@@ -1,3 +1,19 @@
+/** 
+* File: GameMenu.jsx
+
+* This file contains the JSX needed to create a drop down menu 
+* containing options to go back to main menu and undo and redo move.
+
+* Version 0.5
+* Author: Karolina Hagerman, Erik Blomsterberg
+
+* Requires the following files:
+
+* GameLogic.js
+
+*/
+
+
 import React from "react";
 import { StyleSheet, Text } from "react-native";
 import { Menu, MenuOptions, MenuOption, MenuTrigger } from "react-native-popup-menu";
@@ -48,6 +64,8 @@ export default function GameMenu(props) {
     );
 }
 
+/**styles the menu*/
+
 const styles = StyleSheet.create({
     menuButton: {
         backgroundColor: 'white',
@@ -65,3 +83,6 @@ const styles = StyleSheet.create({
     }
 
 });
+
+
+  /* END of file GameMenu.jsx */
