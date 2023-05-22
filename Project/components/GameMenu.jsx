@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
     menuOptions: {
         padding: '3%',
         backgroundColor: '#F8FFFF',
-        width: responsiveWidth(70),
+        width: responsiveWidth(80),
         shadowColor: 'black',
         shadowOffset: { width: -2, height: 4 },
         shadowOpacity: 0.5,
