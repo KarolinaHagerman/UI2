@@ -17,11 +17,7 @@ export default function Logo() {
     //fonts for logo
     //
     const [logoFonts] = useFonts({
-        'impact': require('../fonts/impact.ttf'),
-        'oxfordStreet': require('../fonts/OxfordStreet.ttf'),
         'bold': require('../fonts/THEBOLDFONT.ttf'),
-        'prillyMonly': require('../fonts/PrillyMonly.ttf'),
-        'coffeCake': require('../fonts/CoffeCake.ttf')
       });
 
         // The initial values for all animations used for logo
@@ -34,7 +30,6 @@ export default function Logo() {
         const [slideAnimO] = useState(new Animated.Value(responsiveHeight(-100)))
         const [spinValueX] = useState(new Animated.Value(1));
         const [spinValueZ] = useState(new Animated.Value(1));
-        const [spinValueO] = useState(new Animated.Value(0));
 
 
         //animations for X, O and Z
@@ -44,14 +39,14 @@ export default function Logo() {
                 //
                 Animated.parallel([Animated.timing(fadeAnimX,{tovalue: 1, duration: 1000, useNativeDriver: true}),
                                    Animated.timing(slideAnimX,{tovalue: 1, duration: 1000, useNativeDriver: true}),
-                                   Animated.loop(Animated.timing(spinValueX,{toValue: -0.035,duration: 1000,useNativeDriver: true, isInteraction: false}), {iterations: 1})
+                                   Animated.loop(Animated.timing(spinValueX,{toValue: -0.035, duration: 1000, useNativeDriver: true, isInteraction: false}), {iterations: 1})
                                 ]).start(),  
 
                 //makes letter Z simuntainesly fade in, rotate and slide in from the right
                 //             
                 Animated.parallel([Animated.timing(fadeAnimZ,{tovalue: 1, duration: 1000, delay: 1000, useNativeDriver: true}),
                                    Animated.timing(slideAnimZ,{tovalue: 0, duration: 1000, delay: 1000, useNativeDriver: true}),
-                                   Animated.loop(Animated.timing(spinValueZ,{toValue: 0.035,duration: 1000, delay: 1000, useNativeDriver: true, isInteraction: false}), {iterations: 1})
+                                   Animated.loop(Animated.timing(spinValueZ,{toValue: 0.035, duration: 1000, delay: 1000, useNativeDriver: true, isInteraction: false}), {iterations: 1})
                                 ]).start(),
 
                 //makes letter O simuntainesly fade in and slide in from the top
