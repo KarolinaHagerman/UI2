@@ -12,12 +12,17 @@
 * GameLogic.js
 */
 
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { TouchableOpacity, Text, View, StyleSheet, Animated } from 'react-native';
 import { checkNinRow, nextPlayer } from '../js/gameLogic';
+import { SoundContext } from '../components/SoundContext';
 import Piece from './Piece'
 
 export default function BoardItem({ setResetTime, setActivePlayer, item, tileSize, data, players, activePlayer, piecesToWin, colors }) {
+
+  // Getting the needed information from the sound context
+  //
+  const { soundOn, toggleSound, playBackgroundMusic, backgroundMusic, placePiece, playPlacePiece } = useContext(SoundContext);
 
   //updates the square when it is clicked on and the checks for winner, resets timer and gives the turn to the next player
   //
@@ -28,10 +33,13 @@ export default function BoardItem({ setResetTime, setActivePlayer, item, tileSiz
     if (!item.isClicked) {
       item.isClicked = true;
       item.color = colors[activePlayer];
+      playPlacePiece();
       checkNinRow(data, item, players[activePlayer], piecesToWin);
       nextPlayer(setActivePlayer, activePlayer, players);
       setResetTime(true);
     }
+
+
   }
   return (
     <TouchableOpacity onPress={onPress}  >
