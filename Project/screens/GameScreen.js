@@ -38,7 +38,7 @@ export default function GameScreen({ navigation, route }) {
 
   // Translate tutorialMode
   //
-  function getTutMode(tutModeText){
+  function getTutMode(tutModeText) {
     let tutMode = false;
     if (tutModeText == 'On') {
       tutMode = true;
@@ -46,7 +46,7 @@ export default function GameScreen({ navigation, route }) {
     return tutMode;
   }
 
-  function restartTut(){
+  function restartTut() {
     setHasTutMoved(false);
     setHasTutZoomed(false);
   }
@@ -98,7 +98,11 @@ export default function GameScreen({ navigation, route }) {
           initialZoom={1}
         >
           <MovableView
-            onDragEnd={() => setHasTutMoved(true)}
+            onDragEnd={() => {
+              if (hasTutZoomed) {
+                setHasTutMoved(true);
+              }
+            }}
           >
             <Board
               numColumns={numColumns}
@@ -128,4 +132,4 @@ const styles = StyleSheet.create({
 });
 
 
-  /* END of file GameScreen.js */
+/* END of file GameScreen.js */
