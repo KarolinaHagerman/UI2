@@ -26,59 +26,62 @@ import Timer from './Timer'
 import Players from './Players'
 import { StatusBar } from 'expo-status-bar';
 
-      export default function Header({navigation, language, players, activePlayer, time, setActivePlayer, resetTime, setResetTime, colors, tutMode, setTutMode, restartTut}) {
+export default function Header({ navigation, language, players, activePlayer, time, setActivePlayer, resetTime, setResetTime, colors, tutMode, setTutMode, restartTut, fontsLoaded }) {
   return (
-      <View style={styles.header}>
-        {/**Dropdown menu with hamburger icon at the top left of the screen */}
-        <GameMenu
-          navigation={navigation}
-          language={language}
-          players={players}
-          setActivePlayer={setActivePlayer}
-          activePlayer={activePlayer}
-          setResetTime={setResetTime}
-          tutMode={tutMode}
-          setTutMode={setTutMode}
-          restartTut={restartTut}
-        />
+    <View style={styles.header}>
+      {/**Dropdown menu with hamburger icon at the top left of the screen */}
+      <GameMenu
+        navigation={navigation}
+        language={language}
+        players={players}
+        setActivePlayer={setActivePlayer}
+        activePlayer={activePlayer}
+        setResetTime={setResetTime}
+        tutMode={tutMode}
+        setTutMode={setTutMode}
+        restartTut={restartTut}
+      />
 
-        {/**Timer at the center top of the screen */}
-        <Timer
-          time={time}
-          nextPlayer={nextPlayer}
-          setActivePlayer={setActivePlayer}
-          activePlayer={activePlayer}
-          players={players}
-          resetTime={resetTime}
-          setResetTime={setResetTime}
-          tutMode={tutMode}
-          language={language}
-        />
+      {/**Timer at the center top of the screen */}
+      <Timer
+        time={time}
+        nextPlayer={nextPlayer}
+        setActivePlayer={setActivePlayer}
+        activePlayer={activePlayer}
+        players={players}
+        resetTime={resetTime}
+        setResetTime={setResetTime}
+        tutMode={tutMode}
+        language={language}
+      />
 
-        {/**shows players and which players turn at the top right of the screen*/}
-        <Players
-          players={players}
-          activePlayer={activePlayer}
-          colors={colors}
+      {/**shows players and which players turn at the top right of the screen*/}
+      <Players
+        players={players}
+        activePlayer={activePlayer}
+        colors={colors}
+        fontsLoaded={fontsLoaded}
+      />
+    </View>
 
-        />
-      </View>
 
 
-
-      );
+  );
 }
 
-      /**styles for the header */
-      const styles = StyleSheet.create({
-        header: {
-        flexDirection: "row",
-      backgroundColor: 'rgba(255 ,255,255,1)',
-      borderBottomWidth: 2,
-      borderBottomColor: '#000',
-      paddingRight: 5,
-      justifyContent: 'space-between'
-      },
-  });
+/**styles for the header */
+const styles = StyleSheet.create({
+  header: {
+    flexDirection: "row",
+    //backgroundColor: '#F8FFFF',
+    backgroundColor: '#EDE4E1',
+    //borderBottomWidth: 2,
+    //borderBottomColor: '#000',
+    paddingRight: '2%',
+    justifyContent: 'space-between',
+    alignContent: 'center',
+    alignItems: 'center'
+  },
+});
 
 /* END of file Header.jsx */

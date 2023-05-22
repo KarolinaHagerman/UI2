@@ -25,7 +25,8 @@
         "hideMenu": "Göm meny",
         "toMain": "Tillbaka till huvudmeny",
         "undo": "Ångra",
-        "redo": "Gör om"
+        "redo": "Gör om",
+        "sound": "Ljud"
     } ,
     "Tutorial" : {
         "turn1": "Nu är det ",

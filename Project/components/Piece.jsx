@@ -12,7 +12,7 @@ import { useState, useEffect } from 'react';
 import { Text, StyleSheet, Animated } from 'react-native';
 
 
-export default function Piece(props) {
+export default function Piece( { tileSize, color, player}) {
 
 
   // The initial value of the marker size, when the animation starts
@@ -39,7 +39,7 @@ export default function Piece(props) {
   return (
     <Animated.View style={{ transform: [{ scale: scaleAnim }] }}>
       {/** Animated.View is what animated and Text is the player that clicked on the square */}
-      <Text style={[styles.text, { color: props.color, fontSize: props.tileSize / 1.5, }]}>{props.player}</Text>
+      <Text style={[styles.text, { color: color, fontSize: tileSize / 1.5, }]}>{player}</Text>
     </Animated.View>
 
   );

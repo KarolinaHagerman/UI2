@@ -15,6 +15,7 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text } from 'react-native';
 import { nextPlayer } from '../js/gameLogic';
+import { responsiveFontSize, responsiveHeight } from 'react-native-responsive-dimensions';
 
 export default function Timer({ time, setActivePlayer, activePlayer, players, resetTime, setResetTime, tutMode, language }) {
   //Initializes timeLeft, timeleft is initialized as the same value that was selected in NewGameScreen
@@ -69,10 +70,11 @@ export default function Timer({ time, setActivePlayer, activePlayer, players, re
 /**styles for the timer/seconds left */
 const styles = StyleSheet.create({
   time: {
-    fontSize: 30,
+    fontSize: responsiveFontSize(4),
     color: 'black',
     position: 'relative',
-    paddingTop: 5
+    paddingTop: '2%',
+    fontFamily: 'Helvetica',
   },
   shortTime: {
     color: 'red',

@@ -81,15 +81,18 @@ const styles = StyleSheet.create({
     fontSize: responsiveFontSize(12),
     fontFamily: 'bold',
     transform: [{ rotate: '-12deg'}],
+    color: '#C2933F',
   },
     O: {
     fontSize: responsiveFontSize(20),
     fontFamily: 'bold',
+    color: '#294725',
     },
     Z: {
     fontSize: responsiveFontSize(12),
     fontFamily: 'bold',  
-    transform: [{ rotate: '12deg'}] 
+    transform: [{ rotate: '12deg'}],
+    color: '#276180',
     }
 })
 

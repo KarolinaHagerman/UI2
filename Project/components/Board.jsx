@@ -17,17 +17,16 @@
 import React, { useCallback } from 'react';
 import { StyleSheet, FlatList, Dimensions, TouchableWithoutFeedback, View } from 'react-native';
 import BoardItem from '../components/BoardItem';
-import MovableView from 'react-native-movable-view';
-import ReactNativeZoomableView from '@openspacelabs/react-native-zoomable-view/src/ReactNativeZoomableView';
-import { responsiveHeight } from 'react-native-responsive-dimensions';
+import { responsiveHeight, useResponsiveHeight } from 'react-native-responsive-dimensions';
 
 export default function Board({ numColumns, data, players, activePlayer, piecesToWin, setActivePlayer, setResetTime, colors }) {
     //size of each side of the squares on the board
     //
-    const tileSize = (Dimensions.get('window').width * 0.8) / (numColumns);
+    //const tileSize = (Dimensions.get('window').width * 0.8) / (numColumns);
+    const tileSize = useResponsiveHeight(10);
 
     return (
-            <View style={[styles.container, { height: (tileSize + 2 * tileSize / 25) * numColumns, width: (tileSize + 2 * tileSize / 25) * numColumns }]}>
+            <View style={[styles.container, { height: (tileSize + 2 * tileSize / 25) * numColumns, width: (tileSize + 2 * tileSize / 25) * numColumns }, numColumns < 10 && styles.marginTop ]}>
             
                     {/**FlatList renders all the squares on the board, BoardItem is a single square on the board */}
                     <FlatList
@@ -55,6 +54,10 @@ export default function Board({ numColumns, data, players, activePlayer, piecesT
             const styles = StyleSheet.create({
     container: {
         backgroundColor: '#262723',
+        alignSelf: 'center',
     },
+    marginTop: {
+        marginTop: responsiveHeight(10),
+    }
 
 })
