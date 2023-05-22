@@ -14,58 +14,84 @@
 */
 
 
-import React from "react";
-import { StyleSheet, Text } from "react-native";
+import React, { useContext } from "react";
+import { StyleSheet, Text, TouchableOpacity } from "react-native";
 import { Menu, MenuOptions, MenuOption, MenuTrigger } from "react-native-popup-menu";
 import { Entypo } from '@expo/vector-icons';
 import { EvilIcons } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 import { undo, redo } from '../js/gameLogic';
+import { responsiveFontSize, responsiveHeight, responsiveWidth, useResponsiveFontSize } from "react-native-responsive-dimensions";
+import { SoundContext } from '../components/SoundContext';
 
 /*
 GameMenu:
 a drop down menu located in the header and placed at the top left of the screen
 */
 export default function GameMenu({ navigation, language, players, setActivePlayer, activePlayer, setResetTime, tutMode, setTutMode, restartTut }) {
-    const SYMBOL_SIZE = 20;
+    const ICON_SIZE = useResponsiveFontSize(3);
+    const MENU_SIZE = useResponsiveFontSize(6);
+
+    // Getting the needed information from the sound context
+    //
+    const { soundOn, toggleSound } = useContext(SoundContext);
 
     return (
 
         <Menu>
             <MenuTrigger style={styles.menuButton}>
-                <Entypo name="menu" size={45} color="black" />
+                <Entypo name="menu" size={MENU_SIZE} color="black" />
             </MenuTrigger>
             <MenuOptions style={styles.menuOptions}>
                 <MenuOption
                     style={styles.menuOption}
                     onSelect={() => navigation.popToTop()}
                 >
-                    <Text>{language.GameMenu.toMain}</Text>
+                    <Text style={styles.menuText}>{language.GameMenu.toMain}</Text>
+                    <Ionicons name="chevron-back" size={ICON_SIZE} color="black" />
                 </MenuOption>
                 <MenuOption
                     style={styles.menuOption}
                     onSelect={() => undo(setActivePlayer, activePlayer, players, setResetTime)}
                 >
-                    <Text>{language.GameMenu.undo}</Text>
-                    <EvilIcons name="undo" size={SYMBOL_SIZE} color="black" />
+                    <Text style={styles.menuText}>{language.GameMenu.undo}</Text>
+                    <EvilIcons name="undo" size={ICON_SIZE} color="black" />
                 </MenuOption>
                 <MenuOption
                     style={styles.menuOption}
                     onSelect={() => redo(setActivePlayer, activePlayer, players, setResetTime)}
                 >
-                    <Text>{language.GameMenu.redo}</Text>
-                    <EvilIcons name="redo" size={SYMBOL_SIZE} color="black" />
+                    <Text style={styles.menuText}>{language.GameMenu.redo}</Text>
+                    <EvilIcons name="redo" size={ICON_SIZE} color="black" />
                 </MenuOption>
                 <MenuOption
                     style={styles.menuOption}
                     onSelect={() => {
-                    restartTut();
-                    setTutMode(!tutMode);
+                        restartTut();
+                        setTutMode(!tutMode);
                     }}
                 >
-                    <Text>
-                        {language.NewGameScreen.tutorialMode}
-                        {tutMode ? <Text>: {language.NewGameScreen.on}</Text> : <Text>: {language.NewGameScreen.off}</Text>}
+                    <Text style={styles.menuText}>
+                        {language.NewGameScreen.tutorialMode}:
                     </Text>
+                    {tutMode ?
+                        <Text style={styles.menuText}>{language.NewGameScreen.on}</Text> :
+                        <Text style={styles.menuText}>{language.NewGameScreen.off}</Text>}
+
+                </MenuOption>
+                <MenuOption
+                    style={styles.menuOption}
+                    onSelect={() => { toggleSound(); }}
+                >
+                    <Text style={styles.menuText}>{language.GameMenu.sound}: </Text>
+                    {/* The clickable sound icon, different icons depending on soundOn state */}
+                    <TouchableOpacity>
+                        {soundOn ? (
+                            <Ionicons name="volume-high-outline" size={ICON_SIZE} color="#262723" />
+                        ) : (
+                            <Ionicons name="volume-mute-outline" size={ICON_SIZE} color="#262723" />
+                        )}
+                    </TouchableOpacity>
                 </MenuOption>
             </MenuOptions>
         </Menu>
@@ -77,19 +103,28 @@ export default function GameMenu({ navigation, language, players, setActivePlaye
 
 const styles = StyleSheet.create({
     menuButton: {
-        padding: 2,
-        textAlign: 'center',
-        fontSize: 16,
+        alignSelf: 'baseline'
     },
     menuOptions: {
-        padding: 10,
-        backgroundColor: 'lightblue',
+        padding: '3%',
+        backgroundColor: '#F8FFFF',
+        width: responsiveWidth(70),
+        shadowColor: 'black',
+        shadowOffset: { width: -2, height: 4 },
+        shadowOpacity: 0.5,
+        shadowRadius: 3,
+        borderRadius: '5%',
     },
     menuOption: {
         flexDirection: 'row',
+        justifyContent: 'space-between',
+    },
+    menuText: {
+        fontSize: responsiveFontSize(3),
+        fontFamily: 'Helvetica',
+        color: '#262723',
     }
-
 });
 
 
-  /* END of file GameMenu.jsx */
+/* END of file GameMenu.jsx */

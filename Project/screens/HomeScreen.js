@@ -10,7 +10,7 @@
 // Imports
 //
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Button, View, Image, TouchableOpacity, Text, Animated} from 'react-native';
+import { StyleSheet, Button, View, Image, TouchableOpacity, Text, Animated } from 'react-native';
 import { useState, useEffect, useContext } from 'react';
 import eng from '../languages/eng.json';
 import sve from '../languages/sve.json';
@@ -31,7 +31,7 @@ export default function HomeScreen({ navigation }) {
   // fading animation for header and button
   //
   useEffect(() => {
-          Animated.timing(fadeAnim,{tovalue: 1, duration: 3000, useNativeDriver: true, delay: 3200}).start()
+    Animated.timing(fadeAnim, { tovalue: 1, duration: 3000, useNativeDriver: true, delay: 3200 }).start()
   }, [])
 
   // States for changing the language 
@@ -94,7 +94,7 @@ export default function HomeScreen({ navigation }) {
     <View style={styles.container}>
 
       {/* HEADER */}
-      <Animated.View style={[styles.header, {opacity: fadeAnim}]}>
+      <Animated.View style={[styles.header, { opacity: fadeAnim }]}>
 
         {/* The clickable language flags */}
         <View style={styles.flags}>
@@ -130,7 +130,6 @@ export default function HomeScreen({ navigation }) {
         {/* The clickable sound icon, different icons depending on soundOn state */}
 
         <TouchableOpacity
-          style={[styles.headerItem, styles.soundIcon]}
           onPress={() => { toggleSound(); }}
         >
           {soundOn ? (
@@ -146,16 +145,16 @@ export default function HomeScreen({ navigation }) {
       <View style={styles.body}>
 
         {/* The XOZ text displayed in different colors */}
-        <Logo/>
+        <Logo />
 
         {/* New game button, navigates to new game screen */}
-        <Animated.View style =  {{opacity: fadeAnim}}>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => navigation.navigate("NewGame", { language: language })}
-        >
-          <Text style={styles.buttonText}>{language.HomeScreen.newGameButton}</Text>
-        </TouchableOpacity>
+        <Animated.View style={{ opacity: fadeAnim }}>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => navigation.navigate("NewGame", { language: language })}
+          >
+            <Text style={styles.buttonText}>{language.HomeScreen.newGameButton}</Text>
+          </TouchableOpacity>
         </Animated.View>
       </View>
       {/* END OF BODY */}
@@ -194,43 +193,14 @@ const styles = StyleSheet.create({
   flags: {
     flexDirection: 'row',
   },
-  headerItem: {
-    //INKLUDERAR FLAGGOR OCH LJUDSYMBOL, 
-  },
   flag: {
     height: responsiveHeight(5),
-    aspectRatio: 3/2,
+    aspectRatio: 3 / 2,
     marginRight: '5%',
   },
   chosenFlag: {
     borderColor: '#FFF786',
     borderWidth: 3,
-  },
-  soundIcon: {
-    //här kan vi lägga till
-  },
-  image: {
-    //HÄR LÄGGER VI TILL FÖR BILDEN
-  },
-  xozView: {
-    width: responsiveWidth(90),
-    alignSelf: 'center',
-  },
-  xoz: {
-    fontSize: responsiveFontSize(10),
-    fontFamily: 'bold',
-    justifyContent: 'space-around',
-    alignSelf: 'center',
-  },
-  x: {
-    color: '#C2933F',
-  },
-  o: {
-    fontSize: responsiveFontSize(18),
-    color: '#294725',
-  },
-  z: {
-    color: '#276180',
   },
   button: {
     backgroundColor: '#9E355E',

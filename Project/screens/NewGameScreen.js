@@ -93,10 +93,7 @@ export default function NewGameScreen({ navigation, route }) {
         </TouchableOpacity>
 
         {/* The clickable sound icon, different icons depending on soundOn state */}
-        <TouchableOpacity
-          style={[styles.headerItem, styles.soundIcon]}
-          onPress={() => { toggleSound(); }}
-        >
+        <TouchableOpacity onPress={() => { toggleSound(); }}>
           {soundOn ? (
             <Ionicons name="volume-high-outline" size={ICON_SIZE} color="#262723" />
           ) : (
@@ -276,6 +273,7 @@ const styles = StyleSheet.create({
     borderRadius: 3,
     alignSelf: 'center',
     width: '70%',
+    marginVertical: '1%'
   },
   dropDownText: {
     color: '#262723',
@@ -287,7 +285,7 @@ const styles = StyleSheet.create({
   },
   dropDownIcon: {
     transform: [{ rotate: '270deg' }],
-    color: 'black'
+    color: "#262723",
   },
   startBtn: {
     backgroundColor: '#9E355E',
@@ -301,6 +299,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.5,
     shadowRadius: 3,
     alignSelf: 'center',
+    marginVertical: '1%'
   },
   startBtnText: {
     fontSize: responsiveFontSize(7),

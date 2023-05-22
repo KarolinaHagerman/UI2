@@ -23,7 +23,8 @@
         "hideMenu": "Hide Menu",
         "toMain": "Back to main menu",
         "undo": "Undo",
-        "redo": "Redo"
+        "redo": "Redo",
+        "sound": "Sound"
     },
     "Tutorial" : {
         "turn1": "Now it's ",

@@ -10,6 +10,7 @@
 
 import React from 'react';
 import {View, StyleSheet, Text} from 'react-native';
+import { responsiveFontSize } from 'react-native-responsive-dimensions';
 
 export default function Players({players, activePlayer, colors}) {
   return ( 
@@ -30,14 +31,16 @@ const styles = StyleSheet.create({
         alignItems: 'baseline', 
       },
       player: {
-        fontSize: 20,
+        fontSize: responsiveFontSize(3),
         color: 'black',
-        paddingTop: 5,
+        padding: 1,
+        paddingTop: '3%',
+        fontFamily: 'bold',
+        
       },
       activePlayer: {
-        fontSize: 30,
+        fontSize: responsiveFontSize(5),
         fontWeight: 'bold',
-    
       },
   });
 
