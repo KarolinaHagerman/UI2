@@ -10,6 +10,8 @@
         "numberOfPieces": "Pjäser",
         "timePerMove": "Tid",
         "tutorialMode": "Handledning",
+        "on": "På",
+        "off": "Av",
         "players": "spelare",
         "pieces": "pjäser",
         "seconds": "sekunder",
@@ -24,5 +26,13 @@
         "toMain": "Tillbaka till huvudmeny",
         "undo": "Ångra",
         "redo": "Gör om"
-    } 
+    } ,
+    "Tutorial" : {
+        "turn1": "Nu är det ",
+        "turn2": "spelare ",
+        "turn3": "s tur. Klicka på en tom ruta för att placera pjäsen.",
+        "timer": "Tid kvar: ",
+        "zoom": "Använd två fingrar för att zooma in och ut.",
+        "move": "Dra fingret för att förflytta dig på brädet."
+    }
 }

@@ -3,7 +3,7 @@
  *
  * This file contains the javaScript needed for the new game screen of the app.
  *
- * Version ???
+ * Version 0.5
  * Author: Karolina Hagerman, Erik Blomsterberg
  */
 
@@ -34,12 +34,12 @@ export default function NewGameScreen({ navigation, route }) {
 
   //All displayed options
   //
-  const playerChars = ['X', 'Y', 'Z', 'O', 'E'];
-  const playerColors = ['orange', 'green', 'purple', 'blue', 'red'];
+  const playerChars = ['X', 'O', 'Z', 'Y', 'E'];
+  const playerColors = ['#B35000', '#294725', '#276180', '#9E355E', '#4E3670'];
   const numberOfPlayers = [2, 3, 4, 5];
   const piecesInRow = [3, 4, 5, 6, 7, 8, 9, 10];
   const timePerMove = [5, 10, 15, 30, 60];
-  const boardSizes = [3, 5, 15, 30];
+  const boardSizes = [3, 5, 10, 15, 20, 25, 30];
   const tutModeOptions = ['On', 'Off'];
 
   //States for all options which will then be passed on to game screen
@@ -195,7 +195,7 @@ export default function NewGameScreen({ navigation, route }) {
         <SelectDropdown
           buttonStyle={styles.dropDown}
           buttonTextStyle={styles.dropDownText}
-          defaultButtonText={language.NewGameScreen.tutorialMode + ': ' + tutModeOn}
+          defaultButtonText={language.NewGameScreen.tutorialMode + ': ' + language.NewGameScreen.off}
           renderDropdownIcon={() => { return <Ionicons name="chevron-back" size={24} style={styles.dropDownIcon} />; }}
           data={tutModeOptions}
           onSelect={(selectedItem, index) => { changeTutMode(selectedItem); }}
@@ -203,12 +203,22 @@ export default function NewGameScreen({ navigation, route }) {
             // text represented after item is selected
             // if data array is an array of objects then return selectedItem.property to render after item is selected
             //let text = selectedItem + ' ' + language.NewGameScreen.players
-            return language.NewGameScreen.tutorialMode + ': ' + tutModeOn;
+            if (tutModeOn === 'On') {
+              return language.NewGameScreen.tutorialMode + ': ' + language.NewGameScreen.on;
+            }
+            else {
+              return language.NewGameScreen.tutorialMode + ': ' + language.NewGameScreen.off;
+            }
           }}
           rowTextForSelection={(item, index) => {
             // text represented for each item in dropdown
             // if data array is an array of objects then return item.property to represent item in dropdown
-            return item
+            if (item === 'On') {
+              return language.NewGameScreen.on;
+            }
+            else {
+              return language.NewGameScreen.off;
+            }
           }} />
         {/* End of dropdowns */}
 
@@ -288,7 +298,7 @@ const styles = StyleSheet.create({
     paddingTop: '7%',
     shadowColor: 'black',
     shadowOffset: { width: -2, height: 4 },
-    shadowOpacity: 0.2,
+    shadowOpacity: 0.5,
     shadowRadius: 3,
     alignSelf: 'center',
   },

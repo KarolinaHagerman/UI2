@@ -36,7 +36,7 @@ export default function BoardItem({ setResetTime, setActivePlayer, item, tileSiz
   return (
     <TouchableOpacity onPress={onPress}  >
       {/**a white square that renders a piece if it is clicked on for the first time*/}
-      <View style={[styles.boardItem, { height: tileSize, width: tileSize }]}>
+      <View style={[styles.boardItem, { height: tileSize, width: tileSize, margin: tileSize/25 }]}>
         {item.isClicked && <Piece tileSize={tileSize} color={item.color} player={item.player} />}
       </View>
     </TouchableOpacity>
@@ -48,8 +48,7 @@ const styles = StyleSheet.create({
   boardItem: {
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'white',
-    margin: 1,
+    backgroundColor: '#F8FFFF',
   },
 
 });

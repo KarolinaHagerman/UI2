@@ -3,7 +3,7 @@
  *
  * This file contains the javaScript needed for the home screen of the app.
  *
- * Version ???
+ * Version 0.5
  * Author: Karolina Hagerman, Erik Blomsterberg
  */
 
@@ -203,8 +203,8 @@ const styles = StyleSheet.create({
     marginRight: '5%',
   },
   chosenFlag: {
-    borderColor: '#DBD123',
-    borderWidth: 2,
+    borderColor: '#FFF786',
+    borderWidth: 3,
   },
   soundIcon: {
     //här kan vi lägga till
@@ -241,7 +241,7 @@ const styles = StyleSheet.create({
     paddingTop: '7%',
     shadowColor: 'black',
     shadowOffset: { width: -2, height: 4 },
-    shadowOpacity: 0.2,
+    shadowOpacity: 0.5,
     shadowRadius: 3,
     alignSelf: 'center',
   },

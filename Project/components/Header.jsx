@@ -18,48 +18,67 @@
 */
 
 
-import React, { useState} from 'react';
-import { StyleSheet, View} from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, View } from 'react-native';
 import GameMenu from './GameMenu';
-import {nextPlayer} from '../js/gameLogic';
+import { nextPlayer } from '../js/gameLogic';
 import Timer from './Timer'
 import Players from './Players'
 import { StatusBar } from 'expo-status-bar';
 
-export default function Header({navigation, language, players, activePlayer, time, setActivePlayer, resetTime, setResetTime, colors}) {
-  return ( 
-    
-    <View style={styles.header}>
-      {/**Dropdown menu with hamburger icon at the top left of the screen */}
+      export default function Header({navigation, language, players, activePlayer, time, setActivePlayer, resetTime, setResetTime, colors, tutMode, setTutMode, restartTut}) {
+  return (
+      <View style={styles.header}>
+        {/**Dropdown menu with hamburger icon at the top left of the screen */}
         <GameMenu
-        navigation={navigation}
-        language={language}
-        players={players}
-        setActivePlayer = {setActivePlayer}
-        activePlayer = {activePlayer}
-        setResetTime = {setResetTime}
+          navigation={navigation}
+          language={language}
+          players={players}
+          setActivePlayer={setActivePlayer}
+          activePlayer={activePlayer}
+          setResetTime={setResetTime}
+          tutMode={tutMode}
+          setTutMode={setTutMode}
+          restartTut={restartTut}
         />
-      {/**Timer at the center top of the screen */}
-        <Timer time = {time} nextPlayer = {nextPlayer} setActivePlayer = {setActivePlayer} activePlayer = {activePlayer} players = {players} resetTime = {resetTime} setResetTime = {setResetTime}/>
-      {/**shows players and which players turn at the top right of the screen*/}  
-        <Players players = {players} activePlayer = {activePlayer} colors = {colors}/>
-    </View>
-    
+
+        {/**Timer at the center top of the screen */}
+        <Timer
+          time={time}
+          nextPlayer={nextPlayer}
+          setActivePlayer={setActivePlayer}
+          activePlayer={activePlayer}
+          players={players}
+          resetTime={resetTime}
+          setResetTime={setResetTime}
+          tutMode={tutMode}
+          language={language}
+        />
+
+        {/**shows players and which players turn at the top right of the screen*/}
+        <Players
+          players={players}
+          activePlayer={activePlayer}
+          colors={colors}
+
+        />
+      </View>
 
 
-  );
+
+      );
 }
 
-/**styles for the header */
-const styles = StyleSheet.create({
-    header: {
+      /**styles for the header */
+      const styles = StyleSheet.create({
+        header: {
         flexDirection: "row",
-        backgroundColor: 'rgba(255 ,255,255,1)',
-        borderBottomWidth: 2,
-        borderBottomColor: '#000',
-        paddingRight: 5,
-        justifyContent: 'space-between'
+      backgroundColor: 'rgba(255 ,255,255,1)',
+      borderBottomWidth: 2,
+      borderBottomColor: '#000',
+      paddingRight: 5,
+      justifyContent: 'space-between'
       },
   });
 
-  /* END of file Header.jsx */
+/* END of file Header.jsx */

@@ -3,7 +3,7 @@
  *
  * This file contains the javaScript needed for the sound in the app.
  *
- * Version ???
+ * Version 0.5
  * Author: Karolina Hagerman, Erik Blomsterberg
  */
 
