@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     marginTop: '1%',
     width: responsiveWidth(98),
-    borderRadius: '5%',
+    borderRadius: 10,
     shadowColor: 'black',
     shadowOffset: { width: -2, height: 4 },
     shadowOpacity: 0.5,

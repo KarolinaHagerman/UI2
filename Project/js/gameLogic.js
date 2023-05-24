@@ -13,7 +13,6 @@ export var madeMoves = [];
 export var unmadeMoves = [];
 var lastMove = null;
 var redoMove = null;
-export let isWinnerModalOpen = false;
 
 // This function handles the undo action in the game
 //
@@ -96,7 +95,6 @@ export function initializeBoardData(numColumns) {
     unmadeMoves = [];
     lastMove = null;
     redoMove = null;
-    isWinnerModalOpen = false;
 
     //const numColumns = 30;
     for (let i = 0; i < numColumns; i++) {
@@ -112,7 +110,7 @@ export function initializeBoardData(numColumns) {
 }
 
 
-//This function checks if there is a winner after each click on the board
+//This function checks if there is a winner after each click on the board. Returns true/false if there is a winner or not.
 //
 export function checkNinRow(boardData, clickedSquare, player, n) {
 
@@ -139,6 +137,7 @@ export function checkNinRow(boardData, clickedSquare, player, n) {
                     //
                     if (count == n) {
                         proclaimWinner(player);
+                        return(true);
                     }
                 //if square is not occupied by the same player as the player that made a move, the count is reset to 0
                 // 
@@ -162,6 +161,7 @@ export function checkNinRow(boardData, clickedSquare, player, n) {
                     //
                     if (count == n) {
                         proclaimWinner(player);
+                        return(true);
                     }
 
                 //if square is not occupied by the same player as the player that made a move, the count is reset to 0
@@ -187,6 +187,7 @@ export function checkNinRow(boardData, clickedSquare, player, n) {
                     //
                     if (count == n) {
                         proclaimWinner(player);
+                        return(true);
                     }
                 
                 //if square is not occupied by the same player as the player that made a move, the count is reset to 0
@@ -216,6 +217,7 @@ export function checkNinRow(boardData, clickedSquare, player, n) {
                     //
                     if (count == n) {
                         proclaimWinner(player);
+                        return(true);
                     }
 
                 //if square is not occupied by the same player as the player that made a move, the count is reset to 0
@@ -226,11 +228,11 @@ export function checkNinRow(boardData, clickedSquare, player, n) {
             } catch (err) { }
         }
     }
+    return(false);
 }
 
 export function proclaimWinner(player) {
-    console.log('winner: ', player)
-    isWinnerModalOpen = true;
+    console.log('VINNARLOG I GAMELOGIC');
 }
 
 // Makes sure the activePlayer loops through the players array

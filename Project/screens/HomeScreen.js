@@ -148,14 +148,14 @@ export default function HomeScreen({ navigation }) {
         <Logo />
 
         {/* New game button, navigates to new game screen */}
-        <Animated.View style={{ opacity: fadeAnim }}>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => navigation.navigate("NewGame", { language: language })}
-          >
-            <Text style={styles.buttonText}>{language.HomeScreen.newGameButton}</Text>
-          </TouchableOpacity>
-        </Animated.View>
+        {/*         <Animated.View style={{ opacity: fadeAnim }}> */}
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => navigation.navigate("NewGame", { language: language })}
+        >
+          <Text style={styles.buttonText}>{language.HomeScreen.newGameButton}</Text>
+        </TouchableOpacity>
+        {/*         </Animated.View> */}
       </View>
       {/* END OF BODY */}
 
@@ -167,6 +167,7 @@ export default function HomeScreen({ navigation }) {
 
 
 // Styles for home screen
+//
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#F8FFFF',

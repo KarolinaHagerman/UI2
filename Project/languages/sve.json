@@ -35,5 +35,11 @@
         "timer": "Tid kvar: ",
         "zoom": "Använd två fingrar för att zooma in och ut.",
         "move": "Dra fingret för att förflytta dig på brädet."
+    },
+    "WinnerModal": {
+        "winnerIs": "Vinnaren är ",
+        "player": "spelare ",
+        "congrats": "Grattis! ",
+        "goBack": "För att starta ett nytt spel, gå tillbaka till huvudmenyn."
     }
 }
