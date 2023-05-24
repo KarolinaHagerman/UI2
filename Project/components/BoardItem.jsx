@@ -71,7 +71,7 @@ export default function BoardItem({ winnerCallback, setResetTime, setActivePlaye
     <TouchableOpacity onPress={onPress}  >
       {/**a white square that renders a piece if it is clicked on for the first time*/}
       <View style={[styles.boardItem, { height: tileSize, width: tileSize, margin: tileSize / 25 }]}>
-        {item.isClicked &&
+        {item.isClicked && 
           <Piece
             tileSize={tileSize}
             color={item.color}

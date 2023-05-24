@@ -17,7 +17,8 @@
 
 */
 
-
+// Imports
+//
 import React, { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import GameMenu from './GameMenu';
@@ -26,9 +27,14 @@ import Timer from './Timer'
 import Players from './Players'
 import { StatusBar } from 'expo-status-bar';
 
-export default function Header({ navigation, language, players, activePlayer, time, setActivePlayer, resetTime, setResetTime, colors, tutMode, setTutMode, restartTut }) {
+/*
+Header:
+The header displayed on the game screen
+*/
+export default function Header({ navigation, language, players, activePlayer, time, setActivePlayer, resetTime, setResetTime, colors, tutMode, setTutMode, restartTut, hasWinner }) {
   return (
     <View style={styles.header}>
+
       {/**Dropdown menu with hamburger icon at the top left of the screen */}
       <GameMenu
         navigation={navigation}
@@ -53,6 +59,7 @@ export default function Header({ navigation, language, players, activePlayer, ti
         setResetTime={setResetTime}
         tutMode={tutMode}
         language={language}
+        hasWinner={hasWinner}
       />
 
       {/**shows players and which players turn at the top right of the screen*/}
@@ -68,7 +75,8 @@ export default function Header({ navigation, language, players, activePlayer, ti
   );
 }
 
-/**styles for the header */
+// Styles for the header
+//
 const styles = StyleSheet.create({
   header: {
     flexDirection: "row",

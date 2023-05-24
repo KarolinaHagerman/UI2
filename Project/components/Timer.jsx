@@ -17,10 +17,11 @@ import { StyleSheet, Text } from 'react-native';
 import { nextPlayer } from '../js/gameLogic';
 import { responsiveFontSize, responsiveHeight } from 'react-native-responsive-dimensions';
 
-export default function Timer({ time, setActivePlayer, activePlayer, players, resetTime, setResetTime, tutMode, language }) {
+export default function Timer({ time, setActivePlayer, activePlayer, players, resetTime, setResetTime, tutMode, language, hasWinner }) {
   //Initializes timeLeft, timeleft is initialized as the same value that was selected in NewGameScreen
   //
   const [timeLeft, setTimeLeft] = useState(time);
+
   //initializes timer let
   //
   let timer = null;
@@ -29,37 +30,44 @@ export default function Timer({ time, setActivePlayer, activePlayer, players, re
   //
   useEffect(() => {
 
-    // Creates a timer that runs a function every 1000 milliseconds
+    // If we have a winner the timer freezes by just returning without changing timeLeft and thus the effect will not happen again
     //
-    timer = setTimeout(() => {
+    if (!hasWinner) {
 
-      // Timer counts down
+      // Creates a timer that runs a function every 1000 milliseconds
       //
-      setTimeLeft(timeLeft - 1);
+      timer = setTimeout(() => {
 
-      // If the timer is 0, go to new player and reset time left with chosen time
-      //
-      if (timeLeft == 0) {
-        nextPlayer(setActivePlayer, activePlayer, players);
-        setTimeLeft(time);
-
-        // If resetTime is true, e.g. after undo/redo or placing a marker, reset the time left and change back resetTime to false
+        // Timer counts down 
         //
-      } else if (resetTime) {
-        setTimeLeft(time);
-        setResetTime(false);
-      }
+        setTimeLeft(timeLeft - 1);
 
-    }, 1000);
+        // If the timer is 0, go to new player and reset time left with chosen time
+        //
+        if (timeLeft == 0) {
+          nextPlayer(setActivePlayer, activePlayer, players);
+          setTimeLeft(time);
 
-    // Without this row new timers will be created, so clearInterval clears the timer
-    //
-    return () => clearInterval(timer);
+          // If resetTime is true, e.g. after undo/redo or placing a marker, reset the time left and change back resetTime to false
+          //
+        } else if (resetTime) {
+          setTimeLeft(time);
+          setResetTime(false);
+        }
+
+      }, 1000);
+
+      // Without this row new timers will be created, so clearInterval clears the timer
+      //
+      return () => clearInterval(timer);
+
+    }
+
   }, [timeLeft]);
 
   return (
     <Text style={[styles.time, timeLeft <= 3 ? styles.shortTime : styles.time]}>
-    
+
       {/**shows the time left for a player to make a move*/}
       {tutMode && <Text>{language.Tutorial.timer}</Text>}
       {timeLeft}
