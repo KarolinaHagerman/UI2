@@ -7,18 +7,19 @@
 * Author: Karolina Hagerman, Erik Blomsterberg
 
 */
+
+// Imports
+//
 import { responsiveHeight, responsiveWidth, responsiveFontSize, useResponsiveHeight } from "react-native-responsive-dimensions";
 import { useState, useEffect } from 'react';
 import { Text, StyleSheet, Animated, View } from 'react-native';
-import { useFonts } from 'expo-font';
 
+
+/*
+Logo:
+The Logo XOZ displayed on the home screen.
+*/
 export default function Logo() {
-
-    //fonts for logo
-    //
-    const [logoFonts] = useFonts({
-        'bold': require('../fonts/THEBOLDFONT.ttf'),
-      });
 
         // The initial values for all animations used for logo
         //

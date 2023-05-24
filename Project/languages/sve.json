@@ -34,7 +34,8 @@
         "turn3": "s tur. Klicka på en tom ruta för att placera pjäsen.",
         "timer": "Tid kvar: ",
         "zoom": "Använd två fingrar för att zooma in och ut.",
-        "move": "Dra fingret för att förflytta dig på brädet."
+        "move": "Dra fingret för att förflytta dig på brädet.",
+        "ifWinner1": "Nu är spelet slut. "
     },
     "WinnerModal": {
         "winnerIs": "Vinnaren är ",

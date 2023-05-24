@@ -16,6 +16,8 @@ WinnerModal.jsx
 
 */
 
+// Imports
+//
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, SafeAreaView, View } from 'react-native';
 import { MenuProvider } from "react-native-popup-menu";
@@ -125,6 +127,7 @@ export default function GameScreen({ navigation, route }) {
             tutMode={tutMode}
             setTutMode={setTutMode}
             restartTut={restartTut}
+            hasWinner={hasWinner}
           />
 
           {tutMode &&
@@ -135,12 +138,16 @@ export default function GameScreen({ navigation, route }) {
               colors={colors}
               hasZoomed={hasTutZoomed}
               hasMoved={hasTutMoved}
+              hasWinner={hasWinner}
+              winner={winner}
+              winnerColor={winnerColor}
             />
           }
           {tutMode &&
             <ZoomMoveTut
               hasZoomed={hasTutZoomed}
               hasMoved={hasTutMoved}
+              hasWinner={hasWinner}
             />
           }
 

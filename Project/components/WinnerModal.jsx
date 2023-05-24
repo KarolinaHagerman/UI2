@@ -1,5 +1,5 @@
 /*
-File: WinnerModal.js
+File: WinnerModal.jsx
 
 This file contains the JSX needed to create a winner modal that pops up when we have a winner.
 
@@ -8,6 +8,8 @@ Author: Karolina Hagerman, Erik Blomsterberg
 
 */
 
+// Imports
+//
 import React, { useState, useEffect } from "react";
 import { StyleSheet, View, Text, Modal, Button } from "react-native";
 import { Feather } from '@expo/vector-icons';
@@ -55,8 +57,12 @@ export default function WinnerModal({ hasWinner, winner, winnerColor, language }
                     {/* Text displayed based on the winner*/}
                     <View style={styles.textView}>
                         <Text style={[styles.congrats, { color: winnerColor }]}>{language.WinnerModal.congrats}</Text>
-                        <Text style={styles.modalText}>{language.WinnerModal.winnerIs}<Text style={[styles.winner, { color: winnerColor }]}>{language.WinnerModal.player}{winner}.</Text></Text>
-                        <Text style={styles.modalText}>{language.WinnerModal.goBack}</Text>
+                        <Text style={styles.modalText}>
+                            {language.WinnerModal.winnerIs}
+                            <Text style={[styles.winner, { color: winnerColor }]}>
+                                {language.WinnerModal.player}{winner}
+                            </Text>
+                            {language.WinnerModal.goBack}</Text>
                     </View>
 
                 </View>
