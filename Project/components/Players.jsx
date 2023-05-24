@@ -8,10 +8,16 @@
 
 */
 
+// Imports
+//
 import React from 'react';
 import {View, StyleSheet, Text} from 'react-native';
 import { responsiveFontSize } from 'react-native-responsive-dimensions';
 
+/*
+Players:
+The alternating players displayed in the top right
+*/
 export default function Players({players, activePlayer, colors}) {
   return ( 
     <View style={styles.playerTurn}>
@@ -42,5 +48,6 @@ const styles = StyleSheet.create({
       },
   });
 
-  
-  /* END of file Players.jsx */
+//************
+// END of file Players.jsx
+//************

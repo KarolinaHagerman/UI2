@@ -99,7 +99,7 @@ export default function TutorialText({ language, activePlayer, players, colors, 
   );
 }
 
-// Styles for the header
+// Styles for the tutorial info view
 //
 const styles = StyleSheet.create({
   container: {
@@ -127,3 +127,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   }
 })
+
+//************
+// END of file TutorialText.jsx
+//************

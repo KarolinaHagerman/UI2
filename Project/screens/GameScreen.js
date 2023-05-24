@@ -114,6 +114,8 @@ export default function GameScreen({ navigation, route }) {
     <SafeAreaView style={[styles.container]}>
       <MenuProvider>
         <View style={{ zIndex: 2 }}>
+
+          {/* Header */}
           <Header
             navigation={navigation}
             language={language}
@@ -130,6 +132,7 @@ export default function GameScreen({ navigation, route }) {
             hasWinner={hasWinner}
           />
 
+          {/* Tutorial info view and zoom/move image symbol - both only shown is tut mode is on */}
           {tutMode &&
             <TutorialText
               language={language}
@@ -153,6 +156,7 @@ export default function GameScreen({ navigation, route }) {
 
         </View>
 
+        {/* The actual board is movable and zoomable */}
         <ReactNativeZoomableView
           zoomEnabled={true}
           maxZoom={10}
@@ -181,6 +185,7 @@ export default function GameScreen({ navigation, route }) {
           </MovableView>
         </ReactNativeZoomableView>
 
+        {/* Winner modal */}
         <WinnerModal
           hasWinner={hasWinner}
           winner={winner}
@@ -193,6 +198,8 @@ export default function GameScreen({ navigation, route }) {
   );
 }
 
+// Styles for game screen
+//
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -201,4 +208,6 @@ const styles = StyleSheet.create({
 });
 
 
-/* END of file GameScreen.js */
+//************
+// END of file GameScreen.js
+//************

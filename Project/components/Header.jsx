@@ -91,4 +91,6 @@ const styles = StyleSheet.create({
   },
 });
 
-/* END of file Header.jsx */
+//************
+// END of file Header.jsx
+//************

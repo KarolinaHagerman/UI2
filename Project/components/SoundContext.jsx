@@ -1,7 +1,7 @@
 /**
- * File: SoundContext.js
+ * File: SoundContext.jsx
  *
- * This file contains the javaScript needed for the sound in the app.
+ * This file contains the JSX needed for the sound in the app.
  *
  * Version 0.5
  * Author: Karolina Hagerman, Erik Blomsterberg
@@ -9,9 +9,13 @@
 
 // Imports
 //
-import { createContext, useState, useEffect } from 'react';
+import { createContext, useState } from 'react';
 import { Audio } from 'expo-av';
 
+/*
+SoundContext:
+The sound context in the app
+*/
 export const SoundContext = createContext();
 
 export const SoundProvider = ({ children }) => {
@@ -122,3 +126,6 @@ export const SoundProvider = ({ children }) => {
   );
 };
 
+//************
+// END of file SoundContext.jsx
+//************

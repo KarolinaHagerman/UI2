@@ -13,7 +13,8 @@
 
 */
 
-
+// Imports
+//
 import React, { useContext } from "react";
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
 import { Menu, MenuOptions, MenuOption, MenuTrigger } from "react-native-popup-menu";
@@ -23,6 +24,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { undo, redo } from '../js/gameLogic';
 import { responsiveFontSize, responsiveHeight, responsiveWidth, useResponsiveFontSize } from "react-native-responsive-dimensions";
 import { SoundContext } from '../components/SoundContext';
+import { resetBoardData } from "../js/gameLogic";
 
 /*
 GameMenu:
@@ -36,22 +38,36 @@ export default function GameMenu({ navigation, language, players, setActivePlaye
     //
     const { soundOn, toggleSound } = useContext(SoundContext);
 
+    // Handles what happens when we click on back to main menu
+    const backToMain = () => {
+        resetBoardData();
+        navigation.popToTop();
+      };
+
     // All elements presented to the user
     // 
     return (
 
         <Menu>
+
+            {/* The menu hamburger button*/}
             <MenuTrigger style={styles.menuButton}>
                 <Entypo name="menu" size={MENU_SIZE} color="black" />
             </MenuTrigger>
+
+            {/* START OF MENU OPTIONS */}
             <MenuOptions style={styles.menuOptions}>
+
+                {/* Go back to main menu */}
                 <MenuOption
                     style={styles.menuOption}
-                    onSelect={() => navigation.popToTop()}
+                    onSelect={backToMain}
                 >
                     <Text style={styles.menuText}>{language.GameMenu.toMain}</Text>
                     <Ionicons name="chevron-back" size={ICON_SIZE} color="black" />
                 </MenuOption>
+
+                {/* Undo move*/}
                 <MenuOption
                     style={styles.menuOption}
                     onSelect={() => undo(setActivePlayer, activePlayer, players, setResetTime)}
@@ -59,6 +75,8 @@ export default function GameMenu({ navigation, language, players, setActivePlaye
                     <Text style={styles.menuText}>{language.GameMenu.undo}</Text>
                     <EvilIcons name="undo" size={ICON_SIZE} color="black" />
                 </MenuOption>
+
+                {/* Redo move*/}
                 <MenuOption
                     style={styles.menuOption}
                     onSelect={() => redo(setActivePlayer, activePlayer, players, setResetTime)}
@@ -66,6 +84,8 @@ export default function GameMenu({ navigation, language, players, setActivePlaye
                     <Text style={styles.menuText}>{language.GameMenu.redo}</Text>
                     <EvilIcons name="redo" size={ICON_SIZE} color="black" />
                 </MenuOption>
+
+                {/* Tutorial mode on/off, if this is clicked the tutorial will be restarted */}
                 <MenuOption
                     style={styles.menuOption}
                     onSelect={() => {
@@ -76,16 +96,21 @@ export default function GameMenu({ navigation, language, players, setActivePlaye
                     <Text style={styles.menuText}>
                         {language.NewGameScreen.tutorialMode}:
                     </Text>
+
+                    {/* Shows on/off defending on if it's on/off */}
                     {tutMode ?
                         <Text style={styles.menuText}>{language.NewGameScreen.on}</Text> :
-                        <Text style={styles.menuText}>{language.NewGameScreen.off}</Text>}
-
+                        <Text style={styles.menuText}>{language.NewGameScreen.off}</Text>
+                    }
                 </MenuOption>
+
+                {/* Turn on/off the sound */}
                 <MenuOption
                     style={styles.menuOption}
                     onSelect={() => { toggleSound(); }}
                 >
                     <Text style={styles.menuText}>{language.GameMenu.sound}: </Text>
+
                     {/* The clickable sound icon, different icons depending on soundOn state */}
                     <TouchableOpacity>
                         {soundOn ? (
@@ -95,14 +120,16 @@ export default function GameMenu({ navigation, language, players, setActivePlaye
                         )}
                     </TouchableOpacity>
                 </MenuOption>
+
             </MenuOptions>
+            {/* END OF MENU OPTIONS */}
         </Menu>
 
     );
 }
 
-/**styles the menu*/
-
+// Styles for game menu
+//
 const styles = StyleSheet.create({
     menuButton: {
         alignSelf: 'baseline'
@@ -129,4 +156,6 @@ const styles = StyleSheet.create({
 });
 
 
-/* END of file GameMenu.jsx */
+//************
+// END of file GameMenu.jsx
+//************

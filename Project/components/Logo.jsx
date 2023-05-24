@@ -1,5 +1,5 @@
 /** 
-* File: Piece.jsx
+* File: Logo.jsx
 
 * This file contains the JSX needed to create logo on the starting page
 
@@ -71,7 +71,8 @@ export default function Logo() {
 }
 
 
-/**styles for the logo */
+// Styles for the logo
+//
 const styles = StyleSheet.create({
   container: {
     alignItems: 'baseline',
@@ -97,5 +98,6 @@ const styles = StyleSheet.create({
     }
 })
 
-
-  /* END of file Piece.jsx */
+//************
+// END of file Logo.jsx
+//************

@@ -70,7 +70,7 @@ export function redo(setActivePlayer, activePlayer, players, setResetTime) {
         //
         boardData[redoMove.row][redoMove.col].player = redoMove.player;
         boardData[redoMove.row][redoMove.col].isClicked = true;
-        boardData[lastMove.row][lastMove.col].color = redoMove.color;
+        boardData[redoMove.row][redoMove.col].color = redoMove.color;
 
         // Add the move to made moves
         //
@@ -86,26 +86,40 @@ export function redo(setActivePlayer, activePlayer, players, setResetTime) {
     }
 }
 
-// 
-export function initializeBoardData(numColumns) {
-
-    //Nollställ
+// Reset all the board data
+//
+export function resetBoardData(){
     boardData = [];
     madeMoves = [];
     unmadeMoves = [];
     lastMove = null;
     redoMove = null;
+}
 
-    //const numColumns = 30;
+
+// Initialize the board data
+//
+export function initializeBoardData(numColumns){
+
+    // Loop through all rows
+    //
     for (let i = 0; i < numColumns; i++) {
         let row = [];
+
+        // For each row loop through columns
+        //
         for (let j = 0; j < numColumns; j++) {
+
+            // Create objects in row i, col j and add the object to the row-array
+            //
             let boardObject = { id: i + '-' + j, row: i, col: j, isClicked: false, player: null, color: null }
             row.push(boardObject);
         }
+
+        // Add the finished rows to board data
+        //
         boardData.push(row);
     }
-    //console.log(boardData)
     return boardData
 }
 
@@ -119,6 +133,10 @@ export function checkNinRow(boardData, clickedSquare, player, n) {
     if (boardData[clickedSquare.row][clickedSquare.col].player == null) {
         boardData[clickedSquare.row][clickedSquare.col].player = player;
         madeMoves.push({ ...clickedSquare });
+
+        // If we make a new move we shouldn't be able to redo again. E.g. i make move A, undo move A, make move B, then I can't redo move A
+        //
+        deletedMove = { ...unmadeMoves.pop() };
 
         //count keeps track of the number of same pieces in a row
         //
@@ -236,7 +254,11 @@ export function proclaimWinner(player) {
 }
 
 // Makes sure the activePlayer loops through the players array
+//
 export function nextPlayer(setActivePlayer, activePlayer, players) {
+
+    // If active player is the last index, start from beginning, else take next index
+    //
     if (activePlayer >= (players.length - 1)) {
         setActivePlayer(0);
     }
@@ -244,3 +266,7 @@ export function nextPlayer(setActivePlayer, activePlayer, players) {
         setActivePlayer(activePlayer + 1);
     }
 }
+
+//************
+// END of file gameLogic.js
+//************

@@ -7,16 +7,19 @@
 * Version 0.5
 * Author: Karolina Hagerman, Erik Blomsterberg
 
-* Requires the following files:
-
-* GameLogic.js
 */
 
+// Imports
+//
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text } from 'react-native';
 import { nextPlayer } from '../js/gameLogic';
 import { responsiveFontSize, responsiveHeight } from 'react-native-responsive-dimensions';
 
+/*
+Timer:
+The timer displayed in the top center of the screen
+*/
 export default function Timer({ time, setActivePlayer, activePlayer, players, resetTime, setResetTime, tutMode, language, hasWinner }) {
   //Initializes timeLeft, timeleft is initialized as the same value that was selected in NewGameScreen
   //
@@ -75,7 +78,8 @@ export default function Timer({ time, setActivePlayer, activePlayer, players, re
   );
 }
 
-/**styles for the timer/seconds left */
+// Styles for the timer
+//
 const styles = StyleSheet.create({
   time: {
     fontSize: responsiveFontSize(4),
@@ -90,5 +94,6 @@ const styles = StyleSheet.create({
   },
 });
 
-/* END of file Timer.jsx */
-
+//************
+// END of file Timer.jsx
+//************

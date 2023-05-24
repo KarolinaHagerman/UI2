@@ -14,11 +14,17 @@
 
 */
 
+// Imports
+//
 import React, { useCallback, useState, useEffect } from 'react';
 import { StyleSheet, FlatList, Dimensions, TouchableWithoutFeedback, View } from 'react-native';
 import BoardItem from '../components/BoardItem';
 import { responsiveHeight, useResponsiveHeight } from 'react-native-responsive-dimensions';
 
+/*
+Board:
+The game board with the grid of board items
+*/
 export default function Board({ winnerCallbackAgain, numColumns, data, players, activePlayer, piecesToWin, setActivePlayer, setResetTime, colors }) {
     //size of each side of the squares on the board
     //
@@ -45,7 +51,8 @@ export default function Board({ winnerCallbackAgain, numColumns, data, players, 
         setHasWinner(data.hasWinner);
     };
 
-
+    // All elements presented to the user
+    // 
     return (
         <View style={[styles.container, { height: (tileSize + 2 * tileSize / 25) * numColumns, width: (tileSize + 2 * tileSize / 25) * numColumns }, numColumns < 10 && styles.marginTop]}>
 
@@ -72,7 +79,8 @@ export default function Board({ winnerCallbackAgain, numColumns, data, players, 
     );
 }
 
-/**style for background of the board, gives the color to the lines of the grid */
+// Style for background of the board, gives the color to the lines of the grid */
+//
 const styles = StyleSheet.create({
     container: {
         backgroundColor: '#262723',
@@ -83,3 +91,7 @@ const styles = StyleSheet.create({
     }
 
 })
+
+//************
+// END of file Board.jsx
+//************

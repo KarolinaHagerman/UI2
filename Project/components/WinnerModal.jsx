@@ -13,7 +13,7 @@ Author: Karolina Hagerman, Erik Blomsterberg
 import React, { useState, useEffect } from "react";
 import { StyleSheet, View, Text, Modal, Button } from "react-native";
 import { Feather } from '@expo/vector-icons';
-import { responsiveFontSize, responsiveWidth, useResponsiveFontSize } from "react-native-responsive-dimensions";
+import { responsiveFontSize, responsiveHeight, responsiveWidth, useResponsiveFontSize } from "react-native-responsive-dimensions";
 
 /*
 WinnerModal:
@@ -101,6 +101,7 @@ const styles = StyleSheet.create({
     },
     modalText: {
         fontSize: responsiveFontSize(2.5),
+        marginBottom: responsiveHeight(2),
     },
     winner: {
         fontWeight: 'bold',
@@ -111,3 +112,7 @@ const styles = StyleSheet.create({
         fontSize: responsiveFontSize(5),
     }
 });
+
+//************
+// END of file WinnerModal.jsx
+//************

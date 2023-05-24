@@ -12,12 +12,18 @@
 * GameLogic.js
 */
 
+// Imports
+//
 import React, { useState, useContext, useEffect } from 'react';
 import { TouchableOpacity, Text, View, StyleSheet, Animated } from 'react-native';
 import { checkNinRow, nextPlayer } from '../js/gameLogic';
 import { SoundContext } from '../components/SoundContext';
 import Piece from './Piece'
 
+/*
+BoardItem:
+Each item in the board
+*/
 export default function BoardItem({ winnerCallback, setResetTime, setActivePlayer, item, tileSize, data, players, activePlayer, piecesToWin, colors }) {
 
   // Getting the needed information from the sound context
@@ -33,7 +39,7 @@ export default function BoardItem({ winnerCallback, setResetTime, setActivePlaye
   // Listens to changes in hasWinner and winner, if so update tha callback to the parent
   //
   useEffect(() => {
-    winnerCallback({hasWinner, winner, winnerColor});
+    winnerCallback({ hasWinner, winner, winnerColor });
   }, [hasWinner]);
 
   //updates the square when it is clicked on and the checks for winner, resets timer and gives the turn to the next player
@@ -64,14 +70,15 @@ export default function BoardItem({ winnerCallback, setResetTime, setActivePlaye
       nextPlayer(setActivePlayer, activePlayer, players);
       setResetTime(true);
     }
-
-
   }
+
+  // All elements presented to the user
+  // 
   return (
     <TouchableOpacity onPress={onPress}  >
       {/**a white square that renders a piece if it is clicked on for the first time*/}
       <View style={[styles.boardItem, { height: tileSize, width: tileSize, margin: tileSize / 25 }]}>
-        {item.isClicked && 
+        {item.isClicked &&
           <Piece
             tileSize={tileSize}
             color={item.color}
@@ -82,7 +89,8 @@ export default function BoardItem({ winnerCallback, setResetTime, setActivePlaye
   );
 }
 
-/**styles for each square on the board */
+// Styles for each square on the board
+//
 const styles = StyleSheet.create({
   boardItem: {
     justifyContent: 'center',
@@ -92,4 +100,6 @@ const styles = StyleSheet.create({
 
 });
 
-/* END of file BoardItem.jsx */
+//************
+// END of file BoardItem.jsx
+//************

@@ -129,3 +129,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 });
+
+//************
+// END of file ZoomMoveTut.jsx
+//************

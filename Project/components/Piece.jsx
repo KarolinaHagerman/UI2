@@ -8,12 +8,16 @@
 
 */
 
+// Imports
+//
 import { useState, useEffect } from 'react';
 import { Text, StyleSheet, Animated } from 'react-native';
 
-
+/*
+Piece:
+The pieces displayed in the board items
+*/
 export default function Piece( { tileSize, color, player}) {
-
 
   // The initial value of the marker size, when the animation starts
   //
@@ -52,5 +56,6 @@ const styles = StyleSheet.create({
   }
 })
 
-
-  /* END of file Piece.jsx */
+//************
+// END of file Piece.jsx
+//************
