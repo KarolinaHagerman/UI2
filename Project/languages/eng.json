@@ -33,5 +33,11 @@
         "timer": "Time left: ",
         "zoom": "Use two fingers to zoom in and out.",
         "move": "Drag with your finger to move the board view."
+    },
+    "WinnerModal": {
+        "winnerIs": "The winner is ",
+        "player": "player ",
+        "congrats": "Congratulations! ",
+        "goBack": "To start a new game, go back to main menu."
     }
 }

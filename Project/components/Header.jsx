@@ -26,7 +26,7 @@ import Timer from './Timer'
 import Players from './Players'
 import { StatusBar } from 'expo-status-bar';
 
-export default function Header({ navigation, language, players, activePlayer, time, setActivePlayer, resetTime, setResetTime, colors, tutMode, setTutMode, restartTut, fontsLoaded }) {
+export default function Header({ navigation, language, players, activePlayer, time, setActivePlayer, resetTime, setResetTime, colors, tutMode, setTutMode, restartTut }) {
   return (
     <View style={styles.header}>
       {/**Dropdown menu with hamburger icon at the top left of the screen */}
@@ -60,7 +60,6 @@ export default function Header({ navigation, language, players, activePlayer, ti
         players={players}
         activePlayer={activePlayer}
         colors={colors}
-        fontsLoaded={fontsLoaded}
       />
     </View>
 

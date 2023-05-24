@@ -35,12 +35,10 @@ const styles = StyleSheet.create({
         color: 'black',
         padding: 1,
         paddingTop: '3%',
-        fontFamily: 'bold',
-        
+        fontWeight: 'bold', 
       },
       activePlayer: {
         fontSize: responsiveFontSize(5),
-        fontWeight: 'bold',
       },
   });
 

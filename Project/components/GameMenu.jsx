@@ -36,6 +36,8 @@ export default function GameMenu({ navigation, language, players, setActivePlaye
     //
     const { soundOn, toggleSound } = useContext(SoundContext);
 
+    // All elements presented to the user
+    // 
     return (
 
         <Menu>
@@ -113,7 +115,7 @@ const styles = StyleSheet.create({
         shadowOffset: { width: -2, height: 4 },
         shadowOpacity: 0.5,
         shadowRadius: 3,
-        borderRadius: '5%',
+        borderRadius: 10,
     },
     menuOption: {
         flexDirection: 'row',

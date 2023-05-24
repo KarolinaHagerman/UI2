@@ -14,44 +14,66 @@
 
 */
 
-import React, { useCallback } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import { StyleSheet, FlatList, Dimensions, TouchableWithoutFeedback, View } from 'react-native';
 import BoardItem from '../components/BoardItem';
 import { responsiveHeight, useResponsiveHeight } from 'react-native-responsive-dimensions';
 
-export default function Board({ numColumns, data, players, activePlayer, piecesToWin, setActivePlayer, setResetTime, colors }) {
+export default function Board({ winnerCallbackAgain, numColumns, data, players, activePlayer, piecesToWin, setActivePlayer, setResetTime, colors }) {
     //size of each side of the squares on the board
     //
     //const tileSize = (Dimensions.get('window').width * 0.8) / (numColumns);
     const tileSize = useResponsiveHeight(10);
 
+    // Boolean values that tells if we have a winner or not
+    //
+    const [hasWinner, setHasWinner] = useState(false);
+    const [winner, setWinner] = useState(null);
+    const [winnerColor, setWinnerColor] = useState(null);
+
+    // Listens to changes in hasWinner and winner, if so update tha callback to the parent
+    //
+    useEffect(() => {
+        winnerCallbackAgain({ hasWinner, winner, winnerColor });
+    }, [hasWinner]);
+
+    // Handles the winner callback from BoardItem and set new state values
+    //
+    const handleWinnerCallback = (data) => {
+        setWinnerColor(data.winnerColor);
+        setWinner(data.winner);
+        setHasWinner(data.hasWinner);
+    };
+
+
     return (
-            <View style={[styles.container, { height: (tileSize + 2 * tileSize / 25) * numColumns, width: (tileSize + 2 * tileSize / 25) * numColumns }, numColumns < 10 && styles.marginTop ]}>
-            
-                    {/**FlatList renders all the squares on the board, BoardItem is a single square on the board */}
-                    <FlatList
-                        numColumns={numColumns}
-                        data={data.flatMap((row) => row)}
-                        renderItem={({ item }) =>
-                            <BoardItem
-                                setResetTime={setResetTime}
-                                setActivePlayer={setActivePlayer}
-                                item={item}
-                                tileSize={tileSize}
-                                data={data}
-                                players={players}
-                                activePlayer={activePlayer}
-                                piecesToWin={piecesToWin}
-                                colors={colors}
-                            />
-                        }
+        <View style={[styles.container, { height: (tileSize + 2 * tileSize / 25) * numColumns, width: (tileSize + 2 * tileSize / 25) * numColumns }, numColumns < 10 && styles.marginTop]}>
+
+            {/**FlatList renders all the squares on the board, BoardItem is a single square on the board */}
+            <FlatList
+                numColumns={numColumns}
+                data={data.flatMap((row) => row)}
+                renderItem={({ item }) =>
+                    <BoardItem
+                        winnerCallback={handleWinnerCallback}
+                        setResetTime={setResetTime}
+                        setActivePlayer={setActivePlayer}
+                        item={item}
+                        tileSize={tileSize}
+                        data={data}
+                        players={players}
+                        activePlayer={activePlayer}
+                        piecesToWin={piecesToWin}
+                        colors={colors}
                     />
-            </View>
-            );
+                }
+            />
+        </View>
+    );
 }
 
-            /**style for background of the board, gives the color to the lines of the grid */
-            const styles = StyleSheet.create({
+/**style for background of the board, gives the color to the lines of the grid */
+const styles = StyleSheet.create({
     container: {
         backgroundColor: '#262723',
         alignSelf: 'center',

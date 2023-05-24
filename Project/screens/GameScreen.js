@@ -41,6 +41,12 @@ export default function GameScreen({ navigation, route }) {
   const [activePlayer, setActivePlayer] = useState(0);
   const [resetTime, setResetTime] = useState(false);
 
+  // Boolean values that tells if we have a winner or not
+  //
+  const [hasWinner, setHasWinner] = useState(false);
+  const [winner, setWinner] = useState(null);
+  const [winnerColor, setWinnerColor] = useState(null);
+
   // Tutorial mode states that decide what will be shown for the user in tutorial mode
   //
   const [hasTutZoomed, setHasTutZoomed] = useState(false);
@@ -64,6 +70,13 @@ export default function GameScreen({ navigation, route }) {
     setHasTutZoomed(false);
   }
 
+  // Handles the winner callback from Board 
+  //
+  const handleWinnerCallback = (data) => {
+    setWinnerColor(data.winnerColor)
+    setWinner(data.winner);
+    setHasWinner(data.hasWinner);
+  };
 
   // Fonts, can be downloaded from e.g. https://www.dafont.com/ and added to fonts folder
   //
@@ -93,6 +106,8 @@ export default function GameScreen({ navigation, route }) {
   }
   // ------------------- Ending of the named code ----------------------
 
+  // All elements presented to the user
+  // 
   return (
     <SafeAreaView style={[styles.container]}>
       <MenuProvider>
@@ -110,7 +125,6 @@ export default function GameScreen({ navigation, route }) {
             tutMode={tutMode}
             setTutMode={setTutMode}
             restartTut={restartTut}
-            fontsLoaded={fontsLoaded}
           />
 
           {tutMode &&
@@ -147,6 +161,7 @@ export default function GameScreen({ navigation, route }) {
             }}
           >
             <Board
+              winnerCallbackAgain={handleWinnerCallback}
               numColumns={numColumns}
               data={data}
               players={players}
@@ -159,8 +174,13 @@ export default function GameScreen({ navigation, route }) {
           </MovableView>
         </ReactNativeZoomableView>
 
+        <WinnerModal
+          hasWinner={hasWinner}
+          winner={winner}
+          winnerColor={winnerColor}
+          language={language}
+        />
 
-        <WinnerModal />
       </MenuProvider>
     </SafeAreaView>
   );
