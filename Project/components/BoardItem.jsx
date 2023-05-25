@@ -28,13 +28,17 @@ export default function BoardItem({ winnerCallback, setResetTime, setActivePlaye
 
   // Getting the needed information from the sound context
   //
-  const { soundOn, toggleSound, playBackgroundMusic, backgroundMusic, placePiece, playPlacePiece } = useContext(SoundContext);
+  const { playPlacePiece, playOccupied } = useContext(SoundContext);
 
   // Boolean values that tells if we have a winner or not
   //
   const [hasWinner, setHasWinner] = useState(false);
   const [winner, setWinner] = useState(null);
   const [winnerColor, setWinnerColor] = useState(null);
+
+  // 
+  //
+  const [isOccupied, setIsOccupied] = useState(false);
 
   // Listens to changes in hasWinner and winner, if so update tha callback to the parent
   //
@@ -70,6 +74,10 @@ export default function BoardItem({ winnerCallback, setResetTime, setActivePlaye
       nextPlayer(setActivePlayer, activePlayer, players);
       setResetTime(true);
     }
+    else {
+      playOccupied();
+      setIsOccupied(true);
+    }
   }
 
   // All elements presented to the user
@@ -77,12 +85,14 @@ export default function BoardItem({ winnerCallback, setResetTime, setActivePlaye
   return (
     <TouchableOpacity onPress={onPress}  >
       {/**a white square that renders a piece if it is clicked on for the first time*/}
-      <View style={[styles.boardItem, { height: tileSize, width: tileSize, margin: tileSize / 25 }]}>
+      <View style={[styles.boardItem, { height: tileSize, width: tileSize, margin: tileSize / 25, }]}>
         {item.isClicked &&
           <Piece
             tileSize={tileSize}
             color={item.color}
             player={item.player}
+            isOccupied={isOccupied}
+            setIsOccupied={setIsOccupied}
           />}
       </View>
     </TouchableOpacity>
@@ -97,7 +107,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#F8FFFF',
   },
-
 });
 
 //************

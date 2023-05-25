@@ -40,7 +40,7 @@ export default function HomeScreen({ navigation }) {
 
   // Getting the needed information from the sound context
   //
-  const { soundOn, toggleSound, playBackgroundMusic, backgroundMusic } = useContext(SoundContext);
+  const { soundOn, toggleSound, playBackgroundMusic, backgroundMusic, musicOn } = useContext(SoundContext);
 
   // This hook is responsible for playing and cleaning up the background music based on the soundOn state. It will execute a function whenever soundOn changes. 
   // The function first calls playBackgroundMusic, which is explained in SoundContext.js. 
@@ -55,7 +55,7 @@ export default function HomeScreen({ navigation }) {
         backgroundMusic.unloadAsync();
       }
     };
-  }, [soundOn]);
+  }, [soundOn, musicOn]);
 
   // Fonts, can be downloaded from e.g. https://www.dafont.com/ and added to fonts folder
   //

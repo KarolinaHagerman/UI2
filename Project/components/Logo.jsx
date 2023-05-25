@@ -23,12 +23,12 @@ export default function Logo() {
 
   // The initial values for all animations used for logo
   //
-  const [fadeAnimX] = useState(new Animated.Value(0))
-  const [fadeAnimO] = useState(new Animated.Value(0))
-  const [fadeAnimZ] = useState(new Animated.Value(0))
-  const [slideAnimX] = useState(new Animated.Value(responsiveWidth(100)))
-  const [slideAnimZ] = useState(new Animated.Value(responsiveWidth(-100)))
-  const [slideAnimO] = useState(new Animated.Value(responsiveHeight(-100)))
+  const [fadeAnimX] = useState(new Animated.Value(0));
+  const [fadeAnimO] = useState(new Animated.Value(0));
+  const [fadeAnimZ] = useState(new Animated.Value(0));
+  const [slideAnimX] = useState(new Animated.Value(responsiveWidth(100)));
+  const [slideAnimZ] = useState(new Animated.Value(responsiveWidth(-100)));
+  const [slideAnimO] = useState(new Animated.Value(responsiveHeight(-100)));
   const [spinValueX] = useState(new Animated.Value(1));
   const [spinValueZ] = useState(new Animated.Value(1));
 
@@ -39,32 +39,62 @@ export default function Logo() {
     /* ANIMATION FOR LETTER X
     Parallell animations: 
         - fade in
-        - slide in from left 
-        - a looped rotation 
+        - slide in from right 
+        - a looped rotation that ends with the value -0.035 which maps to a specific degree with interpolate later in the code
     useNativeDriver: false = default approach, useNativeDriver: true = React Native can retrieve and send all the animations frames at the same time, 
     so it happens in the UI
     */
     Animated.parallel([
-      Animated.timing(fadeAnimX, { tovalue: 1, duration: 1000, useNativeDriver: true }),
-      Animated.timing(slideAnimX, { tovalue: 1, duration: 1000, useNativeDriver: true }),
+      Animated.timing(fadeAnimX, {
+        tovalue: 1,
+        duration: 1000,
+        useNativeDriver: true
+      }),
+      Animated.timing(slideAnimX, {
+        tovalue: 0,
+        duration: 1000,
+        useNativeDriver: true
+      }),
       Animated.loop(
-        Animated.timing(spinValueX, { toValue: -0.035, duration: 1000, useNativeDriver: true, isInteraction: false }
-        ), { iterations: 1 })
+        Animated.timing(spinValueX, {
+          toValue: -0.035,
+          duration: 1000,
+          useNativeDriver: true,
+          isInteraction: false
+        }),
+        { iterations: 1 })
     ]).start(),
 
       /* ANIMATION FOR LETTER Z
       Parallell animations: 
           - fade in
-          - slide in from right 
-          - a looped rotation 
+          - slide in from left
+          - a looped rotation that ends with the value 0.035 which maps to a specific degree with interpolate later in the code
       useNativeDriver: false = default approach, useNativeDriver: true = React Native can retrieve and send all the animations frames at the same time, 
       so it happens in the UI
       */
       Animated.parallel([
-        Animated.timing(fadeAnimZ, { tovalue: 1, duration: 1000, delay: 1000, useNativeDriver: true }),
-        Animated.timing(slideAnimZ, { tovalue: 0, duration: 1000, delay: 1000, useNativeDriver: true }),
+        Animated.timing(fadeAnimZ, {
+          tovalue: 1,
+          duration: 1000,
+          delay: 1000,
+          useNativeDriver: true
+        }),
+        Animated.timing(slideAnimZ, {
+          tovalue: 0,
+          duration: 1000,
+          delay: 1000,
+          useNativeDriver: true
+        }),
         Animated.loop(
-          Animated.timing(spinValueZ, { toValue: 0.035, duration: 1000, delay: 1000, useNativeDriver: true, isInteraction: false }), { iterations: 1 })
+          Animated.timing(spinValueZ, {
+            toValue: 0.035,
+            duration: 1000,
+            delay: 1000,
+            useNativeDriver: true,
+            isInteraction: false
+          }),
+          { iterations: 1 })
       ]).start(),
 
       /* ANIMATION FOR LETTER O
@@ -76,11 +106,23 @@ export default function Logo() {
       so it happens in the UI
       */
       Animated.parallel([
-        Animated.timing(fadeAnimO, { tovalue: 1, duration: 1000, delay: 2000, useNativeDriver: true }),
-        Animated.timing(slideAnimO, { tovalue: 0, duration: 1000, delay: 2000, useNativeDriver: true }),
+        Animated.timing(fadeAnimO, {
+          tovalue: 1,
+          duration: 1000,
+          delay: 2000,
+          useNativeDriver: true
+        }),
+        Animated.timing(slideAnimO, {
+          tovalue: 0,
+          duration: 1000,
+          delay: 2000,
+          useNativeDriver: true
+        }),
       ],).start()
   }, [])
 
+  // All elements presented to the user
+  //
   return (
     <Animated.View style={styles.container}>
 
@@ -182,7 +224,6 @@ const styles = StyleSheet.create({
   X: {
     fontSize: responsiveFontSize(12),
     fontFamily: 'bold',
-    transform: [{ rotate: '-12deg' }],
     color: '#C2933F',
   },
   O: {
@@ -193,7 +234,6 @@ const styles = StyleSheet.create({
   Z: {
     fontSize: responsiveFontSize(12),
     fontFamily: 'bold',
-    transform: [{ rotate: '12deg' }],
     color: '#276180',
   }
 })
