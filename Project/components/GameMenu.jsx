@@ -36,13 +36,13 @@ export default function GameMenu({ navigation, language, players, setActivePlaye
 
     // Getting the needed information from the sound context
     //
-    const { soundOn, toggleSound } = useContext(SoundContext);
+    const { soundOn, toggleSound, musicOn, soundEffectsOn, toggleMusic, toggleSoundEffects } = useContext(SoundContext);
 
     // Handles what happens when we click on back to main menu
     const backToMain = () => {
         resetBoardData();
         navigation.popToTop();
-      };
+    };
 
     // All elements presented to the user
     // 
@@ -120,6 +120,36 @@ export default function GameMenu({ navigation, language, players, setActivePlaye
                         )}
                     </TouchableOpacity>
                 </MenuOption>
+                <MenuOption
+                    style={[styles.menuOption]}
+                    onSelect={() => { toggleMusic(); }}
+                >
+                    <Text style={[styles.menuText, styles.soundText]}>{language.GameMenu.music}: </Text>
+
+                    {/* The clickable sound icon, different icons depending on soundOn state */}
+                    <TouchableOpacity>
+                        {musicOn ? (
+                            <Ionicons name="volume-high-outline" size={ICON_SIZE} color="#262723" />
+                        ) : (
+                            <Ionicons name="volume-mute-outline" size={ICON_SIZE} color="#262723" />
+                        )}
+                    </TouchableOpacity>
+                </MenuOption>
+                <MenuOption
+                    style={[styles.menuOption]}
+                    onSelect={() => { toggleSoundEffects(); }}
+                >
+                    <Text style={[styles.menuText, styles.soundText]}>{language.GameMenu.soundEffects}: </Text>
+
+                    {/* The clickable sound icon, different icons depending on soundOn state */}
+                    <TouchableOpacity>
+                        {soundEffectsOn ? (
+                            <Ionicons name="volume-high-outline" size={ICON_SIZE} color="#262723" />
+                        ) : (
+                            <Ionicons name="volume-mute-outline" size={ICON_SIZE} color="#262723" />
+                        )}
+                    </TouchableOpacity>
+                </MenuOption>
 
             </MenuOptions>
             {/* END OF MENU OPTIONS */}
@@ -152,6 +182,10 @@ const styles = StyleSheet.create({
         fontSize: responsiveFontSize(3),
         fontFamily: 'Helvetica',
         color: '#262723',
+    },
+    soundText: {
+        fontSize: responsiveFontSize(2),
+        marginLeft: responsiveWidth(5),
     }
 });
 

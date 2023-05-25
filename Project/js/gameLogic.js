@@ -100,6 +100,7 @@ export function resetBoardData(){
 // Initialize the board data
 //
 export function initializeBoardData(numColumns){
+    resetBoardData();
 
     // Loop through all rows
     //

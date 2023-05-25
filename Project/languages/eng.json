@@ -24,7 +24,9 @@
         "toMain": "Back to main menu",
         "undo": "Undo",
         "redo": "Redo",
-        "sound": "Sound"
+        "sound": "Sound",
+        "music": "Music",
+        "soundEffects": "Sound effects"
     },
     "Tutorial" : {
         "turn1": "Now it's ",
