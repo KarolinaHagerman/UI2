@@ -28,6 +28,7 @@ export const SoundProvider = ({ children }) => {
   const [backgroundMusic, setBackgroundMusic] = useState(null);
   const [placePiece, setPlacePiece] = useState(null);
   const [occupied, setOccupied] = useState(null);
+  const [applause, setApplause] = useState(null);
 
   // This function toggles the states for the sound. This is called when we change all the sound together.
   //
@@ -186,11 +187,52 @@ export const SoundProvider = ({ children }) => {
         console.log('Failed to play the sound', error);
       }
 
-      // If sound or sound effect is off and if the effect is already playing we stop it, unload the audio file and set place piecet to null
+      // If sound or sound effect is off and if the effect is already playing we stop it, unload the audio file and occupied is set to null
     } else if ((!soundOn || !soundEffectsOn) && occupied) {
       await occupied.stopAsync();
       await occupied.unloadAsync();
       setOccupied(null);
+    }
+  }
+
+  // This function is responsible for playing the applause sound effect
+  //
+  const playApplause = async () => {
+    // If sound and soundeffect is on and if the sound effect isn't already playing we create a new soundObject.
+    //
+    if (soundOn && soundEffectsOn && !occupied) {
+      const soundObject = new Audio.Sound();
+      try {
+
+        // The mp3 is loaded and prepared for playback
+        //
+        await soundObject.loadAsync(require('../sounds/applause.mp3'));
+
+        // Sets an update callback function for the playback status
+        //
+        await soundObject.setOnPlaybackStatusUpdate(async (status) => {
+
+          // If sounds is loaded and has already finished we unload the audio from the sound object and applause is set to null.
+          //
+          if (status.isLoaded && status.didJustFinish) {
+            await soundObject.unloadAsync();
+            setApplause(null);
+          }
+        });
+
+        // Start playing and set applause to the soundObject
+        // 
+        await soundObject.playAsync();
+        setApplause(soundObject);
+      } catch (error) {
+        console.log('Failed to play the sound', error);
+      }
+
+      // If sound or sound effect is off and if the effect is already playing we stop it, unload the audio file and set place piecet to null
+    } else if ((!soundOn || !soundEffectsOn) && applause) {
+      await applause.stopAsync();
+      await applause.unloadAsync();
+      setApplause(null);
     }
   }
 
@@ -209,7 +251,8 @@ export const SoundProvider = ({ children }) => {
       occupied,
       playOccupied,
       toggleMusic,
-      toggleSoundEffects
+      toggleSoundEffects,
+      playApplause
     }}>
       {children}
     </SoundContext.Provider>

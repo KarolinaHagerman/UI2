@@ -191,6 +191,8 @@ export default function GameScreen({ navigation, route }) {
           winner={winner}
           winnerColor={winnerColor}
           language={language}
+          players={players}
+          colors={colors}
         />
 
       </MenuProvider>
