@@ -1,22 +1,32 @@
-Max size 1 → #Heading 1
-Size 2 → ##Heading 2
-Size 3 → ###Heading 3
-Size 4 → ####Heading 4
-Size 5→ #####Heading 5
-Min Size 6 → ######Heading 6
+**XOZ**
+a project by Karolina Hagerman and Erik Blomsterberg
 
-Simple text :- Can be simply typed → Text
-Italic text :- Can be typed between pair of Underscores → _text_
-Bold text :- Can be typed between a pair of two Asterisk → **text**
-Strikethrough :- Can be typed between a pair of two Tilde → ~~text~~
+Amount of hours spent for each member:
 
-#XOZ
-A project by:
-Karolina Hagerman
-Erik Blomsterberg
+**Erik Blomsterberg**
+_Billable:_ 110
+_Non-billable:_ 15
 
+**Karolina Hagerman**
+_Billable:_ 100
+_Non-billable:_ 10
 
+**How to start the project**
+1. Download node js 
+2. Install expo
+    'npm add expo' OR 'yarn add expo'
+2. Download Expo go app to your iphone or ipad
+3. Write in cmd: 
+    'npx expo start '
+4. Scan the QR code in cmd with you device, ExpoGo app will start.
+5. Make sure the sound on your device is on.
 
-"Remember to add a README.md file that describes how to run the project. This file should also contain the names of the project members, and the amount of time used for the project by each of you. You can also add information about possible delimitations or remaining bugs or problems, if there are any remaining. "
+**Bugs and warnings**
+- Using undo and redo several times on different occasions during the same game can result in wrong moves being undone/remade.
+- When you turn on/off the sound several times you get a warning that says that the sound is not loaded, this doesn't effect the game which is why it was not prioritized.
+- When you go back to main menu after completing a game you get a arning about native splash screens, this doesn't effect the game which is why it was not prioritized.
+- A few warnings about different libraries we're using.
+- Internal React error warnings, which indicates a bug in React.
 
 [GitHub Repository](https://github.com/KarolinaHagerman/UI2)
+
