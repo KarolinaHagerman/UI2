@@ -16,8 +16,8 @@
 
 // Imports
 //
-import React, { useCallback, useState, useEffect } from 'react';
-import { StyleSheet, FlatList, Dimensions, TouchableWithoutFeedback, View } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, FlatList, View } from 'react-native';
 import BoardItem from '../components/BoardItem';
 import { responsiveHeight, useResponsiveHeight } from 'react-native-responsive-dimensions';
 
@@ -26,9 +26,9 @@ Board:
 The game board with the grid of board items
 */
 export default function Board({ winnerCallbackAgain, numColumns, data, players, activePlayer, piecesToWin, setActivePlayer, setResetTime, colors }) {
+
     //size of each side of the squares on the board
     //
-    //const tileSize = (Dimensions.get('window').width * 0.8) / (numColumns);
     const tileSize = useResponsiveHeight(10);
 
     // Boolean values that tells if we have a winner or not

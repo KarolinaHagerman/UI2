@@ -19,13 +19,12 @@
 
 // Imports
 //
-import React, { useState } from 'react';
+import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import GameMenu from './GameMenu';
 import { nextPlayer } from '../js/gameLogic';
 import Timer from './Timer'
 import Players from './Players'
-import { StatusBar } from 'expo-status-bar';
 
 /*
 Header:
@@ -80,10 +79,7 @@ export default function Header({ navigation, language, players, activePlayer, ti
 const styles = StyleSheet.create({
   header: {
     flexDirection: "row",
-    //backgroundColor: '#F8FFFF',
     backgroundColor: '#EDE4E1',
-    //borderBottomWidth: 2,
-    //borderBottomColor: '#000',
     paddingRight: '2%',
     justifyContent: 'space-between',
     alignContent: 'center',

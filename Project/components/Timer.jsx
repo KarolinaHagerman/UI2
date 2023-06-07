@@ -14,13 +14,14 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text } from 'react-native';
 import { nextPlayer } from '../js/gameLogic';
-import { responsiveFontSize, responsiveHeight } from 'react-native-responsive-dimensions';
+import { responsiveFontSize } from 'react-native-responsive-dimensions';
 
 /*
 Timer:
 The timer displayed in the top center of the screen
 */
 export default function Timer({ time, setActivePlayer, activePlayer, players, resetTime, setResetTime, tutMode, language, hasWinner }) {
+
   //Initializes timeLeft, timeleft is initialized as the same value that was selected in NewGameScreen
   //
   const [timeLeft, setTimeLeft] = useState(time);
@@ -68,6 +69,8 @@ export default function Timer({ time, setActivePlayer, activePlayer, players, re
 
   }, [timeLeft]);
 
+  // All elements displayed to the user
+  //
   return (
     <Text style={[styles.time, timeLeft <= 3 ? styles.shortTime : styles.time]}>
 

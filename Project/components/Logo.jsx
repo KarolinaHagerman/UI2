@@ -12,7 +12,7 @@
 //
 import { responsiveHeight, responsiveWidth, responsiveFontSize, useResponsiveHeight } from "react-native-responsive-dimensions";
 import { useState, useEffect } from 'react';
-import { Text, StyleSheet, Animated, View } from 'react-native';
+import { StyleSheet, Animated } from 'react-native';
 
 
 /*

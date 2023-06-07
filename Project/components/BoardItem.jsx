@@ -15,7 +15,7 @@
 // Imports
 //
 import React, { useState, useContext, useEffect } from 'react';
-import { TouchableOpacity, Text, View, StyleSheet, Animated } from 'react-native';
+import { TouchableOpacity, View, StyleSheet } from 'react-native';
 import { checkNinRow, nextPlayer } from '../js/gameLogic';
 import { SoundContext } from '../components/SoundContext';
 import Piece from './Piece'
@@ -36,7 +36,7 @@ export default function BoardItem({ winnerCallback, setResetTime, setActivePlaye
   const [winner, setWinner] = useState(null);
   const [winnerColor, setWinnerColor] = useState(null);
 
-  // 
+  // Tells if the board item is occupied or not
   //
   const [isOccupied, setIsOccupied] = useState(false);
 
@@ -46,11 +46,11 @@ export default function BoardItem({ winnerCallback, setResetTime, setActivePlaye
     winnerCallback({ hasWinner, winner, winnerColor });
   }, [hasWinner]);
 
-  //updates the square when it is clicked on and the checks for winner, resets timer and gives the turn to the next player
+  // updates the square when it is clicked on and the checks for winner, resets timer and gives the turn to the next player
   //
   const onPress = () => {
 
-    //checks that the square isnt occupied before updating the square with new values
+    // checks that the square isnt occupied before updating the square with new values
     //
     if (!item.isClicked) {
       item.isClicked = true;
@@ -84,6 +84,7 @@ export default function BoardItem({ winnerCallback, setResetTime, setActivePlaye
   // 
   return (
     <TouchableOpacity onPress={onPress}  >
+
       {/**a white square that renders a piece if it is clicked on for the first time*/}
       <View style={[styles.boardItem, { height: tileSize, width: tileSize, margin: tileSize / 25, }]}>
         {item.isClicked &&

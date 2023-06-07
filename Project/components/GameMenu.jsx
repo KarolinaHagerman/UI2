@@ -22,7 +22,7 @@ import { Entypo } from '@expo/vector-icons';
 import { EvilIcons } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import { undo, redo } from '../js/gameLogic';
-import { responsiveFontSize, responsiveHeight, responsiveWidth, useResponsiveFontSize } from "react-native-responsive-dimensions";
+import { responsiveFontSize, responsiveWidth, useResponsiveFontSize } from "react-native-responsive-dimensions";
 import { SoundContext } from '../components/SoundContext';
 import { resetBoardData } from "../js/gameLogic";
 
@@ -39,6 +39,7 @@ export default function GameMenu({ navigation, language, players, setActivePlaye
     const { soundOn, toggleSound, musicOn, soundEffectsOn, toggleMusic, toggleSoundEffects } = useContext(SoundContext);
 
     // Handles what happens when we click on back to main menu
+    // 
     const backToMain = () => {
         resetBoardData();
         navigation.popToTop();

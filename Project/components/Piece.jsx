@@ -74,19 +74,23 @@ export default function Piece({ tileSize, color, player, isOccupied, setIsOccupi
   // All elements presented to the user
   //
   return (
+    // Animated.View is what animated and Text is the player that clicked on the square
+    //
     <Animated.View style={{
       transform: [
         {
           scale: scaleAnim
         },
         {
+          // Interpolate translates the input values from 0 to 1 to degrees 0 to 360
+          // where e.g. 1 means 360 degrees.
+          //
           rotate: rotate.interpolate({
             inputRange: [0, 1],
             outputRange: ['0deg', '360deg'],
           })
         },]
     }}>
-      {/** Animated.View is what animated and Text is the player that clicked on the square */}
       <Text style={[styles.text, { color: color, fontSize: tileSize / 1.5, }]}>{player}</Text>
     </Animated.View>
 

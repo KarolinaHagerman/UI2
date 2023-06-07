@@ -57,6 +57,8 @@ export const SoundProvider = ({ children }) => {
     setSoundEffectsOn(!soundEffectsOn);
   };
 
+  // This effect makes sure that if both music and sound effect are off, then sound is off. Else sound is on.
+  //
   useEffect(() => {
     if (!musicOn && !soundEffectsOn) {
       setSoundOn(false);
@@ -106,6 +108,7 @@ export const SoundProvider = ({ children }) => {
       }
 
       // If sound or music is off and if the background music is already playing we stop the music, unload the audio file and set the backgroundMusic to null
+      //
     } else if ((!soundOn || !musicOn) && backgroundMusic) {
       await backgroundMusic.stopAsync();
       await backgroundMusic.unloadAsync();
@@ -147,6 +150,7 @@ export const SoundProvider = ({ children }) => {
       }
 
       // If sound or sound effect is off and if the effect is already playing we stop it, unload the audio file and set place piecet to null
+      //
     } else if ((!soundOn || !soundEffectsOn) && placePiece) {
       await placePiece.stopAsync();
       await placePiece.unloadAsync();
@@ -188,6 +192,7 @@ export const SoundProvider = ({ children }) => {
       }
 
       // If sound or sound effect is off and if the effect is already playing we stop it, unload the audio file and occupied is set to null
+      //
     } else if ((!soundOn || !soundEffectsOn) && occupied) {
       await occupied.stopAsync();
       await occupied.unloadAsync();
@@ -229,6 +234,7 @@ export const SoundProvider = ({ children }) => {
       }
 
       // If sound or sound effect is off and if the effect is already playing we stop it, unload the audio file and set place piecet to null
+      //
     } else if ((!soundOn || !soundEffectsOn) && applause) {
       await applause.stopAsync();
       await applause.unloadAsync();
