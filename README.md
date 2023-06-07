@@ -1,13 +1,13 @@
 **XOZ**
 a project by Karolina Hagerman and Erik Blomsterberg
 
-Amount of hours spent for each member:
+**Amount of hours spent for each member:**
 
-**Erik Blomsterberg**
+Erik Blomsterberg - 
 _Billable:_ 110
 _Non-billable:_ 15
 
-**Karolina Hagerman**
+Karolina Hagerman -
 _Billable:_ 100
 _Non-billable:_ 10
 
