@@ -10,7 +10,7 @@
 // Imports
 //
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, View, Text, Button, Switch, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import React, { useState, useEffect, useContext } from 'react';
 import { StackActions } from '@react-navigation/native';
 import SelectDropdown from 'react-native-select-dropdown';
@@ -21,6 +21,8 @@ import * as SplashScreen from 'expo-splash-screen';
 import { SoundContext } from '../components/SoundContext';
 import { responsiveHeight, responsiveWidth, responsiveFontSize, useResponsiveHeight } from "react-native-responsive-dimensions";
 
+/* NewGameScreen is the screen where we choose all the settings for the game.
+*/
 export default function NewGameScreen({ navigation, route }) {
   const ICON_SIZE = useResponsiveHeight(5);
 
@@ -54,17 +56,19 @@ export default function NewGameScreen({ navigation, route }) {
   // Fonts, can be downloaded from e.g. https://www.dafont.com/ and added to fonts folder
   //
   const [fontsLoaded] = useFonts({
-    'impact': require('../fonts/impact.ttf'),
     'oxfordStreet': require('../fonts/OxfordStreet.ttf'),
     'bold': require('../fonts/THEBOLDFONT.ttf'),
   });
 
   // The following useEffect was explained in https://www.youtube.com/watch?v=viIkcDYSBrI and is used to load the fonts.
+  // -----------------------------------------------------------------
   // This hook is used to tell React to do prepare after rendering
   //
   useEffect(() => {
     async function prepare() {
+
       // Keeps the splash screen visible until we call hideAsync
+      //
       await SplashScreen.preventAutoHideAsync();
     }
     prepare();
@@ -74,9 +78,12 @@ export default function NewGameScreen({ navigation, route }) {
     return undefined;
   }
   else {
+
     //Hides the native splash screen immediately - Expo Documentation
+    //
     SplashScreen.hideAsync();
   }
+  // --------------------------------------------
   // Ending of the named code
 
   // All elements presented to the user
@@ -108,6 +115,7 @@ export default function NewGameScreen({ navigation, route }) {
       <View style={styles.body}>
 
         {/* The dropdowns */}
+        {/* Choose number of players */}
         <SelectDropdown
           buttonStyle={styles.dropDown}
           buttonTextStyle={styles.dropDownText}
@@ -120,16 +128,16 @@ export default function NewGameScreen({ navigation, route }) {
           }}
           buttonTextAfterSelection={(selectedItem, index) => {
             // text represented after item is selected
-            // if data array is an array of objects then return selectedItem.property to render after item is selected
-            //let text = selectedItem + ' ' + language.NewGameScreen.players
+            //
             return language.NewGameScreen.numberOfPlayers + ': ' + players.length;
           }}
           rowTextForSelection={(item, index) => {
             // text represented for each item in dropdown
-            // if data array is an array of objects then return item.property to represent item in dropdown
+            // 
             return item
           }} />
 
+        {/* Choose number of pieces */}
         <SelectDropdown
           buttonStyle={styles.dropDown}
           buttonTextStyle={styles.dropDownText}
@@ -139,16 +147,16 @@ export default function NewGameScreen({ navigation, route }) {
           onSelect={(selectedItem, index) => { changePieces(selectedItem); }}
           buttonTextAfterSelection={(selectedItem, index) => {
             // text represented after item is selected
-            // if data array is an array of objects then return selectedItem.property to render after item is selected
-            //let text = selectedItem + ' ' + language.NewGameScreen.pieces
+            // 
             return language.NewGameScreen.numberOfPieces + ': ' + pieces;
           }}
           rowTextForSelection={(item, index) => {
             // text represented for each item in dropdown
-            // if data array is an array of objects then return item.property to represent item in dropdown
+            // 
             return item
           }} />
 
+        {/* Choose time */}
         <SelectDropdown
           buttonStyle={styles.dropDown}
           buttonTextStyle={styles.dropDownText}
@@ -158,17 +166,17 @@ export default function NewGameScreen({ navigation, route }) {
           onSelect={(selectedItem, index) => { changeTime(selectedItem); }}
           buttonTextAfterSelection={(selectedItem, index) => {
             // text represented after item is selected
-            // if data array is an array of objects then return selectedItem.property to render after item is selected
-            //let text = selectedItem + ' ' + language.NewGameScreen.seconds
+            // 
             return language.NewGameScreen.timePerMove + ': ' + time + ' ' + language.NewGameScreen.seconds;
           }}
           rowTextForSelection={(item, index) => {
             // text represented for each item in dropdown
-            // if data array is an array of objects then return item.property to represent item in dropdown
+            //
             let text = item + ' ' + language.NewGameScreen.seconds
             return text
           }} />
 
+        {/* Choose board size */}
         <SelectDropdown
           buttonStyle={styles.dropDown}
           buttonTextStyle={styles.dropDownText}
@@ -178,17 +186,17 @@ export default function NewGameScreen({ navigation, route }) {
           onSelect={(selectedItem, index) => { changeBoardSize(selectedItem); }}
           buttonTextAfterSelection={(selectedItem, index) => {
             // text represented after item is selected
-            // if data array is an array of objects then return selectedItem.property to render after item is selected
-            //let text = selectedItem + ' x ' + selectedItem + ' ' + route.params.language.NewGameScreen.squares
+            // 
             return language.NewGameScreen.boardSize + ': ' + boardSize + 'x' + boardSize;
           }}
           rowTextForSelection={(item, index) => {
             // text represented for each item in dropdown
-            // if data array is an array of objects then return item.property to represent item in dropdown
+            // 
             let text = item + ' x ' + item + ' ' + route.params.language.NewGameScreen.squares
             return text
           }} />
 
+        {/* Choose if tutorial mode */}
         <SelectDropdown
           buttonStyle={styles.dropDown}
           buttonTextStyle={styles.dropDownText}
@@ -198,8 +206,7 @@ export default function NewGameScreen({ navigation, route }) {
           onSelect={(selectedItem, index) => { changeTutMode(selectedItem); }}
           buttonTextAfterSelection={(selectedItem, index) => {
             // text represented after item is selected
-            // if data array is an array of objects then return selectedItem.property to render after item is selected
-            //let text = selectedItem + ' ' + language.NewGameScreen.players
+            // 
             if (tutModeOn === 'On') {
               return language.NewGameScreen.tutorialMode + ': ' + language.NewGameScreen.on;
             }
@@ -209,7 +216,7 @@ export default function NewGameScreen({ navigation, route }) {
           }}
           rowTextForSelection={(item, index) => {
             // text represented for each item in dropdown
-            // if data array is an array of objects then return item.property to represent item in dropdown
+            //
             if (item === 'On') {
               return language.NewGameScreen.on;
             }

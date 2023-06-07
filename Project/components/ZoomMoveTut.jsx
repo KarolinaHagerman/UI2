@@ -11,21 +11,21 @@ Author: Karolina Hagerman, Erik Blomsterberg
 // Imports
 //
 import * as React from 'react';
-import { View, StyleSheet, Image } from 'react-native';
-import Animated, {
-  useAnimatedStyle,
-  withRepeat,
-  withSequence,
-  withTiming,
-} from 'react-native-reanimated';
-import { responsiveHeight, responsiveWidth, useResponsiveHeight } from 'react-native-responsive-dimensions';
+import { View, StyleSheet, Image, Dimensions } from 'react-native';
+import Animated, { useAnimatedStyle, withRepeat, withSequence, withTiming } from 'react-native-reanimated';
+import { responsiveHeight, useResponsiveWidth } from 'react-native-responsive-dimensions';
 
-// Constants for the animation
+// The proportions of the window decides how big the container is
+//
+const width = Dimensions.get('window').width;
+const height = Dimensions.get('window').height;
+const isWider = width > height;
+
+// Constants for the animation and the image
 //
 const INITIAL_SCALE = 1;
 const MINIMUM_SCALE = 0.95;
 const DURATION = 2000;
-
 const IMAGE_SIZE = '80%';
 
 /*
@@ -76,9 +76,10 @@ export default function ZoomMoveTut({ hasZoomed, hasMoved, hasWinner }) {
   return (
     <View>
 
-      {/* Circle is only shown unless we have a winner and if we either haven't zoomed or dragged on the screen. */}
+      {/* Circle is only shown unless we have a winner and if we either haven't zoomed or dragged on the screen. 
+      The size depends on the proportions of the screen with isWider variable. */}
       {!hasWinner && (!hasZoomed || !hasMoved) &&
-        <Animated.View style={[styles.container, movingAnimation]}>
+        <Animated.View style={[styles.container, movingAnimation, isWider ? { width: useResponsiveWidth(30) } : { width: useResponsiveWidth(50) }]}>
           <View style={styles.symbol}>
 
             {/* A zoom image is shown if you haven't zoomed or moved. */}
@@ -117,10 +118,10 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     position: 'absolute',
     alignSelf: 'center',
-    marginTop: responsiveHeight(35),
+    marginTop: responsiveHeight(20),
+    marginBottom: responsiveHeight(20),
     backgroundColor: '#FFF786',
     opacity: 0.9,
-    width: responsiveWidth(50),
     aspectRatio: 1 / 1,
     borderRadius: '100%',
   },

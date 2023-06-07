@@ -137,7 +137,7 @@ export function checkNinRow(boardData, clickedSquare, player, n) {
 
         // If we make a new move we shouldn't be able to redo again. E.g. i make move A, undo move A, make move B, then I can't redo move A
         //
-        deletedMove = { ...unmadeMoves.pop() };
+        let deletedMove = { ...unmadeMoves.pop() };
 
         //count keeps track of the number of same pieces in a row
         //
@@ -152,10 +152,9 @@ export function checkNinRow(boardData, clickedSquare, player, n) {
                 if (boardData[clickedSquare.row + (i - n)][clickedSquare.col + (j - n)].player == boardData[clickedSquare.row][clickedSquare.col].player) {
                     count += 1;
 
-                    //if count is the same as the number of pieces needed to win, the winner is anounced
+                    //if count is the same as the number of pieces needed to win, return true - WINNER
                     //
                     if (count == n) {
-                        proclaimWinner(player);
                         return(true);
                     }
                 //if square is not occupied by the same player as the player that made a move, the count is reset to 0
@@ -176,10 +175,9 @@ export function checkNinRow(boardData, clickedSquare, player, n) {
                 if (boardData[clickedSquare.row + (i - n)][clickedSquare.col + (n - j)].player == boardData[clickedSquare.row][clickedSquare.col].player) {
                     count += 1;
 
-                    //if count is the same as the number of pieces needed to win, the winner is anounced
+                    //if count is the same as the number of pieces needed to win, return true - WINNER
                     //
                     if (count == n) {
-                        proclaimWinner(player);
                         return(true);
                     }
 
@@ -202,10 +200,9 @@ export function checkNinRow(boardData, clickedSquare, player, n) {
                 if (boardData[clickedSquare.row + (i - n)][clickedSquare.col].player == boardData[clickedSquare.row][clickedSquare.col].player) {
                     count += 1;
 
-                    //if count is the same as the number of pieces needed to win, the winner is anounced
+                    //if count is the same as the number of pieces needed to win, return true - WINNER
                     //
                     if (count == n) {
-                        proclaimWinner(player);
                         return(true);
                     }
                 
@@ -232,10 +229,9 @@ export function checkNinRow(boardData, clickedSquare, player, n) {
                 if (boardData[clickedSquare.row][clickedSquare.col + (j - n)].player == boardData[clickedSquare.row][clickedSquare.col].player) {
                     count += 1;
 
-                    //if count is the same as the number of pieces needed to win, the winner is anounced
+                    //if count is the same as the number of pieces needed to win, return true - WINNER
                     //
                     if (count == n) {
-                        proclaimWinner(player);
                         return(true);
                     }
 
@@ -248,10 +244,6 @@ export function checkNinRow(boardData, clickedSquare, player, n) {
         }
     }
     return(false);
-}
-
-export function proclaimWinner(player) {
-    console.log('VINNARLOG I GAMELOGIC');
 }
 
 // Makes sure the activePlayer loops through the players array

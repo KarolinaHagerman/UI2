@@ -19,4 +19,4 @@ Erik Blomsterberg
 
 "Remember to add a README.md file that describes how to run the project. This file should also contain the names of the project members, and the amount of time used for the project by each of you. You can also add information about possible delimitations or remaining bugs or problems, if there are any remaining. "
 
-[GitHub Repository](https://github.com/KarolinaHagerman/UI2)
+[Link to GitHub Repository](https://github.com/KarolinaHagerman/UI2)

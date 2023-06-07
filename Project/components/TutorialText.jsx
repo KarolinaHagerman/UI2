@@ -10,11 +10,12 @@
 
 // Imports
 //
-import { useState, useEffect } from 'react';
-import { Text, StyleSheet, View, Image } from 'react-native';
-import { responsiveHeight, responsiveWidth, responsiveFontSize, useResponsiveHeight } from "react-native-responsive-dimensions";
+import { Text, StyleSheet, View } from 'react-native';
+import { responsiveWidth, responsiveFontSize } from "react-native-responsive-dimensions";
 import Animated, { useAnimatedStyle, withRepeat, withSequence, withTiming } from 'react-native-reanimated';
 
+// Constants for the animation
+//
 const INITIAL_SCALE = 1; //Scale of the glow
 const MINIMUM_SCALE = 0.95;
 const DURATION = 2000;

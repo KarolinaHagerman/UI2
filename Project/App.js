@@ -3,7 +3,7 @@
  *
  * This file contains the javaScript needed for the app in whole.
  *
- * Version ???
+ * Version 0.5
  * Author: Karolina Hagerman, Erik Blomsterberg
  */
 
@@ -25,6 +25,9 @@ export default function App() {
   // All elements presented to the user, in this case only the navigation container
   // 
   return (
+
+    //This is where the SoundProvides wraps the whole app
+    // 
     <SoundProvider>
       <NavigationContainer>
         <Stack.Navigator>
@@ -48,3 +51,7 @@ export default function App() {
     </SoundProvider>
   );
 }
+
+//************
+// END of file App.js
+//************

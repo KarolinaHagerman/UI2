@@ -5,12 +5,17 @@
  *
  * Version 0.5
  * Author: Karolina Hagerman, Erik Blomsterberg
+ * 
+ * Requires the following files:
+ * 
+ * Logo.jsx
+ * 
  */
 
 // Imports
 //
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Button, View, Image, TouchableOpacity, Text, Animated } from 'react-native';
+import { StyleSheet, View, Image, TouchableOpacity, Text, Animated } from 'react-native';
 import { useState, useEffect, useContext } from 'react';
 import eng from '../languages/eng.json';
 import sve from '../languages/sve.json';
@@ -21,6 +26,8 @@ import { SoundContext } from '../components/SoundContext';
 import { responsiveHeight, responsiveWidth, responsiveFontSize, useResponsiveHeight } from "react-native-responsive-dimensions";
 import Logo from '../components/Logo';
 
+/* HomeScreen is the first screen displayed to the user.
+*/
 export default function HomeScreen({ navigation }) {
   const ICON_SIZE = useResponsiveHeight(5);
 
@@ -43,6 +50,7 @@ export default function HomeScreen({ navigation }) {
   const { soundOn, toggleSound, playBackgroundMusic, backgroundMusic, musicOn } = useContext(SoundContext);
 
   // This hook is responsible for playing and cleaning up the background music based on the soundOn state. It will execute a function whenever soundOn changes. 
+  // The returned function is a cleanup and runs before the effect is reached
   // The function first calls playBackgroundMusic, which is explained in SoundContext.js. 
   // Then it returns a cleanup function that stops/unloads if backgroundMusic is already defined. 
   // It was created with the help of ChatGPT.
@@ -60,13 +68,12 @@ export default function HomeScreen({ navigation }) {
   // Fonts, can be downloaded from e.g. https://www.dafont.com/ and added to fonts folder
   //
   const [fontsLoaded] = useFonts({
-    'impact': require('../fonts/impact.ttf'),
     'oxfordStreet': require('../fonts/OxfordStreet.ttf'),
     'bold': require('../fonts/THEBOLDFONT.ttf'),
-    'prillyMonly': require('../fonts/PrillyMonly.ttf')
   });
 
   // The following code was explained in https://www.youtube.com/watch?v=viIkcDYSBrI and is used to load the fonts.
+  // -------------------------------------------------------------
   // This hook is used to tell React to do prepare after rendering.
   //
   useEffect(() => {
@@ -82,10 +89,12 @@ export default function HomeScreen({ navigation }) {
     return undefined;
   }
   else {
+
     //Hides the native splash screen immediately - explained in Expo Documentation
     //
     SplashScreen.hideAsync();
   }
+  // ------------------------------------------------
   // Ending of the named code
 
   // All elements presented to the user
@@ -148,14 +157,12 @@ export default function HomeScreen({ navigation }) {
         <Logo />
 
         {/* New game button, navigates to new game screen */}
-        {/*         <Animated.View style={{ opacity: fadeAnim }}> */}
         <TouchableOpacity
           style={styles.button}
           onPress={() => navigation.navigate("NewGame", { language: language })}
         >
           <Text style={styles.buttonText}>{language.HomeScreen.newGameButton}</Text>
         </TouchableOpacity>
-        {/*         </Animated.View> */}
       </View>
       {/* END OF BODY */}
 

@@ -1,7 +1,7 @@
 /*
 File: GameScreen.js
 
-This file contains the JSX needed to create 
+This file contains the javaScript needed to create 
 1) a header; containing a menu, timer and players
 2) a game board
 
@@ -13,6 +13,8 @@ Requires the following files:
 Header.jsx
 Board.jsx
 WinnerModal.jsx
+ZoomMoveTut.jsx
+TutorialText.jsx
 
 */
 
@@ -24,14 +26,15 @@ import { MenuProvider } from "react-native-popup-menu";
 import Header from '../components/Header';
 import Board from '../components/Board';
 import WinnerModal from '../components/WinnerModal';
-import MovableView from 'react-native-movable-view';
-import ReactNativeZoomableView from '@openspacelabs/react-native-zoomable-view/src/ReactNativeZoomableView';
 import ZoomMoveTut from '../components/ZoomMoveTut';
 import TutorialText from '../components/TutorialText';
+import MovableView from 'react-native-movable-view';
+import ReactNativeZoomableView from '@openspacelabs/react-native-zoomable-view/src/ReactNativeZoomableView';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 
-
+/* GameScreen is the screen where you play the game.
+*/
 export default function GameScreen({ navigation, route }) {
 
   // Passed values from New game screen
@@ -93,7 +96,9 @@ export default function GameScreen({ navigation, route }) {
   //
   useEffect(() => {
     async function prepare() {
+
       // Keeps the splash screen visible until we call hideAsync
+      //
       await SplashScreen.preventAutoHideAsync();
     }
     prepare();
@@ -103,7 +108,8 @@ export default function GameScreen({ navigation, route }) {
     return undefined;
   }
   else {
-    //Hides the native splash screen immediately - Expo Documentation
+    // Hides the native splash screen immediately - Expo Documentation
+    //
     SplashScreen.hideAsync();
   }
   // ------------------- Ending of the named code ----------------------
